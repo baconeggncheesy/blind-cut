@@ -4,35 +4,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>THE BLIND CUT — Live Cinema Calibrator</title>
+  <title>THE BLIND CUT — Cyber-Script Calibrator</title>
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- Premium Google Fonts -->
+  <!-- Google Fonts: Courier Prime and Cinzel -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=JetBrains+Mono:wght@300;400;700&family=Plus+Jakarta+Sans:wght@300;400;600&family=Playfair+Display:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
+            mono: ['"Courier Prime"', 'Courier', 'monospace'],
             cinzel: ['Cinzel', 'serif'],
-            mono: ['"JetBrains Mono"', 'monospace'],
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-            serif: ['"Playfair Display"', 'serif'],
           },
           colors: {
             neonRed: '#FF003C',
             darkGrey: '#0A0A0A',
-            panelGrey: '#121212',
           },
           boxShadow: {
             'neon': '0 0 20px rgba(255, 0, 60, 0.45)',
             'neon-sm': '0 0 10px rgba(255, 0, 60, 0.3)',
-            'neon-lg': '0 0 40px rgba(255, 0, 60, 0.65)',
           }
         }
       }
@@ -41,16 +37,11 @@
 
   <style>
     /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 4px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #000;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #FF003C;
-      border-radius: 2px;
-    }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #000; }
+    ::-webkit-scrollbar-thumb { background: #FF003C; border-radius: 0px; }
+
+    body { font-size: 14px; line-height: 1.4; }
 
     /* CRT Scanlines Overlay */
     .crt::after {
@@ -66,364 +57,316 @@
       opacity: 0.35;
     }
 
-    /* Custom range slider styling */
+    /* Screenplay Formatting Classes */
+    .scene-heading { font-weight: bold; text-transform: uppercase; margin-bottom: 1rem; color: #fff; border-bottom: 1px dashed #333; padding-bottom: 0.25rem; }
+    .action { margin-bottom: 1.5rem; text-align: left; color: #a3a3a3; }
+    .character { text-align: center; text-transform: uppercase; width: 100%; margin-top: 1rem; margin-bottom: 0.2rem; color: #FF003C; font-weight: bold; }
+    .parenthetical { text-align: center; width: 100%; font-style: italic; margin-bottom: 0.2rem; color: #737373; }
+    .dialogue { width: 90%; margin: 0 auto 1.5rem auto; text-align: left; padding-left: 5%; color: #e5e5e5; }
+    .transition { text-align: right; text-transform: uppercase; font-weight: bold; margin-top: 1.5rem; margin-bottom: 1rem; color: #FF003C; }
+
+    /* Typewriter Cursor */
+    .cursor-blink::after {
+      content: "█";
+      animation: blink 0.8s infinite;
+      color: #FF003C;
+      margin-left: 4px;
+    }
+    @keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
+
+    /* Mechanical Typewriter Sliders */
     input[type="range"] {
-      -webkit-appearance: none;
-      appearance: none;
-      background: #1A1A1A;
-      border-radius: 9999px;
-      height: 6px;
-      outline: none;
+      -webkit-appearance: none; appearance: none; background: transparent; height: 24px; outline: none; position: relative; width: 100%;
+    }
+    input[type="range"]::before {
+      content: ""; position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: #444; transform: translateY(-50%); z-index: -1;
     }
     input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: #FF003C;
-      cursor: pointer;
-      box-shadow: 0 0 10px #FF003C;
-      transition: transform 0.15s ease, background-color 0.15s ease;
+      -webkit-appearance: none; appearance: none; width: 12px; height: 24px; background: #FF003C; cursor: pointer; border: 1px solid #FF003C; border-radius: 0px; box-shadow: 0 0 10px rgba(255, 0, 60, 0.5); transition: background 0.15s ease, transform 0.1s ease;
     }
-    input[type="range"]::-webkit-slider-thumb:active {
-      transform: scale(1.3);
-      background: #ffffff;
-      box-shadow: 0 0 16px #ffffff;
+    input[type="range"]::-webkit-slider-thumb:active { background: #fff; border-color: #fff; transform: scaleX(1.3); box-shadow: 0 0 15px #fff; }
+
+    /* Script UI Buttons */
+    .script-btn { display: inline-block; border: 1px solid #333; background: #0A0A0A; color: #a3a3a3; padding: 0.5rem; cursor: pointer; transition: all 0.2s; }
+    .script-btn:hover { border-color: #FF003C; color: #fff; }
+    .script-btn.active { border-color: #FF003C; font-weight: bold; background: rgba(255,0,60,0.1); color: #FF003C; }
+    .script-btn-primary { border: 1px solid #FF003C; background: #0A0A0A; color: #fff; padding: 0.75rem 1rem; font-weight: bold; text-align: center; width: 100%; transition: all 0.2s; box-shadow: inset 0 0 0 0 #FF003C; }
+    .script-btn-primary:hover { box-shadow: inset 0 0 10px 0 rgba(255,0,60,0.4); }
+    .script-btn-primary:active { background: #FF003C; color: #000; }
+
+    /* 3D Cinematic Tarot Deck */
+    .tarot-card-container { perspective: 1000px; }
+    .tarot-card { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.7s cubic-bezier(0.4, 0.0, 0.2, 1); cursor: pointer; }
+    .tarot-card.flipped { transform: rotateY(180deg); }
+    .tarot-card-front, .tarot-card-back { position: absolute; backface-visibility: hidden; top: 0; left: 0; width: 100%; height: 100%; background: #0A0A0A; border: 1px solid #333; padding: 4px; }
+    .tarot-card-front { transform: rotateY(180deg); border-color: #FF003C; }
+    .tarot-inner-border { width: 100%; height: 100%; border: 1px solid #333; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 8px 4px; position: relative; overflow: hidden; }
+    .tarot-card-front .tarot-inner-border { border-color: rgba(255,0,60,0.3); }
+    
+    .tarot-back-art {
+      width: 100%; height: 100%;
+      background-image: radial-gradient(circle at center, transparent 40%, #0A0A0A 60%), repeating-linear-gradient(45deg, rgba(255,0,60,0.05) 0, rgba(255,0,60,0.05) 2px, transparent 2px, transparent 8px), repeating-linear-gradient(-45deg, rgba(255,0,60,0.05) 0, rgba(255,0,60,0.05) 2px, transparent 2px, transparent 8px);
     }
 
-    /* Glitch text animation for offline error screens */
-    .glitch {
-      position: relative;
-    }
-    .glitch::before, .glitch::after {
-      content: attr(data-text);
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: black;
-    }
-    .glitch::before {
-      left: 2px;
-      text-shadow: -1px 0 #ff003c;
-      clip: rect(44px, 450px, 56px, 0);
-      animation: glitch-anim 5s infinite linear alternate-reverse;
-    }
-    .glitch::after {
-      left: -2px;
-      text-shadow: -1px 0 #00ffff;
-      clip: rect(85px, 450px, 140px, 0);
-      animation: glitch-anim2 5s infinite linear alternate-reverse;
-    }
-    @keyframes glitch-anim {
-      0% { clip: rect(15px, 9999px, 66px, 0); }
-      100% { clip: rect(34px, 9999px, 55px, 0); }
-    }
-    @keyframes glitch-anim2 {
-      0% { clip: rect(70px, 9999px, 105px, 0); }
-      100% { clip: rect(12px, 9999px, 85px, 0); }
-    }
+    /* Glitch Animation */
+    .glitch { position: relative; color: #FF003C; }
+    .glitch::before, .glitch::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: black; }
+    .glitch::before { left: 2px; text-shadow: -1px 0 #fff; clip: rect(44px, 450px, 56px, 0); animation: glitch-anim 5s infinite linear alternate-reverse; }
+    .glitch::after { left: -2px; text-shadow: -1px 0 #FF003C; clip: rect(85px, 450px, 140px, 0); animation: glitch-anim2 5s infinite linear alternate-reverse; }
+    @keyframes glitch-anim { 0% { clip: rect(15px, 9999px, 66px, 0); } 100% { clip: rect(34px, 9999px, 55px, 0); } }
+    @keyframes glitch-anim2 { 0% { clip: rect(70px, 9999px, 105px, 0); } 100% { clip: rect(12px, 9999px, 85px, 0); } }
   </style>
 </head>
-<body class="h-full bg-black text-white font-sans antialiased crt overflow-hidden">
+<body class="h-full bg-black text-neutral-200 font-mono antialiased overflow-hidden crt">
 
-  <!-- Main Application Wrapper -->
-  <div class="relative h-full w-full max-w-lg mx-auto bg-black border-x border-neutral-900 flex flex-col justify-between overflow-y-auto">
+  <!-- Main Wrapper -->
+  <div class="relative h-full w-full max-w-lg mx-auto bg-black flex flex-col justify-between pt-4 pb-6 px-6 border-x border-neutral-900 overflow-y-auto">
     
-    <!-- Audio status & diagnostics bar -->
-    <header class="w-full flex items-center justify-between px-6 py-4 border-b border-neutral-900 bg-black/85 backdrop-blur z-50">
-      <div class="flex items-center space-x-3">
+    <!-- Header -->
+    <header class="w-full flex items-center justify-between pb-4 mb-4 border-b border-neutral-900">
+      <div class="flex items-center space-x-2">
         <span class="w-2 h-2 rounded-full bg-neonRed animate-pulse shadow-neon-sm"></span>
-        <span class="font-mono text-[10px] tracking-[0.2em] text-neutral-400 uppercase">SYS_UPLINK_ACTIVE</span>
+        <span class="font-bold text-[10px] tracking-widest text-neutral-500">THE BLIND CUT</span>
       </div>
-      <button onclick="toggleAudio()" id="audio-toggle-btn" class="flex items-center space-x-1.5 opacity-60 hover:opacity-100 transition-opacity focus:outline-none">
-        <svg id="audio-icon" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-          <path id="audio-wave" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 14c.667-1 .667-3 0-4M19.07 17c1.333-2 1.333-6 0-8" />
-        </svg>
-        <span id="audio-text" class="font-mono text-[9px] tracking-wider text-neutral-400">AUDIO_ON</span>
-      </button>
+      <div class="flex items-center space-x-4 text-[10px] font-bold text-neutral-500">
+        <button onclick="toggleAudio()" id="audio-toggle-btn" class="hover:text-white transition-colors uppercase focus:outline-none">
+          [AUDIO: ON]
+        </button>
+      </div>
     </header>
 
     <!-- CONTENT CONTAINERS -->
-    <main class="flex-1 flex flex-col justify-center px-6 py-4 relative">
+    <main class="flex-1 relative pb-6">
 
       <!-- ================= SCREEN 1: INTRO ================= -->
-      <section id="screen-intro" class="flex flex-col justify-center space-y-8 animate-fade-in">
-        <div class="text-center space-y-3">
-          <h1 class="font-cinzel text-4xl sm:text-5xl tracking-[0.15em] font-bold text-white relative">
-            THE BLIND
-            <span class="block text-neonRed font-black shadow-neon-sm mt-1">CUT</span>
+      <section id="screen-intro" class="animate-fade-in flex flex-col justify-center min-h-[60vh]">
+        <div class="text-center space-y-4 mb-12">
+          <h1 class="font-cinzel text-4xl sm:text-5xl font-bold uppercase tracking-widest text-white border-y border-neutral-800 py-6 my-8">
+            The Blind Cut
           </h1>
-          <p class="font-mono text-[10px] tracking-[0.3em] text-neutral-500 uppercase mt-2 font-bold font-mono">Subconscious Vector Matchmaker</p>
+          <p class="text-xs text-neutral-500">A Subconscious Matchmaking Interface</p>
+          <p class="text-[10px] uppercase mt-8 text-neutral-600">Cyber-Script Edition — <span id="current-date"></span></p>
         </div>
 
-        <div class="space-y-4 text-center px-3">
-          <p class="text-neutral-300 text-sm leading-relaxed font-light">
-            An internet-powered diagnostic scours the entire historic landscape of cinema to map your immediate subconscious vibe.
-          </p>
-          <p class="text-neutral-500 text-xs leading-relaxed font-mono">
-            Zero setup required. Fully client-contained, scanning live global archives in real-time.
-          </p>
+        <div class="action text-xs leading-relaxed text-center px-4">
+          An internet-powered diagnostic scours the entire historic landscape of cinema to map your immediate subconscious vibe.<br><br>
+          Zero setup required. Fully client-contained vector search.
         </div>
 
-        <div class="pt-6">
-          <button onclick="startCalibrator()" class="w-full py-4 bg-black border border-neonRed hover:bg-neonRed text-white hover:shadow-neon transition-all duration-300 tracking-[0.2em] font-mono text-xs uppercase font-bold active:scale-[0.98] rounded-none">
-            INITIATE DIAGNOSTIC
+        <div class="character text-xs mt-8">THE SYSTEM</div>
+        <div class="dialogue cursor-blink text-xs text-center mx-auto" id="intro-dialogue"></div>
+
+        <div class="mt-8">
+          <button onclick="startCalibrator()" class="script-btn-primary uppercase text-xs tracking-widest">
+            [ INITIATE DIAGNOSTIC ]
           </button>
         </div>
       </section>
 
-      <!-- ================= SCREEN 1.5: PARAMETERS (LENS SETTINGS) ================= -->
-      <section id="screen-parameters" class="hidden flex flex-col space-y-5 animate-fade-in">
-        <div class="space-y-1">
-          <span class="font-mono text-xs text-neonRed tracking-widest font-bold">CALIBRATION PRE-FLIGHT</span>
-          <h2 class="font-cinzel text-2xl tracking-wider uppercase">Lens Parameters</h2>
-          <p class="font-mono text-[10px] text-neutral-500 tracking-wider">ALIGNING CULTURAL & CHRONOLOGICAL GLASS</p>
+      <!-- ================= SCREEN 1.5: PARAMETERS ================= -->
+      <section id="screen-parameters" class="hidden animate-fade-in flex flex-col justify-center min-h-[60vh]">
+        <div class="scene-heading text-xs">INT. PRE-FLIGHT CALIBRATION - CONTINUOUS</div>
+        
+        <div class="action text-xs">
+          The machine demands structural boundaries before querying the live global database.
         </div>
 
-        <div class="space-y-4">
-          <!-- Parameter A: Language -->
-          <div class="space-y-1.5">
-            <span class="font-mono text-[10px] tracking-widest text-neutral-400 block uppercase font-bold">1. Cultural Language Origin</span>
-            <div class="grid grid-cols-3 gap-2">
-              <button onclick="setParameter('language', 'any')" id="lang-any" class="py-2.5 px-2 bg-darkGrey border text-[9px] font-mono tracking-wider uppercase transition-all duration-200">
-                Global Codes
+        <div class="character text-xs">THE SYSTEM</div>
+        <div class="dialogue cursor-blink text-xs" id="param-dialogue"></div>
+
+        <div class="space-y-5 mt-4">
+          <div>
+            <div class="font-bold mb-1 uppercase text-[10px] text-neutral-500">1. Cultural Origin</div>
+            <div class="grid grid-cols-3 gap-1.5 text-[9px] font-bold tracking-wider">
+              <button onclick="setParameter('language', 'any')" id="lang-any" class="script-btn active">GLOBAL</button>
+              <button onclick="setParameter('language', 'english')" id="lang-english" class="script-btn">ENGLISH</button>
+              <button onclick="setParameter('language', 'foreign')" id="lang-foreign" class="script-btn">FOREIGN</button>
+            </div>
+          </div>
+
+          <div>
+            <div class="font-bold mb-1 uppercase text-[10px] text-neutral-500">2. Chronological Epoch</div>
+            <div class="grid grid-cols-2 gap-1.5 text-[9px] font-bold tracking-wider">
+              <button onclick="setParameter('era', 'any')" id="era-any" class="script-btn active flex justify-between">
+                <span>ANY ERA</span><span class="text-neutral-600">ALL</span>
               </button>
-              <button onclick="setParameter('language', 'english')" id="lang-english" class="py-2.5 px-2 bg-darkGrey border text-[9px] font-mono tracking-wider uppercase transition-all duration-200">
-                Anglo/English
+              <button onclick="setParameter('era', 'golden')" id="era-golden" class="script-btn flex justify-between">
+                <span>GOLDEN</span><span class="text-neutral-600">&lt;1970</span>
               </button>
-              <button onclick="setParameter('language', 'foreign')" id="lang-foreign" class="py-2.5 px-2 bg-darkGrey border text-[9px] font-mono tracking-wider uppercase transition-all duration-200">
-                Foreign Tongue
+              <button onclick="setParameter('era', 'neon')" id="era-neon" class="script-btn flex justify-between">
+                <span>NEON</span><span class="text-neutral-600">70-99</span>
+              </button>
+              <button onclick="setParameter('era', 'digital')" id="era-digital" class="script-btn flex justify-between">
+                <span>DIGITAL</span><span class="text-neutral-600">2000+</span>
               </button>
             </div>
           </div>
 
-          <!-- Parameter B: Era -->
-          <div class="space-y-1.5">
-            <span class="font-mono text-[10px] tracking-widest text-neutral-400 block uppercase font-bold">2. Chronological Epoch</span>
-            <div class="grid grid-cols-2 gap-2">
-              <button onclick="setParameter('era', 'any')" id="era-any" class="py-2.5 px-3 bg-darkGrey border text-[9px] font-mono tracking-wider uppercase transition-all duration-200 text-left flex justify-between items-center">
-                <span>Any Era</span>
-                <span class="text-[8px] text-neutral-600 font-bold">Full Spectrum</span>
+          <div>
+            <div class="font-bold mb-1 uppercase text-[10px] text-neutral-500">3. Cognitive Depth</div>
+            <div class="flex flex-col gap-1.5 text-[9px] font-bold tracking-wider">
+              <button onclick="setParameter('depth', 'casual')" id="depth-casual" class="script-btn text-left p-3">
+                [ CASUAL ] - Accessible pacing, universal narratives.
               </button>
-              <button onclick="setParameter('era', 'golden')" id="era-golden" class="py-2.5 px-3 bg-darkGrey border text-[9px] font-mono tracking-wider uppercase transition-all duration-200 text-left flex justify-between items-center">
-                <span>Golden Era</span>
-                <span class="text-[8px] text-neutral-600">Pre-1970</span>
-              </button>
-              <button onclick="setParameter('era', 'neon')" id="era-neon" class="py-2.5 px-3 bg-darkGrey border text-[9px] font-mono tracking-wider uppercase transition-all duration-200 text-left flex justify-between items-center">
-                <span>Neon Revolution</span>
-                <span class="text-[8px] text-neutral-600">1970 - 1999</span>
-              </button>
-              <button onclick="setParameter('era', 'digital')" id="era-digital" class="py-2.5 px-3 bg-darkGrey border text-[9px] font-mono tracking-wider uppercase transition-all duration-200 text-left flex justify-between items-center">
-                <span>Digital Horizon</span>
-                <span class="text-[8px] text-neutral-600">2000 - Present</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Parameter C: Watch Mode -->
-          <div class="space-y-1.5">
-            <span class="font-mono text-[10px] tracking-widest text-neutral-400 block uppercase font-bold">3. Cognitive Calibration Depth</span>
-            <div class="grid grid-cols-2 gap-2">
-              <button onclick="setParameter('depth', 'casual')" id="depth-casual" class="p-2.5 bg-darkGrey border text-left flex flex-col justify-between transition-all duration-200 min-h-[56px]">
-                <span class="font-mono text-[9px] tracking-wider uppercase font-bold">Casual Watch</span>
-                <span class="text-[8px] text-neutral-500 mt-0.5 leading-normal font-light">Accessible pacing, universal narratives.</span>
-              </button>
-              <button onclick="setParameter('depth', 'cinephile')" id="depth-cinephile" class="p-2.5 bg-darkGrey border text-left flex flex-col justify-between transition-all duration-200 min-h-[56px]">
-                <span class="font-mono text-[9px] tracking-wider uppercase font-bold">Cinephile Index</span>
-                <span class="text-[8px] text-neutral-500 mt-0.5 leading-normal font-light">Art-house focus, deep film grammar.</span>
+              <button onclick="setParameter('depth', 'cinephile')" id="depth-cinephile" class="script-btn active text-left p-3">
+                [ CINEPHILE ] - Art-house focus, deep film grammar.
               </button>
             </div>
           </div>
         </div>
 
-        <div class="pt-4">
-          <button onclick="goToGame1()" class="w-full py-4 bg-black border border-neutral-700 hover:border-neonRed text-white hover:shadow-neon-sm transition-all duration-300 tracking-[0.2em] font-mono text-xs uppercase font-bold rounded-none flex items-center justify-center space-x-2">
-            <span>LOCK LENS PARAMETERS</span>
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <div class="transition text-[10px]">CUT TO:</div>
+
+        <div class="mt-2">
+          <button onclick="goToGame1()" class="script-btn-primary uppercase text-xs tracking-widest">
+            [ LOCK LENS & CONTINUE ]
           </button>
         </div>
       </section>
 
       <!-- ================= SCREEN 2: GAME 1 (THE SLIDERS) ================= -->
-      <section id="screen-game1" class="hidden flex flex-col space-y-6 animate-fade-in">
-        <div class="space-y-1">
-          <span class="font-mono text-xs text-neonRed tracking-widest font-bold">GAME 01 / 03</span>
-          <h2 class="font-cinzel text-2xl tracking-wider uppercase">The Core Spectrum</h2>
-          <p class="font-mono text-[10px] text-neutral-500 tracking-wider">ESTABLISHING SUBCONSCIOUS BASELINES</p>
+      <section id="screen-game1" class="hidden animate-fade-in flex flex-col justify-center min-h-[60vh]">
+        <div class="scene-heading text-xs">INT. THE CORE SPECTRUM - GAME 01</div>
+        
+        <div class="action text-xs">
+          Five mechanical levers sit on the terminal. They establish the user's subconscious baselines.
         </div>
 
-        <!-- Slider 1 -->
-        <div class="space-y-2 pt-2">
-          <div class="flex justify-between font-mono text-[9px] tracking-wider">
-            <span class="text-neutral-400 font-bold">HEARTWARMING & COZY</span>
-            <span id="val-warmth" class="text-neonRed font-bold font-mono">50%</span>
-            <span class="text-neutral-400 font-bold">EXISTENTIAL DREAD</span>
+        <div class="character text-xs">THE SYSTEM</div>
+        <div class="parenthetical text-xs">(patiently)</div>
+        <div class="dialogue cursor-blink text-xs" id="slider-dialogue"></div>
+
+        <div class="space-y-4 mt-6 pl-3 border-l border-neutral-800">
+          
+          <div class="space-y-1">
+            <div class="flex justify-between text-[9px] font-bold text-neutral-400">
+              <span>COZY</span>
+              <span id="val-warmth" class="text-neonRed">50</span>
+              <span>DREAD</span>
+            </div>
+            <input type="range" id="slider-warmth" min="1" max="100" value="50" oninput="updateSliderVal('warmth')">
           </div>
-          <input type="range" id="slider-warmth" min="1" max="100" value="50" oninput="updateSliderVal('warmth')" class="w-full cursor-pointer">
-        </div>
 
-        <!-- Slider 2 -->
-        <div class="space-y-2">
-          <div class="flex justify-between font-mono text-[9px] tracking-wider">
-            <span class="text-neutral-400 font-bold">MEDITATIVE & SLOW</span>
-            <span id="val-tempo" class="text-neonRed font-bold font-mono">50%</span>
-            <span class="text-neutral-400 font-bold">KINETIC & INTENSE</span>
+          <div class="space-y-1">
+            <div class="flex justify-between text-[9px] font-bold text-neutral-400">
+              <span>MEDITATIVE</span>
+              <span id="val-tempo" class="text-neonRed">50</span>
+              <span>KINETIC</span>
+            </div>
+            <input type="range" id="slider-tempo" min="1" max="100" value="50" oninput="updateSliderVal('tempo')">
           </div>
-          <input type="range" id="slider-tempo" min="1" max="100" value="50" oninput="updateSliderVal('tempo')" class="w-full cursor-pointer">
-        </div>
 
-        <!-- Slider 3 -->
-        <div class="space-y-2">
-          <div class="flex justify-between font-mono text-[9px] tracking-wider">
-            <span class="text-neutral-400 font-bold">GROUNDED & GRITTY</span>
-            <span id="val-reality" class="text-neonRed font-bold font-mono">50%</span>
-            <span class="text-neutral-400 font-bold">SURREAL & DREAMLIKE</span>
+          <div class="space-y-1">
+            <div class="flex justify-between text-[9px] font-bold text-neutral-400">
+              <span>GROUNDED</span>
+              <span id="val-reality" class="text-neonRed">50</span>
+              <span>SURREAL</span>
+            </div>
+            <input type="range" id="slider-reality" min="1" max="100" value="50" oninput="updateSliderVal('reality')">
           </div>
-          <input type="range" id="slider-reality" min="1" max="100" value="50" oninput="updateSliderVal('reality')" class="w-full cursor-pointer">
-        </div>
 
-        <!-- Slider 4: Obscurity Slider -->
-        <div class="space-y-2">
-          <div class="flex justify-between font-mono text-[9px] tracking-wider">
-            <span class="text-neutral-400 font-bold">HOUSEHOLD MAINSTREAM</span>
-            <span id="val-obscurity" class="text-neonRed font-bold font-mono">50%</span>
-            <span class="text-neutral-400 font-bold">OBSCURE DEEP CUT</span>
+          <div class="space-y-1">
+            <div class="flex justify-between text-[9px] font-bold text-neutral-400">
+              <span>MAINSTREAM</span>
+              <span id="val-obscurity" class="text-neonRed">50</span>
+              <span>OBSCURE</span>
+            </div>
+            <input type="range" id="slider-obscurity" min="1" max="100" value="50" oninput="updateSliderVal('obscurity')">
           </div>
-          <input type="range" id="slider-obscurity" min="1" max="100" value="50" oninput="updateSliderVal('obscurity')" class="w-full cursor-pointer">
+
+          <div class="space-y-1">
+            <div class="flex justify-between text-[9px] font-bold text-neutral-400">
+              <span>BLEAK / NIHILISTIC</span>
+              <span id="val-humor" class="text-neonRed">50</span>
+              <span>WITTY / FUNNY</span>
+            </div>
+            <input type="range" id="slider-humor" min="1" max="100" value="50" oninput="updateSliderVal('humor')">
+          </div>
+
         </div>
 
-        <div class="pt-4">
-          <button onclick="goToGame2()" class="w-full py-4 bg-black border border-neutral-700 hover:border-neonRed text-white hover:shadow-neon-sm transition-all duration-300 tracking-[0.2em] font-mono text-xs uppercase font-bold rounded-none flex items-center justify-center space-x-2">
-            <span>LOCK SPECTRUM</span>
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <div class="transition text-[10px]">CUT TO:</div>
+
+        <div class="mt-2">
+          <button onclick="goToGame2()" class="script-btn-primary uppercase text-xs tracking-widest">
+            [ SET MARGINS & CONTINUE ]
           </button>
         </div>
       </section>
 
       <!-- ================= SCREEN 3: GAME 2 (WORD ASSOCIATION) ================= -->
-      <section id="screen-game2" class="hidden flex flex-col space-y-6 animate-fade-in">
-        <div class="space-y-1">
-          <span class="font-mono text-xs text-neonRed tracking-widest font-bold">GAME 02 / 03</span>
-          <h2 class="font-cinzel text-2xl tracking-wider uppercase">The Echo Chamber</h2>
-          <p class="font-mono text-[10px] text-neutral-500 tracking-wider">RAPID NEURAL COUPLING</p>
+      <section id="screen-game2" class="hidden animate-fade-in flex flex-col justify-center min-h-[60vh]">
+        <div class="scene-heading text-xs">INT. THE ECHO CHAMBER - GAME 02</div>
+        
+        <div class="action text-xs">
+          A blank prompt appears on the screen. Rapid neural coupling begins.
         </div>
 
-        <!-- Terminal Panel -->
-        <div class="bg-darkGrey border border-neutral-800 p-6 rounded-none font-mono text-xs space-y-4 relative overflow-hidden min-h-[220px] flex flex-col justify-between">
-          <div class="absolute top-2 right-2 bg-neutral-900 px-2 py-0.5 text-[8px] text-neutral-500 tracking-wider font-bold">
-            TERMINAL_SECURE
-          </div>
+        <div class="character text-xs">THE SYSTEM</div>
+        <div class="dialogue cursor-blink text-xs" id="word-dialogue"></div>
 
-          <div class="space-y-2">
-            <div class="text-neutral-500">
-              [CALIBRATING ASSOCIATION <span id="word-progress">1/5</span>]
-            </div>
-            <div class="text-neutral-400 text-[10px]">
-              Type the first single word that enters your head. Press enter.
-            </div>
-            <div class="pt-6 flex flex-col items-center justify-center space-y-3">
-              <span id="terminal-stimulus" class="text-2xl font-bold tracking-[0.3em] text-white uppercase animate-pulse">
-                STIMULUS
-              </span>
-            </div>
-          </div>
-
-          <div class="space-y-2">
-            <div class="flex items-center space-x-2 border-b border-neutral-800 pb-1">
-              <span class="text-neonRed font-bold">&gt;</span>
-              <input type="text" id="association-input" autofocus autocomplete="off" placeholder="type association..." class="bg-transparent text-white outline-none w-full tracking-widest uppercase font-mono placeholder-neutral-700 text-sm">
-            </div>
-            <div class="flex justify-between items-center text-[9px] text-neutral-600">
-              <span>MUST BE A SINGLE WORD</span>
-              <span id="input-char-count">0 Chars</span>
-            </div>
+        <div class="my-10 text-center">
+          <div class="text-[10px] text-neutral-500 mb-2">STIMULUS <span id="word-progress" class="text-neonRed">1/5</span>:</div>
+          <div id="terminal-stimulus" class="text-3xl font-bold uppercase tracking-widest text-white border-y border-neutral-800 py-4 inline-block px-8 shadow-neon-sm">
+            WAITING
           </div>
         </div>
 
-        <div class="grid grid-cols-5 gap-2" id="word-indicators">
-          <div class="h-1 bg-neonRed"></div>
-          <div class="h-1 bg-neutral-800"></div>
-          <div class="h-1 bg-neutral-800"></div>
-          <div class="h-1 bg-neutral-800"></div>
-          <div class="h-1 bg-neutral-800"></div>
+        <div class="action text-[10px] text-center text-neutral-500">
+          (Type immediate gut reaction)
+        </div>
+
+        <div class="flex items-center space-x-2 border-b border-neutral-500 pb-1 mb-8 w-full max-w-xs mx-auto">
+          <span class="font-bold text-neonRed">&gt;</span>
+          <input type="text" id="association-input" autocomplete="off" placeholder="SINGLE WORD..." class="bg-transparent text-white outline-none w-full uppercase font-bold text-sm tracking-widest placeholder-neutral-700">
         </div>
 
         <div>
-          <button onclick="submitWord()" class="w-full py-4 bg-black border border-neutral-700 hover:border-neonRed text-white hover:shadow-neon-sm transition-all duration-300 tracking-[0.2em] font-mono text-xs uppercase font-bold rounded-none">
-            REGISTER RESPONSE
+          <button onclick="submitWord()" class="script-btn-primary uppercase text-xs tracking-widest">
+            [ SUBMIT ]
           </button>
         </div>
       </section>
 
-      <!-- ================= SCREEN 4: GAME 3 (TACTILE DILEMMAS) ================= -->
-      <section id="screen-game3" class="hidden flex flex-col space-y-6 animate-fade-in">
-        <div class="space-y-1">
-          <span class="font-mono text-xs text-neonRed tracking-widest font-bold">GAME 03 / 03</span>
-          <h2 class="font-cinzel text-2xl tracking-wider uppercase">Tactile Dilemma</h2>
-          <p class="font-mono text-[10px] text-neutral-500 tracking-wider">SENSORY REACTION ANALYSIS</p>
+      <!-- ================= SCREEN 4: GAME 3 (CINEMATIC TAROT) ================= -->
+      <section id="screen-game3" class="hidden animate-fade-in flex flex-col justify-center min-h-[60vh]">
+        <div class="scene-heading text-xs">INT. THE DIRECTOR'S DESK - GAME 03</div>
+        
+        <div class="action text-xs mb-2">
+          Twelve cards are spread across the digital surface. They are the Cinematic Arcana.
         </div>
 
-        <div class="text-center font-mono text-[10px] text-neutral-400" id="dilemma-progress">
-          SELECT COGNITIVE PREFERENCE (1 OF 3)
+        <div class="character text-xs mt-0">THE SYSTEM</div>
+        <div class="parenthetical text-xs">(whispering)</div>
+        <div class="dialogue cursor-blink text-xs min-h-[40px]" id="tarot-dialogue"></div>
+
+        <!-- 3x4 Grid of Tarot Cards -->
+        <div class="grid grid-cols-3 sm:grid-cols-4 gap-2 py-4 mx-auto w-full" id="tarot-grid">
+          <!-- Injected dynamically via script -->
         </div>
 
-        <!-- Dilemma Container -->
-        <div class="flex flex-col space-y-4">
-          <h3 id="dilemma-title" class="text-center font-cinzel text-lg italic text-neutral-300 tracking-wide py-2">
-            Which environment provides shelter for your soul?
-          </h3>
-
-          <div class="grid grid-cols-1 gap-4">
-            <!-- Option A Card -->
-            <button onclick="selectDilemma('A')" id="option-a" class="group relative py-6 px-4 bg-darkGrey border border-neutral-800 hover:border-neonRed text-center hover:shadow-neon-sm transition-all duration-300 active:scale-[0.98] flex flex-col justify-center items-center space-y-2 min-h-[110px]">
-              <span class="font-mono text-[9px] text-neutral-500 group-hover:text-neonRed transition-colors">OPTION_ALPHA</span>
-              <span id="option-a-text" class="text-sm font-sans font-medium text-neutral-200 group-hover:text-white leading-relaxed">
-                An intimate hand-built log cabin in deep snow
-              </span>
-            </button>
-
-            <!-- Option B Card -->
-            <button onclick="selectDilemma('B')" id="option-b" class="group relative py-6 px-4 bg-darkGrey border border-neutral-800 hover:border-neonRed text-center hover:shadow-neon-sm transition-all duration-300 active:scale-[0.98] flex flex-col justify-center items-center space-y-2 min-h-[110px]">
-              <span class="font-mono text-[9px] text-neutral-500 group-hover:text-neonRed transition-colors">OPTION_BETA</span>
-              <span id="option-b-text" class="text-sm font-sans font-medium text-neutral-200 group-hover:text-white leading-relaxed">
-                A sterile, silent space station looking at a dead star
-              </span>
-            </button>
-          </div>
-        </div>
-
-        <div class="flex justify-center space-x-1" id="dilemma-indicators">
-          <span class="w-2 h-2 rounded-full bg-neonRed"></span>
-          <span class="w-2 h-2 rounded-full bg-neutral-800"></span>
-          <span class="w-2 h-2 rounded-full bg-neutral-800"></span>
+        <div class="mt-4">
+          <button id="tarot-proceed-btn" onclick="initiateSubconsciousMatching()" class="hidden script-btn-primary uppercase text-xs tracking-widest border-green-500 shadow-[inset_0_0_10px_0_rgba(34,197,94,0.4)] text-green-400 hover:bg-green-500 hover:text-black">
+            [ INITIATE SYNTHESIS ]
+          </button>
         </div>
       </section>
 
-      <!-- ================= SCREEN 5: DIAGNOSTIC / LOADING ================= -->
-      <section id="screen-loading" class="hidden flex flex-col space-y-8 py-12 animate-fade-in font-mono">
-        <div class="flex flex-col items-center space-y-6">
-          <!-- Hypnotic SVG Loader -->
-          <div class="relative w-28 h-28">
-            <svg class="w-full h-full animate-spin duration-10000" viewBox="0 0 100 100">
-              <circle cx="50" cy="50" r="45" fill="none" stroke="#1A1A1A" stroke-width="2" />
-              <circle cx="50" cy="50" r="45" fill="none" stroke="#FF003C" stroke-width="2.5" stroke-dasharray="80 160" stroke-linecap="round" class="shadow-neon" />
-            </svg>
-            <div class="absolute inset-0 flex items-center justify-center">
-              <span id="loading-pct" class="font-mono text-xs font-bold text-white tracking-widest">00%</span>
-            </div>
-          </div>
-          
-          <div class="text-center space-y-2">
-            <h3 class="font-cinzel text-lg tracking-widest uppercase">Synthesizing Psyche</h3>
-            <p class="font-mono text-[9px] text-neutral-500 tracking-[0.2em] uppercase">ACCESSING CINEMATIC DIRECTORY</p>
-          </div>
+      <!-- ================= SCREEN 5: LOADING ================= -->
+      <section id="screen-loading" class="hidden animate-fade-in flex flex-col justify-center min-h-[60vh]">
+        <div class="scene-heading text-xs">MONTAGE: SYNTHESIZING PSYCHE</div>
+        
+        <div class="action text-xs leading-loose">
+          -- The telemetrics lock into place.<br>
+          -- The script pages shuffle furiously.<br>
+          -- The global archives are queried.
         </div>
 
-        <!-- System Diagnostics Terminal -->
-        <div class="bg-black border border-neutral-900 p-4 font-mono text-[9px] text-neutral-400 space-y-2 min-h-[160px] max-h-[160px] overflow-y-auto" id="diagnostic-terminal">
-          <div class="text-neonRed font-bold">&gt;&gt; STARTING PSYCHOLOGICAL ANALYSIS...</div>
-          <div class="text-neutral-500">INIT: Sliders, words & tactile preferences parsed.</div>
+        <div class="character text-xs">THE SYSTEM</div>
+        <div class="parenthetical text-xs">(processing)</div>
+        <div class="dialogue text-xs">
+          <span id="loading-pct" class="font-bold text-2xl text-neonRed">0%</span><br><br>
+          <span class="cursor-blink text-neutral-400" id="loading-terminal">Mapping vectors...</span>
         </div>
       </section>
 
@@ -433,7 +376,7 @@
         <!-- Background Ambient Cover Art -->
         <div id="ambient-bg" class="absolute -inset-x-6 -inset-y-8 bg-cover bg-center opacity-25 filter blur-3xl mix-blend-color-dodge transition-all duration-1000 z-0"></div>
 
-        <div class="relative z-10 space-y-6">
+        <div class="relative z-10 space-y-4">
           
           <!-- Cinematic Oracle Headline -->
           <div class="text-center space-y-1">
@@ -443,35 +386,39 @@
             </p>
           </div>
 
+          <!-- VIBE WORDS STRIP -->
+          <div class="flex flex-wrap justify-center gap-2 mb-4" id="vibe-words-container">
+            <!-- Injected dynamically -->
+          </div>
+
           <!-- Movie Showcase Card -->
           <div class="bg-darkGrey/95 border border-neutral-800 p-4 shadow-neon-sm relative flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-5">
             <!-- Poster -->
-            <div class="w-full sm:w-[140px] aspect-[2/3] bg-neutral-900 border border-neutral-800 relative overflow-hidden flex-shrink-0">
-              <img id="movie-poster" src="" alt="Cinema Poster" class="w-full h-full object-cover opacity-0 transition-opacity duration-1000" onerror="handleImageError(this)">
-              <div id="poster-fallback-text" class="absolute inset-0 flex items-center justify-center text-center p-3 font-cinzel text-xs text-neutral-400 select-none">
+            <div class="w-full sm:w-[130px] aspect-[2/3] bg-neutral-900 border border-neutral-800 relative overflow-hidden flex-shrink-0">
+              <img id="movie-poster" src="" alt="Cinema Poster" class="w-full h-full object-cover opacity-0 transition-opacity duration-1000" onerror="this.style.opacity='0'; document.getElementById('poster-fallback-text').style.display='flex';">
+              <div id="poster-fallback-text" class="absolute inset-0 hidden items-center justify-center text-center p-3 font-cinzel text-xs text-neutral-400 select-none">
                 CINEMA REVEAL
               </div>
             </div>
 
             <!-- Details -->
-            <div class="flex-1 flex flex-col justify-between py-1 space-y-3">
-              <div class="space-y-1">
-                <h2 id="movie-title" class="font-cinzel text-xl sm:text-2xl font-bold tracking-wider text-white leading-tight uppercase">
-                  IN THE MOOD FOR LOVE
-                </h2>
-                <div class="flex flex-wrap gap-2 text-[10px] font-mono text-neutral-400">
-                  <span id="movie-year">2000</span>
-                  <span>•</span>
-                  <span id="movie-director">DIR: Wong Kar-wai</span>
-                  <span>•</span>
-                  <span id="movie-runtime">98 min</span>
+            <div class="flex-1 flex flex-col justify-between py-1 font-sans">
+              <div>
+                <h2 id="movie-title" class="font-cinzel text-xl sm:text-2xl font-bold uppercase leading-none mb-2 text-white">TITLE</h2>
+                <div class="flex flex-wrap gap-2 text-[10px] font-mono font-bold border-b border-neutral-800 pb-2 mb-3 text-neonRed tracking-widest">
+                  <span id="movie-year">YEAR</span> | <span id="movie-director">DIR</span> | <span id="movie-runtime">MIN</span>
+                </div>
+                
+                <!-- 1 SENTENCE PLOT -->
+                <div class="border-l-2 border-neutral-800 pl-3 mb-4">
+                  <p class="text-xs text-neutral-400 italic font-sans" id="movie-plot">"One sentence plot goes here..."</p>
                 </div>
               </div>
 
               <!-- US Watch Providers / Streaming availability -->
-              <div class="space-y-1.5 pt-1">
-                <span class="font-mono text-[9px] tracking-wider text-neutral-500 uppercase block">Where to watch (US):</span>
-                <div id="providers-container" class="flex flex-wrap gap-2">
+              <div class="pt-2">
+                <span class="font-mono text-[9px] tracking-wider text-neutral-500 uppercase block font-bold mb-1.5">Where to watch (US):</span>
+                <div id="providers-container" class="flex flex-wrap gap-1.5 font-mono">
                   <!-- Badges added dynamically -->
                 </div>
               </div>
@@ -480,261 +427,304 @@
 
           <!-- Synthesis Analysis -->
           <div class="bg-black border border-neutral-900 p-4 font-mono text-xs leading-relaxed text-neutral-300 relative">
-            <div class="absolute top-2 right-2 font-mono text-[8px] text-neutral-600">SUB-COGNITIVE ALIGNMENT MATRIX</div>
+            <div class="absolute top-2 right-2 font-mono text-[8px] text-neutral-600 font-bold">SUB-COGNITIVE ALIGNMENT MATRIX</div>
             <p id="custom-analysis" class="pt-2 text-justify text-neutral-200">
               Analyzing. Calculating mental parameters...
             </p>
           </div>
 
           <!-- Lens parameters active for this Projection -->
-          <div class="flex flex-wrap gap-1 justify-between items-center border border-neutral-900 px-3 py-2 bg-darkGrey/50 rounded-none font-mono text-[8px] text-neutral-500 uppercase tracking-widest">
-            <span>LANG: <strong id="active-lang-badge" class="text-neonRed">ANY</strong></span>
-            <span>EPOCH: <strong id="active-era-badge" class="text-neonRed">ANY</strong></span>
-            <span>DEPTH: <strong id="active-depth-badge" class="text-neonRed">CINEPHILE</strong></span>
-            <span>OBSCURITY: <strong id="active-obscurity-badge" class="text-neonRed">50%</strong></span>
+          <div class="flex flex-wrap gap-1 justify-between items-center border border-neutral-900 px-3 py-2 bg-darkGrey/50 rounded-none font-mono text-[8px] text-neutral-500 uppercase tracking-widest font-bold">
+            <span>LANG: <strong id="active-lang-badge" class="text-neonRed font-mono">ANY</strong></span>
+            <span>EPOCH: <strong id="active-era-badge" class="text-neonRed font-mono">ANY</strong></span>
+            <span>DEPTH: <strong id="active-depth-badge" class="text-neonRed font-mono">CINEPHILE</strong></span>
+            <span>OBSC: <strong id="active-obscurity-badge" class="text-neonRed font-mono">50%</strong></span>
+            <span>HUMOR: <strong id="active-humor-badge" class="text-neonRed font-mono">50%</strong></span>
           </div>
 
-          <!-- Actions Panel -->
-          <div class="grid grid-cols-2 gap-3 pt-2">
-            <button onclick="shareProjection()" class="py-3 bg-black border border-neutral-800 hover:border-white text-neutral-400 hover:text-white transition-all text-[11px] font-mono tracking-wider flex items-center justify-center space-x-2">
-              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 10.742l4.572-2.286m0 0a3 3 0 110 5.143L8.684 13.258m0 0a3 3 0 110-2.516m0 0H3" />
-              </svg>
-              <span>SHARE PROJECTION</span>
-            </button>
-            <button onclick="recalibrate()" class="py-3 bg-neonRed hover:bg-red-700 text-white transition-all text-[11px] font-mono tracking-wider font-bold flex items-center justify-center space-x-2 shadow-neon-sm hover:shadow-neon">
-              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 8H18" />
-              </svg>
-              <span>RECALIBRATE</span>
-            </button>
+          <!-- REALIGNMENT & FINE-TUNING PANEL -->
+          <div class="bg-darkGrey/90 border border-dashed border-neutral-700 p-4 space-y-3 relative font-mono">
+            <span class="font-mono text-[9px] tracking-wider text-neutral-400 block uppercase font-bold">Script Notes (Adjustments):</span>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <!-- Adjust Warmth -->
+              <div class="flex flex-col space-y-1">
+                <span class="font-mono text-[8px] text-neutral-500 font-bold tracking-wider">WARMTH DENSITY</span>
+                <div class="flex space-x-1">
+                  <button onclick="adjustSubconsciousVibe('warmth', -20)" class="script-btn flex-1 text-center text-[9px] tracking-widest">[ COZIER ]</button>
+                  <button onclick="adjustSubconsciousVibe('warmth', 20)" class="script-btn flex-1 text-center text-[9px] tracking-widest">[ DARKER ]</button>
+                </div>
+              </div>
+
+              <!-- Adjust Obscurity -->
+              <div class="flex flex-col space-y-1">
+                <span class="font-mono text-[8px] text-neutral-500 font-bold tracking-wider">RARITY RADIUS</span>
+                <div class="flex space-x-1">
+                  <button onclick="adjustSubconsciousVibe('obscurity', -20)" class="script-btn flex-1 text-center text-[9px] tracking-widest">[ POPULAR ]</button>
+                  <button onclick="adjustSubconsciousVibe('obscurity', 20)" class="script-btn flex-1 text-center text-[9px] tracking-widest">[ DEEP CUT ]</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Extra options: Marked seen & instant reroll -->
+            <div class="flex space-x-2 border-t border-neutral-800 pt-3 mt-3">
+              <button onclick="markMovieAsSeen()" class="script-btn flex-1 text-center text-[10px] tracking-widest text-green-500 hover:border-green-500 hover:text-green-400">I'VE SEEN THIS</button>
+              <button onclick="rerollCurrentSpectrum()" class="script-btn flex-1 text-center font-bold text-[10px] tracking-widest !text-neonRed hover:!border-neonRed hover:!text-neonRed">REROLL SCENE</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 pt-2 font-mono">
+            <button onclick="shareProjection()" class="script-btn-primary uppercase text-xs tracking-widest">Share Script</button>
+            <button onclick="recalibrate()" class="script-btn uppercase text-xs text-center tracking-widest border border-neutral-600 hover:border-white">Start Over</button>
           </div>
         </div>
       </section>
 
-      <!-- ================= SCREEN 7: DISRUPTED UPLINK (ERROR SCREEN) ================= -->
-      <section id="screen-error" class="hidden flex flex-col space-y-6 text-center py-8 animate-fade-in font-mono">
-        <div class="space-y-2">
-          <span class="inline-block px-3 py-1 bg-neonRed text-white text-[10px] tracking-widest font-bold font-mono">UPLINK SEVERED</span>
-          <h2 class="font-cinzel text-3xl tracking-wider uppercase text-neonRed mt-4 glitch" data-text="SYSTEM OFFLINE">SYSTEM OFFLINE</h2>
-          <p class="text-[10px] text-neutral-500 uppercase tracking-widest">Global Archive Unreachable</p>
+      <!-- ================= SCREEN 7: ERROR ================= -->
+      <section id="screen-error" class="hidden animate-fade-in text-center py-12 flex flex-col justify-center min-h-[60vh]">
+        <div class="scene-heading glitch text-2xl border-none mb-6" data-text="SYSTEM OFFLINE">SYSTEM OFFLINE</div>
+        
+        <div class="action text-center mt-2 text-xs leading-relaxed max-w-xs mx-auto" id="error-message">
+          The live pipeline failed to establish a handshake with the global visual catalog.<br><br>
+          [ERR_NETWORK_DISRUPTED_OR_EMPTY]
         </div>
 
-        <div class="bg-darkGrey border border-neutral-800 p-6 text-left text-xs text-neutral-400 space-y-4 leading-relaxed">
-          <p>
-            The Blind Cut live pipeline was unable to perform a handshake with the TMDB visual catalog.
-          </p>
-          <div class="border-t border-neutral-900 pt-3 text-[10px] text-neonRed space-y-1 font-mono">
-            <div>&gt; ERR_NETWORK_DISRUPTED_OR_TIMEOUT</div>
-            <div>&gt; Reason: Active internet feed is required to resolve real-time recommendations. Please check your data connection.</div>
-          </div>
-        </div>
-
-        <div class="pt-4 space-y-3">
-          <button onclick="retryProjection()" class="w-full py-4 bg-neonRed hover:bg-red-700 text-white font-bold tracking-[0.2em] text-xs uppercase shadow-neon-sm hover:shadow-neon transition-all duration-300 font-mono">
-            RETRY SYSTEM UPLINK
-          </button>
-          <button onclick="recalibrate()" class="w-full py-3 bg-black border border-neutral-800 text-neutral-500 hover:text-white hover:border-white tracking-[0.2em] text-[10px] uppercase transition-all duration-300 font-mono">
-            BACK TO CONSOLE
-          </button>
+        <div class="mt-8 space-y-3 max-w-xs mx-auto w-full">
+          <button onclick="retryProjection()" class="script-btn-primary uppercase text-xs tracking-widest">Action: Retry</button>
+          <button onclick="recalibrate()" class="script-btn uppercase text-xs w-full text-center block tracking-widest border border-neutral-600">Action: Restart</button>
         </div>
       </section>
 
     </main>
 
-    <!-- Footer Information -->
-    <footer class="w-full text-center py-4 border-t border-neutral-900 bg-black/85 backdrop-blur z-50">
-      <span class="font-mono text-[8px] tracking-widest text-neutral-600 uppercase">THE BLIND CUT — DYNAMIC VECTOR MATCHMAKER v2.00</span>
+    <!-- Footer: Scene Counter -->
+    <footer class="w-full text-center pt-4 pb-2 border-t border-neutral-900 flex justify-between items-center text-[9px] font-bold uppercase text-neutral-600 tracking-widest">
+      <div>V 5.0.0</div>
+      <div class="flex items-center space-x-2">
+        <span>SCENES RENDERED:</span>
+        <div id="retro-counter" class="flex space-x-0.5">
+          <!-- Populated dynamically -->
+          <span>0</span><span>0</span><span>0</span><span>0</span><span>0</span>
+        </div>
+      </div>
     </footer>
 
   </div>
 
-  <!-- Custom Notification Banner -->
-  <div id="notification-banner" class="fixed top-6 left-1/2 -translate-x-1/2 bg-neutral-900 border border-neutral-800 text-white font-mono text-xs px-6 py-3 tracking-widest uppercase shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none z-50">
-    PROJECTION LINK COPIED
+  <!-- Notification Banner -->
+  <div id="notification-banner" class="fixed top-6 left-1/2 -translate-x-1/2 bg-neonRed text-white font-bold text-xs px-6 py-2 uppercase tracking-widest shadow-neon opacity-0 transition-opacity duration-300 pointer-events-none z-50">
+    LINK COPIED TO CLIPBOARD
   </div>
 
   <!-- JavaScript Core -->
   <script>
-    // TMDB Configuration - Using your working key directly to resolve serverless limitations on GitHub Pages!
+    // TMDB Configuration - Serverless client-side vector math pipeline
     const TMDB_API_KEY = "c2015ecda624b83d2e3d19ead77c0a8c";
 
-    // Application Global State
     const AppState = {
       audioEnabled: true,
       currentScreen: 'intro',
-      
-      // Filter State
       language: 'any', 
       era: 'any',      
       depth: 'cinephile', 
-      
-      sliders: {
-        warmth: 50,
-        tempo: 50,
-        reality: 50,
-        obscurity: 50
-      },
+      sliders: { warmth: 50, tempo: 50, reality: 50, obscurity: 50, humor: 50 },
+      seenMovies: [],
+      rejectedMovies: [],
+      currentMovie: null,
       wordPool: [
         'SHADOW', 'SILENCE', 'VELVET', 'NEON', 'FOG', 'RUST', 'ECHO', 'CHROME', 'RAIN', 
-        'GLASS', 'DECAY', 'MIRROR', 'FEATHER', 'ASH', 'COCOON', 'SPIKE', 'AMBER', 'STATIC'
+        'GLASS', 'DECAY', 'MIRROR', 'FEATHER', 'ASH', 'COCOON', 'SPIKE', 'AMBER', 'STATIC',
+        'VEIL', 'RAZOR', 'BLOOD', 'CHAMBER', 'VOID', 'COBALT', 'GHOST', 'CRYSTAL', 'GLITCH',
+        'THORN', 'PULSE', 'OBSIDIAN', 'SIREN', 'LABYRINTH', 'SKELETON', 'COPPER', 'SPIRAL',
+        'WHISPER', 'TEMPLE', 'ECLIPSE', 'GRID', 'CLAY', 'CAGE', 'THREAD', 'GRAVE', 'CROWN',
+        'ROOT', 'WAVE', 'DESERT', 'SUTURE', 'MASK', 'BEAST', 'OXYGEN', 'STEEL', 'CARBON'
       ],
       selectedWords: [],
       wordIndex: 0,
       associations: [],
-      dilemmaPool: [
+      // Cinematic Tarot Deck (Minimalist SVGs representing legendary archetypes)
+      tarotDeck: [
         {
-          q: "Choose your sanctuary:",
-          a: "Intimate wood cabin heated by open fire",
-          b: "Vast, sterile space station in absolute silence"
+          id: 'tramp', name: 'The Tramp (The Fool)', num: '0',
+          meaning: 'Beginnings, spontaneity, comedy masking tragedy.', essence: 'pure spontaneity, lighthearted survival, and physical humor',
+          shift: { w: -20, t: 25, r: 10, h: 40 }, 
+          svg: `<svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M40 30 Q50 10 60 30 L70 30 Q50 20 30 30 Z"/><line x1="50" y1="30" x2="50" y2="70"/><path d="M45 70 L35 120 M55 70 L65 120 M50 50 L30 80 M50 50 L80 40 L85 100"/><circle cx="50" cy="15" r="8"/></svg>`
         },
         {
-          q: "Choose your soundscape:",
-          a: "Muted rain whispering on dirty glass",
-          b: "Thumping sub-bass beats in a dark, concrete bunker"
+          id: 'auteur', name: 'The Auteur (Magician)', num: 'I',
+          meaning: 'Willpower, absolute control, and creation.', essence: 'focused manifestation, meta-narratives, and cinematic construction',
+          shift: { w: 10, t: 10, r: 25, h: 0 },
+          svg: `<svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polygon points="30 40 70 40 60 80 40 80"/><line x1="30" y1="80" x2="20" y2="120"/><line x1="70" y1="80" x2="80" y2="120"/><path d="M35 25 C45 10 55 10 65 25 C75 40 55 40 50 30 C45 40 25 40 35 25 Z" stroke="#FF003C"/></svg>`
         },
         {
-          q: "Choose your physical texture:",
-          a: "Cold, rough sandstone cliffside overlooking a grey sea",
-          b: "Smooth, flowing liquid silk slip"
+          id: 'oracle', name: 'The Oracle (Priestess)', num: 'II',
+          meaning: 'The subconscious, hidden truth behind reality.', essence: 'unveiling the matrix of reality, deep intuition, and philosophy',
+          shift: { w: 20, t: -15, r: 40, h: -10 }, 
+          svg: `<svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="3"><rect x="20" y="30" width="10" height="90"/><rect x="70" y="30" width="10" height="90"/><path d="M40 70 Q50 50 60 70 Q50 90 40 70 Z"/><circle cx="50" cy="70" r="5" fill="#FF003C"/></svg>`
         },
         {
-          q: "Choose your illumination:",
-          a: "A single, dying flicking wax candle",
-          b: "Dazzling, hyper-kinetic strobe flashes in absolute darkness"
+          id: 'don', name: 'The Don (Emperor)', num: 'IV',
+          meaning: 'Power, family, corruption, and structure.', essence: 'rigid family structures, power dynamics, and heavy consequences',
+          shift: { w: 30, t: -10, r: -20, h: -20 }, 
+          svg: `<svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="3"><line x1="20" y1="40" x2="80" y2="40"/><line x1="50" y1="20" x2="50" y2="60"/><line x1="20" y1="40" x2="20" y2="100" stroke-dasharray="4 4"/><line x1="80" y1="40" x2="80" y2="120" stroke-dasharray="4 4"/><line x1="50" y1="60" x2="50" y2="110" stroke-dasharray="4 4"/><circle cx="50" cy="70" r="8" stroke="#FF003C"/></svg>`
         },
         {
-          q: "Choose your trajectory:",
-          a: "Drifting weightless on deep open water",
-          b: "Falling freely at terrifying terminal velocity"
+          id: 'reel', name: 'The Reel (Wheel)', num: 'X',
+          meaning: 'Destiny, time loops, and changing fortunes.', essence: 'cyclical time, fateful turning points, and narrative loops',
+          shift: { w: 0, t: 20, r: 15, h: 10 },
+          svg: `<svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="3"><circle cx="50" cy="75" r="35"/><circle cx="50" cy="75" r="10" fill="#FF003C"/><line x1="15" y1="75" x2="85" y2="75"/><line x1="50" y1="40" x2="50" y2="110"/><line x1="25" y1="50" x2="75" y2="100"/><line x1="25" y1="100" x2="75" y2="50"/></svg>`
         },
         {
-          q: "Choose your relic:",
-          a: "A forgotten handwritten love letter on fading paper",
-          b: "An encrypted, cold steel quantum data drive"
+          id: 'falling', name: 'Falling Man (Hanged Man)', num: 'XII',
+          meaning: 'Surrender, shifting perspectives, and gravity.', essence: 'surrender to the fall, psychological vertigo, and altered perspectives',
+          shift: { w: 15, t: -30, r: 25, h: -15 }, 
+          svg: `<svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="3"><path d="M50 20 L50 60 M50 60 L30 30 M50 60 L70 30 M50 20 L40 10 L60 10" opacity="0.3"/><circle cx="50" cy="110" r="10"/><line x1="50" y1="100" x2="50" y2="50"/><line x1="50" y1="80" x2="30" y2="50"/><line x1="50" y1="80" x2="70" y2="50"/><line x1="50" y1="50" x2="35" y2="20"/><line x1="50" y1="50" x2="65" y2="20"/></svg>`
+        },
+        {
+          id: 'chess', name: 'Chess Match (Death)', num: 'XIII',
+          meaning: 'Inevitability, transition, and playing with fate.', essence: 'the inevitability of endings, stark existentialism, and stark reality',
+          shift: { w: 40, t: -10, r: -15, h: -30 }, 
+          svg: `<svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 120 L80 120 L60 70 L40 70 Z"/><path d="M45 70 L45 40 L55 40 L55 70 M40 40 L60 40 M50 40 L50 20 M40 30 L60 30"/><path d="M75 20 Q90 20 90 40 Q90 80 50 100" stroke="#FF003C"/></svg>`
+        },
+        {
+          id: 'hotel', name: 'The Hotel (The Devil)', num: 'XV',
+          meaning: 'Isolation, madness, traps, and shadow selves.', essence: 'claustrophobic madness, isolation, and dark psychological traps',
+          shift: { w: 45, t: 15, r: 10, h: -25 }, 
+          svg: `<svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="3"><polygon points="50 30 80 50 80 100 50 120 20 100 20 50"/><polygon points="50 60 65 70 65 90 50 100 35 90 35 70"/><line x1="50" y1="30" x2="50" y2="60"/><line x1="20" y1="50" x2="35" y2="70"/><line x1="80" y1="50" x2="65" y2="70"/><line x1="20" y1="100" x2="35" y2="90"/><line x1="80" y1="100" x2="65" y2="90"/><line x1="50" y1="120" x2="50" y2="100" stroke="#FF003C"/></svg>`
+        },
+        {
+          id: 'tower', name: 'The Nakatomi (The Tower)', num: 'XVI',
+          meaning: 'Explosive chaos, ruin, and action.', essence: 'explosive chaos, confined action, and the destruction of physical structures',
+          shift: { w: 20, t: 40, r: -20, h: 5 }, 
+          svg: `<svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="3"><rect x="35" y="50" width="30" height="90"/><path d="M25 50 L50 20 L75 50 Z"/><path d="M10 40 L40 60 L20 80 L50 90" stroke="#FF003C"/><circle cx="30" cy="90" r="2"/><circle cx="70" cy="110" r="2"/></svg>`
+        },
+        {
+          id: 'moon', name: 'Méliès Moon', num: 'XVIII',
+          meaning: 'Dreams, early illusions, and surreal visions.', essence: 'wild early-cinema surrealism, dream logic, and visual trickery',
+          shift: { w: 0, t: -15, r: 45, h: 10 }, 
+          svg: `<svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="3"><path d="M70 30 A 40 40 0 1 0 70 120 A 30 30 0 1 1 70 30"/><path d="M 50 65 L 90 50 L 85 75 Z" stroke="#FF003C"/><circle cx="45" cy="55" r="4"/><path d="M 40 85 Q 50 95 60 85"/></svg>`
+        },
+        {
+          id: 'rosebud', name: 'The Rosebud (The World)', num: 'XXI',
+          meaning: 'Wholeness, memory, legacy, and complete truth.', essence: 'lost memories, complete narrative arcs, and the search for absolute truth',
+          shift: { w: -15, t: -10, r: -10, h: 0 }, 
+          svg: `<svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="3"><circle cx="50" cy="65" r="35"/><path d="M30 115 L70 115 L60 100 L40 100 Z"/><path d="M35 70 C45 60 55 60 65 70" stroke="#FF003C"/><line x1="30" y1="80" x2="70" y2="80"/></svg>`
+        },
+        {
+          id: 'delorean', name: 'Time Machine (Chariot)', num: 'VII',
+          meaning: 'Momentum, journeys, overcoming obstacles.', essence: 'kinetic journeys, overcoming time and physical obstacles, and hope',
+          shift: { w: -20, t: 35, r: 20, h: 20 }, 
+          svg: `<svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 90 L80 90 L70 70 L30 70 Z"/><path d="M30 70 L10 40 M70 70 L90 40"/><circle cx="30" cy="90" r="10"/><circle cx="70" cy="90" r="10"/><line x1="10" y1="110" x2="90" y2="110" stroke="#FF003C" stroke-dasharray="10 5"/></svg>`
         }
       ],
-      selectedDilemmas: [],
-      dilemmaIndex: 0,
-      dilemmaAnswers: [],
-      diagnosticLogs: []
+      selectedTarotCard: null
     };
 
-    // Subconscious Genre Vector coordinates mapping system
+    // Subconscious Genre Vector mapping coords (incorporating h for Humor)
     const GENRE_MAP = {
-      18: { w: 50, t: 25, r: 10 },   // Drama (Neutral warmth, slow-burn, gritty/grounded)
-      35: { w: 15, t: 65, r: 35 },   // Comedy (Warm, kinetic, slightly surreal)
-      53: { w: 85, t: 75, r: 30 },   // Thriller (High dread, highly kinetic, grounded)
-      27: { w: 95, t: 70, r: 80 },   // Horror (Extreme dread, fast-paced, dreamlike/unreal)
-      878: { w: 70, t: 60, r: 90 },  // Science Fiction (Dread, kinetic, surreal)
-      14: { w: 30, t: 50, r: 95 },   // Fantasy (Cozy, meditative, highly surreal)
-      10749: { w: 20, t: 30, r: 20 },// Romance (Highly cozy, meditative, grounded)
-      28: { w: 65, t: 95, r: 35 },   // Action (Dread, kinetic, slightly heightened)
-      80: { w: 80, t: 65, r: 15 },   // Crime (Dread, intense, gritty/grounded)
-      9648: { w: 75, t: 40, r: 55 },  // Mystery (Dread, slow-burn, slightly surreal)
-      36: { w: 45, t: 20, r: 5 },    // History (Comforting, slow-burn, ultra-grounded)
-      10752: { w: 90, t: 80, r: 10 }, // War (Extreme dread, fast-paced, gritty reality)
-      99: { w: 50, t: 15, r: 0 },    // Documentary (Neutral, slow-burn, absolute truth)
-      10751: { w: 10, t: 40, r: 30 }, // Family (Ultra-cozy, slow-burn, grounded)
-      12: { w: 40, t: 85, r: 50 },   // Adventure (Comforting, kinetic, heightened)
-      37: { w: 60, t: 50, r: 15 },   // Western (Tense dread, med-tempo, gritty)
-      10402: { w: 30, t: 40, r: 40 }  // Music (Cozy, meditative, heightened)
+      18: { w: 50, t: 25, r: 10, h: 25, name: 'DRAMA' },
+      35: { w: 15, t: 65, r: 35, h: 95, name: 'COMEDY' },
+      53: { w: 85, t: 75, r: 30, h: 15, name: 'THRILLER' },
+      27: { w: 95, t: 70, r: 80, h: 10, name: 'HORROR' },
+      878: { w: 70, t: 60, r: 90, h: 30, name: 'SCI-FI' },
+      14: { w: 30, t: 50, r: 95, h: 50, name: 'FANTASY' },
+      10749: { w: 20, t: 30, r: 20, h: 60, name: 'ROMANCE' },
+      28: { w: 65, t: 95, r: 35, h: 40, name: 'ACTION' },
+      80: { w: 80, t: 65, r: 15, h: 20, name: 'CRIME' },
+      9648: { w: 75, t: 40, r: 55, h: 30, name: 'MYSTERY' },
+      36: { w: 45, t: 20, r: 5, h: 20, name: 'HISTORY' },
+      10752: { w: 90, t: 80, r: 10, h: 5, name: 'WAR' },
+      99: { w: 50, t: 15, r: 0, h: 35, name: 'DOC' },
+      10751: { w: 10, t: 40, r: 30, h: 70, name: 'FAMILY' },
+      12: { w: 40, t: 85, r: 50, h: 60, name: 'ADVENTURE' },
+      37: { w: 60, t: 50, r: 15, h: 30, name: 'WESTERN' },
+      10402: { w: 30, t: 40, r: 40, h: 50, name: 'MUSIC' }
     };
 
-    // ================= AUDIO SYNTHESIZER (WEB AUDIO API) =================
-    let audioCtx = null;
+    // Initialize application
+    window.onload = function() {
+      fetchHitsTelemetry();
+      document.getElementById('current-date').innerText = new Date().toLocaleDateString();
+      typewriter('intro-dialogue', "Are you ready to project your subconscious?", 40);
+    };
 
-    function initAudio() {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    // Live Typewriter Effect Generator
+    let typeToken = 0;
+    async function typewriter(elementId, text, speed = 30) {
+      const el = document.getElementById(elementId);
+      if(!el) return;
+      el.innerHTML = '';
+      typeToken++;
+      const currentToken = typeToken;
+      for (let i = 0; i < text.length; i++) {
+        if (typeToken !== currentToken) return;
+        el.innerHTML += text.charAt(i);
+        if(AppState.audioEnabled && i % 3 === 0) {
+          playSynthBeep(800 + Math.random()*200, 0.01, 'square');
+        }
+        await sleep(speed + Math.random()*20);
       }
     }
 
+    // Retro Telemetry Handler
+    async function fetchHitsTelemetry() {
+      try {
+        const res = await fetch('https://api.counterapi.dev/v1/theblindcut_baconeggncheesy/hits/increment');
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.count) {
+            renderHitCounter(data.count);
+            return;
+          }
+        }
+      } catch (e) {}
+      let localHits = parseInt(localStorage.getItem('blind_cut_telemetry') || '142');
+      localHits += 1;
+      localStorage.setItem('blind_cut_telemetry', localHits);
+      renderHitCounter(localHits);
+    }
+
+    function renderHitCounter(count) {
+      const paddedStr = count.toString().padStart(5, '0');
+      const container = document.getElementById('retro-counter');
+      if (container) {
+        container.innerHTML = paddedStr.split('').map(digit => 
+          `<span class="inline-block px-1 border border-neutral-700 bg-neutral-900 text-neonRed font-bold shadow-sm">${digit}</span>`
+        ).join('');
+      }
+    }
+
+    // Audio Context (Mechanical clicks)
+    let audioCtx = null;
+    function initAudio() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
     function toggleAudio() {
       AppState.audioEnabled = !AppState.audioEnabled;
-      const audioText = document.getElementById('audio-text');
-      const audioWave = document.getElementById('audio-wave');
-      
-      if (AppState.audioEnabled) {
-        audioText.innerText = "AUDIO_ON";
-        audioWave.style.display = "block";
-        playSynthBeep(440, 0.05, 'sine');
-      } else {
-        audioText.innerText = "AUDIO_OFF";
-        audioWave.style.display = "none";
-      }
+      document.getElementById('audio-toggle-btn').innerText = AppState.audioEnabled ? "[AUDIO: ON]" : "[AUDIO: OFF]";
+      if (AppState.audioEnabled) playSynthBeep(440, 0.05, 'square');
     }
-
-    function playSynthBeep(freq, duration, type = 'sine') {
+    function playSynthBeep(freq, duration, type = 'square') {
       if (!AppState.audioEnabled) return;
       try {
         initAudio();
-        if (!audioCtx) return;
-        
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
-        
         osc.type = type;
         osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        
-        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-        
         osc.connect(gain);
         gain.connect(audioCtx.destination);
-        
-        osc.start();
-        osc.stop(audioCtx.currentTime + duration);
+        osc.start(); osc.stop(audioCtx.currentTime + duration);
       } catch (e) {}
     }
-
-    function playLowDrone() {
-      if (!AppState.audioEnabled) return;
-      try {
-        initAudio();
-        if (!audioCtx) return;
-        
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(55, audioCtx.currentTime); 
-        
-        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.2);
-        
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        
-        osc.start();
-        osc.stop(audioCtx.currentTime + 1.2);
-      } catch (e) {}
+    function playTypewriterDing() {
+      playSynthBeep(1200, 0.1, 'sine');
+      setTimeout(() => playSynthBeep(1500, 0.1, 'sine'), 50);
     }
 
-    function playHighChime() {
-      if (!AppState.audioEnabled) return;
-      try {
-        initAudio();
-        if (!audioCtx) return;
-        
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(880, audioCtx.currentTime); 
-        
-        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.8);
-        
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        
-        osc.start();
-        osc.stop(audioCtx.currentTime + 1.8);
-      } catch (e) {}
-    }
-
-    // ================= APP FLOW & SCREEN NAVIGATION =================
+    // Navigation Flow
     function showScreen(screenId) {
       ['screen-intro', 'screen-parameters', 'screen-game1', 'screen-game2', 'screen-game3', 'screen-loading', 'screen-result', 'screen-error'].forEach(id => {
         document.getElementById(id).classList.add('hidden');
@@ -742,71 +732,53 @@
       document.getElementById(screenId).classList.remove('hidden');
     }
 
-    function startCalibrator() {
-      playSynthBeep(330, 0.1);
-      setTimeout(() => playSynthBeep(440, 0.15), 100);
+    async function startCalibrator() {
+      playTypewriterDing();
       showScreen('screen-parameters');
-      
       updateParameterUI('language', AppState.language);
       updateParameterUI('era', AppState.era);
       updateParameterUI('depth', AppState.depth);
+      await sleep(300);
+      typewriter('param-dialogue', "Define your structural boundaries before we begin writing the script.");
     }
 
     function setParameter(key, value) {
       AppState[key] = value;
-      playSynthBeep(key === 'language' ? 350 : key === 'era' ? 450 : 550, 0.08, 'sine');
+      playSynthBeep( key==='depth'? 300 : 400, 0.05, 'square');
       updateParameterUI(key, value);
     }
 
     function updateParameterUI(key, val) {
-      if (key === 'language') {
-        ['any', 'english', 'foreign'].forEach(item => {
-          const btn = document.getElementById(`lang-${item}`);
-          if (item === val) {
-            btn.className = "py-2.5 px-2 bg-black border border-neonRed text-neonRed text-[10px] font-mono tracking-wider uppercase transition-all duration-200 shadow-neon-sm font-bold";
-          } else {
-            btn.className = "py-2.5 px-2 bg-darkGrey border border-neutral-800 text-neutral-500 text-[10px] font-mono tracking-wider uppercase transition-all duration-200 hover:border-neutral-700 font-bold";
-          }
-        });
-      } else if (key === 'era') {
-        ['any', 'golden', 'neon', 'digital'].forEach(item => {
-          const btn = document.getElementById(`era-${item}`);
-          if (item === val) {
-            btn.className = "py-2.5 px-3 bg-black border border-neonRed text-neonRed text-[10px] font-mono tracking-wider uppercase transition-all duration-200 text-left flex justify-between items-center shadow-neon-sm font-bold";
-            btn.querySelector('span:last-child').className = "text-[8px] text-neonRed opacity-80 font-bold";
-          } else {
-            btn.className = "py-2.5 px-3 bg-darkGrey border border-neutral-800 text-neutral-500 text-[10px] font-mono tracking-wider uppercase transition-all duration-200 text-left flex justify-between items-center hover:border-neutral-700 font-bold";
-            btn.querySelector('span:last-child').className = "text-[8px] text-neutral-600 font-bold";
-          }
-        });
-      } else if (key === 'depth') {
-        ['casual', 'cinephile'].forEach(item => {
-          const btn = document.getElementById(`depth-${item}`);
-          if (item === val) {
-            btn.className = "p-2.5 bg-black border border-neonRed text-neonRed text-left flex flex-col justify-between transition-all duration-200 min-h-[56px] shadow-neon-sm font-bold";
-            btn.querySelector('span:last-child').className = "text-[8px] text-neonRed/80 mt-0.5 leading-normal font-light";
-          } else {
-            btn.className = "p-2.5 bg-darkGrey border border-neutral-800 text-neutral-500 text-left flex flex-col justify-between transition-all duration-200 min-h-[56px] hover:border-neutral-700 font-bold";
-            btn.querySelector('span:last-child').className = "text-[8px] text-neutral-600 mt-0.5 leading-normal font-light";
-          }
-        });
-      }
+      const ids = {
+        'language': ['any', 'english', 'foreign'],
+        'era': ['any', 'golden', 'neon', 'digital'],
+        'depth': ['casual', 'cinephile']
+      };
+      ids[key].forEach(item => {
+        const btn = document.getElementById(`${key}-${item}`);
+        if(btn) {
+          if (item === val) btn.classList.add('active');
+          else btn.classList.remove('active');
+        }
+      });
     }
 
-    function goToGame1() {
-      playSynthBeep(440, 0.1);
+    async function goToGame1() {
+      playTypewriterDing();
       showScreen('screen-game1');
+      await sleep(300);
+      typewriter('slider-dialogue', "Adjust the margins of your mind. How do you want to feel?");
     }
 
     function updateSliderVal(sliderType) {
       const val = document.getElementById(`slider-${sliderType}`).value;
-      document.getElementById(`val-${sliderType}`).innerText = `${val}%`;
+      document.getElementById(`val-${sliderType}`).innerText = val;
       AppState.sliders[sliderType] = parseInt(val);
-      playSynthBeep(150 + val * 3, 0.02, 'sine');
+      playSynthBeep(200 + parseInt(val)*5, 0.02, 'square');
     }
 
-    function goToGame2() {
-      playLowDrone();
+    async function goToGame2() {
+      playTypewriterDing();
       const shuffled = [...AppState.wordPool].sort(() => 0.5 - Math.random());
       AppState.selectedWords = shuffled.slice(0, 5);
       AppState.wordIndex = 0;
@@ -815,378 +787,358 @@
       setupWordAssociation();
       showScreen('screen-game2');
       
-      setTimeout(() => {
-        const input = document.getElementById('association-input');
-        input.focus();
-      }, 300);
+      await sleep(300);
+      typewriter('word-dialogue', "Read the stimulus. Type your immediate reaction. Do not think.");
+      document.getElementById('association-input').focus();
     }
 
     function setupWordAssociation() {
       const currWord = AppState.selectedWords[AppState.wordIndex];
       document.getElementById('terminal-stimulus').innerText = currWord.split('').join(' ');
       document.getElementById('word-progress').innerText = `${AppState.wordIndex + 1}/5`;
-      
-      const indicators = document.getElementById('word-indicators').children;
-      for (let i = 0; i < indicators.length; i++) {
-        if (i <= AppState.wordIndex) {
-          indicators[i].className = "h-1 bg-neonRed transition-all duration-300 shadow-neon-sm";
-        } else {
-          indicators[i].className = "h-1 bg-neutral-800 transition-all duration-300";
-        }
-      }
-
-      const input = document.getElementById('association-input');
-      input.value = "";
-      document.getElementById('input-char-count').innerText = "0 Chars";
+      document.getElementById('association-input').value = "";
     }
 
-    document.getElementById('association-input').addEventListener('input', (e) => {
-      let val = e.target.value.replace(/[^A-Za-z]/g, '').toUpperCase();
-      if (val.includes(' ')) {
-        val = val.split(' ')[0];
-      }
-      e.target.value = val;
-      document.getElementById('input-char-count').innerText = `${val.length} Chars`;
-      playSynthBeep(600 + (val.length * 30), 0.01, 'triangle');
-    });
-
     document.getElementById('association-input').addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        submitWord();
-      }
+      if (e.key === 'Enter') submitWord();
+      else playSynthBeep(600 + Math.random()*200, 0.01, 'square');
     });
 
     function submitWord() {
       const input = document.getElementById('association-input');
       const val = input.value.trim().toUpperCase();
-      
-      if (!val) {
-        playSynthBeep(120, 0.3, 'sawtooth');
-        input.classList.add('border-red-600', 'animate-shake');
-        setTimeout(() => input.classList.remove('border-red-600', 'animate-shake'), 400);
-        return;
-      }
+      if (!val) return;
 
       AppState.associations.push(val);
-      playSynthBeep(440, 0.05, 'sine');
+      playTypewriterDing();
 
       if (AppState.wordIndex < 4) {
         AppState.wordIndex++;
         setupWordAssociation();
         input.focus();
       } else {
-        goToGame3();
+        goToTarotGame();
       }
     }
 
-    function goToGame3() {
-      playLowDrone();
-      const shuffled = [...AppState.dilemmaPool].sort(() => 0.5 - Math.random());
-      AppState.selectedDilemmas = shuffled.slice(0, 3);
-      AppState.dilemmaIndex = 0;
-      AppState.dilemmaAnswers = [];
+    // ================= SUBCONSCIOUS TAROT INTERFACE =================
+    async function goToTarotGame() {
+      playTypewriterDing();
+      AppState.selectedTarotCard = null;
+      document.getElementById('tarot-proceed-btn').classList.add('hidden');
       
-      setupDilemma();
+      const shuffledDeck = [...AppState.tarotDeck].sort(() => 0.5 - Math.random());
+      const grid = document.getElementById('tarot-grid');
+      grid.innerHTML = "";
+      
+      shuffledDeck.slice(0,12).forEach((card) => {
+        const wrapper = document.createElement('div');
+        wrapper.className = "tarot-card-container aspect-[2.5/3.5] w-full h-[120px] sm:h-[135px]";
+        
+        wrapper.innerHTML = `
+          <div onclick="selectTarotCard('${card.id}', this)" class="tarot-card cursor-pointer">
+            <!-- Card Back -->
+            <div class="tarot-card-back hover:-translate-y-1 transition-transform">
+              <div class="tarot-inner-border bg-neutral-950 border-neutral-800">
+                <div class="tarot-back-art opacity-30 text-neonRed w-full h-full"></div>
+                <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" class="w-8 h-8 text-neutral-600">
+                    <circle cx="50" cy="50" r="30"/><circle cx="50" cy="50" r="10"/><path d="M50 20 L50 80 M20 50 L80 50" stroke-dasharray="4"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <!-- Card Front (Standard Symbol) -->
+            <div class="tarot-card-front shadow-xl bg-black">
+              <div class="tarot-inner-border">
+                <span class="font-bold text-[9px] tracking-widest text-neonRed">${card.num}</span>
+                <div class="w-10 h-10 sm:w-14 sm:h-14 flex items-center justify-center text-white">${card.svg}</div>
+                <span class="font-bold text-[7px] uppercase tracking-wider text-center leading-tight px-1 text-white">${card.name}</span>
+              </div>
+            </div>
+          </div>
+        `;
+        grid.appendChild(wrapper);
+      });
+
       showScreen('screen-game3');
+      await sleep(300);
+      typewriter('tarot-dialogue', "Twelve standard Major Arcana rest face down. Choose the card your gut is inexplicably drawn to.");
     }
 
-    function setupDilemma() {
-      const currDilemma = AppState.selectedDilemmas[AppState.dilemmaIndex];
-      document.getElementById('dilemma-title').innerText = currDilemma.q;
-      document.getElementById('option-a-text').innerText = currDilemma.a;
-      document.getElementById('option-b-text').innerText = currDilemma.b;
+    async function selectTarotCard(cardId, element) {
+      const allCards = document.querySelectorAll('.tarot-card');
+      allCards.forEach(c => c.style.pointerEvents = "none");
       
-      document.getElementById('dilemma-progress').innerText = `SELECT COGNITIVE PREFERENCE (${AppState.dilemmaIndex + 1} OF 3)`;
+      const selectedCard = AppState.tarotDeck.find(c => c.id === cardId);
+      AppState.selectedTarotCard = selectedCard;
+
+      playTypewriterDing();
+      element.classList.add('flipped');
+
+      await typewriter('tarot-dialogue', `You drew ${selectedCard.name}. Your inner landscape aligns with ${selectedCard.essence}.`, 30);
+
+      // Halt execution here and present tactile button to continue
+      document.getElementById('tarot-proceed-btn').classList.remove('hidden');
+    }
+
+    // ================= DYNAMIC VECTOR MATCHMAKING PIPELINE =================
+    let progressInterval = null;
+
+    async function initiateSubconsciousMatching() {
+      showScreen('screen-loading');
       
-      const indicators = document.getElementById('dilemma-indicators').children;
-      for (let i = 0; i < indicators.length; i++) {
-        if (i <= AppState.dilemmaIndex) {
-          indicators[i].className = "w-2 h-2 rounded-full bg-neonRed shadow-neon-sm transition-all duration-300";
-        } else {
-          indicators[i].className = "w-2 h-2 rounded-full bg-neutral-800 transition-all duration-300";
+      const logs = [
+        "Formatting margins...",
+        "Evaluating dialogue associations...",
+        "Calculating spatial tarot vectors...",
+        "Querying global live archives...",
+        "Printing definitive match..."
+      ];
+      
+      let step = 0;
+      const term = document.getElementById('loading-terminal');
+      const pct = document.getElementById('loading-pct');
+      
+      progressInterval = setInterval(() => {
+        let currentPct = parseInt(pct.innerText);
+        if(currentPct < 95) {
+          pct.innerText = `${currentPct + Math.floor(Math.random()*5)}%`;
         }
+        if(Math.random() > 0.7 && step < logs.length) {
+          term.innerText = logs[step];
+          playSynthBeep(700, 0.02, 'square');
+          step++;
+        }
+      }, 200);
+
+      // Hardened Try/Catch to prevent hanging!
+      try {
+        const tarot = AppState.selectedTarotCard || AppState.tarotDeck[0];
+        const finalWarmth = Math.max(1, Math.min(100, AppState.sliders.warmth + (tarot.shift?.w || 0)));
+        const finalTempo = Math.max(1, Math.min(100, AppState.sliders.tempo + (tarot.shift?.t || 0)));
+        const finalReality = Math.max(1, Math.min(100, AppState.sliders.reality + (tarot.shift?.r || 0)));
+        const finalHumor = Math.max(1, Math.min(100, AppState.sliders.humor + (tarot.shift?.h || 0)));
+
+        // Build discovery parameters dynamically
+        let discoverParams = [
+          `api_key=${TMDB_API_KEY}`,
+          `vote_average.gte=6.8`,
+          `include_adult=false`,
+          `with_runtime.gte=60`
+        ];
+
+        if (AppState.language === 'english') discoverParams.push(`with_original_language=en`);
+        else if (AppState.language === 'foreign') discoverParams.push(`with_original_language=fr,ja,ko,it,es,de,ru,zh,pt,pl,da`);
+
+        if (AppState.era === 'golden') discoverParams.push(`primary_release_date.lte=1970-12-31`);
+        else if (AppState.era === 'neon') discoverParams.push(`primary_release_date.gte=1971-01-01`, `primary_release_date.lte=1999-12-31`);
+        else if (AppState.era === 'digital') discoverParams.push(`primary_release_date.gte=2000-01-01`);
+
+        const obs = AppState.sliders.obscurity;
+        if (obs <= 35) discoverParams.push(`vote_count.gte=1000`, `sort_by=popularity.desc`);
+        else if (obs >= 70) discoverParams.push(`vote_count.gte=30`, `vote_count.lte=1500`, `sort_by=vote_average.desc`);
+        else discoverParams.push(`vote_count.gte=250`, `vote_count.lte=4000`, `sort_by=popularity.desc`);
+
+        // Safe fetch with AbortController timeout to prevent infinite hanging
+        const fetchWithTimeout = async (url, ms = 10000) => {
+          const controller = new AbortController();
+          const id = setTimeout(() => controller.abort(), ms);
+          const response = await fetch(url, { signal: controller.signal });
+          clearTimeout(id);
+          return response;
+        };
+
+        discoverParams.push(`page=${Math.floor(Math.random() * 4) + 1}`);
+        const discoverUrl = `https://api.themoviedb.org/3/discover/movie?${discoverParams.join('&')}`;
+
+        let candidates = [];
+        try {
+          const response = await fetchWithTimeout(discoverUrl);
+          if (response.ok) {
+            const data = await response.json();
+            candidates = data.results || [];
+          } else throw new Error("TMDB Discovery failed");
+        } catch (err) {
+          const fbUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&vote_average.gte=7.0&vote_count.gte=200&page=1`;
+          const fbRes = await fetchWithTimeout(fbUrl);
+          const fbData = await fbRes.json();
+          candidates = fbData.results || [];
+        }
+
+        candidates = candidates.filter(m => !AppState.seenMovies.includes(m.id) && !AppState.rejectedMovies.includes(m.id));
+
+        if (candidates.length === 0) {
+          const fbUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&vote_average.gte=6.8&vote_count.gte=50&page=1`;
+          const response = await fetchWithTimeout(fbUrl);
+          if (response.ok) {
+            const data = await response.json();
+            candidates = (data.results || []).filter(m => !AppState.seenMovies.includes(m.id) && !AppState.rejectedMovies.includes(m.id));
+          }
+        }
+
+        if (candidates.length === 0) throw new Error("No nodes matched");
+
+        let selectedMovieMeta = null;
+        let minDistance = Infinity;
+
+        candidates.forEach(movie => {
+          let wSum = 0, tSum = 0, rSum = 0, hSum = 0, count = 0;
+          if (movie.genre_ids) {
+            movie.genre_ids.forEach(gid => {
+              if (GENRE_MAP[gid]) {
+                wSum += GENRE_MAP[gid].w; tSum += GENRE_MAP[gid].t;
+                rSum += GENRE_MAP[gid].r; hSum += GENRE_MAP[gid].h; count++;
+              }
+            });
+          }
+
+          const movieW = count > 0 ? wSum / count : 50;
+          const movieT = count > 0 ? tSum / count : 50;
+          const movieR = count > 0 ? rSum / count : 50;
+          const movieH = count > 0 ? hSum / count : 50;
+          const movieObscurity = Math.max(0, Math.min(100, 100 - (Math.log10(movie.vote_count || 1) * 22)));
+
+          const dW = movieW - finalWarmth; const dT = movieT - finalTempo;
+          const dR = movieR - finalReality; const dO = movieObscurity - obs;
+          const dH = movieH - finalHumor;
+
+          let depthOffset = 0;
+          if (AppState.depth === 'cinephile' && (movie.genre_ids||[]).some(g => [18, 9648, 36, 99].includes(g))) depthOffset = 15;
+          else if (AppState.depth === 'casual' && (movie.genre_ids||[]).some(g => [28, 12, 35, 53].includes(g))) depthOffset = 15;
+
+          const score = Math.sqrt(dW*dW + dT*dT + dR*dR + dO*dO + dH*dH) - depthOffset;
+
+          if (score < minDistance) {
+            minDistance = score;
+            selectedMovieMeta = movie;
+          }
+        });
+
+        if (!selectedMovieMeta) throw new Error("Null match");
+
+        let fullDetails = null;
+        try {
+          const res = await fetchWithTimeout(`https://api.themoviedb.org/3/movie/${selectedMovieMeta.id}?api_key=${TMDB_API_KEY}&append_to_response=credits,watch/providers`);
+          fullDetails = res.ok ? await res.json() : selectedMovieMeta;
+        } catch (e) { fullDetails = selectedMovieMeta; }
+
+        AppState.currentMovie = fullDetails;
+
+        const customCritique = composeProceduralCritique(fullDetails, finalWarmth, finalTempo, finalReality, finalHumor);
+        const vibeWords = generateVibeWords(fullDetails, finalWarmth, finalTempo, finalReality, finalHumor);
+        const plotSentence = getOneSentencePlot(fullDetails.overview);
+
+        populateFinalReveal(fullDetails, customCritique, vibeWords, plotSentence);
+
+        clearInterval(progressInterval);
+        document.getElementById('loading-pct').innerText = "100%";
+        playTypewriterDing();
+        await sleep(600);
+        
+        showScreen('screen-result');
+        // Live type the long review
+        typewriter('custom-analysis', customCritique.reasoning, 12);
+
+      } catch (err) {
+        clearInterval(progressInterval);
+        console.error("Matchmaker Crash: ", err.message);
+        document.getElementById('error-message').innerText = `[CRITICAL FAULT] Matrix empty or uplink disrupted.\n\n${err.message}`;
+        showScreen('screen-error');
       }
     }
 
-    function selectDilemma(choice) {
-      const currDilemma = AppState.selectedDilemmas[AppState.dilemmaIndex];
-      const answer = choice === 'A' ? currDilemma.a : currDilemma.b;
-      
-      AppState.dilemmaAnswers.push(answer);
-      playSynthBeep(choice === 'A' ? 400 : 500, 0.08);
+    // ================= ACTIONS =================
+    function adjustSubconsciousVibe(sliderKey, amount) {
+      let newVal = AppState.sliders[sliderKey] + amount;
+      AppState.sliders[sliderKey] = Math.max(1, Math.min(100, newVal));
+      if (AppState.currentMovie) AppState.rejectedMovies.push(AppState.currentMovie.id);
+      initiateSubconsciousMatching();
+    }
 
-      if (AppState.dilemmaIndex < 2) {
-        AppState.dilemmaIndex++;
-        setupDilemma();
-      } else {
+    function markMovieAsSeen() {
+      if (AppState.currentMovie) {
+        AppState.seenMovies.push(AppState.currentMovie.id);
         initiateSubconsciousMatching();
       }
     }
 
-    // ================= DYNAMIC VECTOR SEARCH MATCHER (KEYLESS) =================
-    async function initiateSubconsciousMatching() {
-      showScreen('screen-loading');
-      playLowDrone();
-      
-      const logContainer = document.getElementById('diagnostic-terminal');
-      logContainer.innerHTML = `<div class="text-neonRed font-bold">&gt;&gt; STARTING PSYCHOLOGICAL ANALYSIS...</div>`;
-      
-      let progress = 0;
-      const progressInterval = setInterval(() => {
-        if (progress < 95) {
-          progress += Math.floor(Math.random() * 8) + 2;
-          if (progress > 95) progress = 95;
-          document.getElementById('loading-pct').innerText = `${progress.toString().padStart(2, '0')}%`;
-        }
-      }, 150);
-
-      function writeLog(text, color = 'text-neutral-400') {
-        const line = document.createElement('div');
-        line.className = color;
-        line.innerHTML = `[OK] ${text}`;
-        logContainer.appendChild(line);
-        logContainer.scrollTop = logContainer.scrollHeight;
-        playSynthBeep(450, 0.02, 'triangle');
+    function rerollCurrentSpectrum() {
+      if (AppState.currentMovie) {
+        AppState.rejectedMovies.push(AppState.currentMovie.id);
+        initiateSubconsciousMatching();
       }
-
-      await sleep(400);
-      writeLog("Telemetry profile coordinates computed.");
-      await sleep(200);
-      writeLog(`Vectors: Warmth-${AppState.sliders.warmth} Tempo-${AppState.sliders.tempo} Reality-${AppState.sliders.reality}`);
-      
-      await sleep(300);
-      writeLog(`LENS: Languages set to [${AppState.language.toUpperCase()}]`);
-      writeLog(`LENS: Chronological space tuned to [${AppState.era.toUpperCase()}]`);
-      writeLog(`LENS: Depth threshold calibrated to [${AppState.depth.toUpperCase()}]`);
-      
-      await sleep(300);
-      writeLog("Compiling rapid neural words and tactile dilemmas...");
-      await sleep(400);
-      writeLog("Polling global cinema archive (TMDB Database)...", "text-neonRed");
-
-      // Build parameters list dynamically
-      let discoverParams = [
-        `api_key=${TMDB_API_KEY}`,
-        `vote_average.gte=7.0`,
-        `include_adult=false`,
-        `with_runtime.gte=60`
-      ];
-
-      // Format constraints based on parameters chosen
-      if (AppState.language === 'english') {
-        discoverParams.push(`with_original_language=en`);
-      } else if (AppState.language === 'foreign') {
-        discoverParams.push(`with_original_language=fr|ja|ko|it|es|de|cn|pt|da|ru|pl|fa|hi|sv|no|nl`);
-      }
-
-      if (AppState.era === 'golden') {
-        discoverParams.push(`release_date.lte=1970-12-31`);
-      } else if (AppState.era === 'neon') {
-        discoverParams.push(`release_date.gte=1971-01-01`, `release_date.lte=1999-12-31`);
-      } else if (AppState.era === 'digital') {
-        discoverParams.push(`release_date.gte=2000-01-01`);
-      }
-
-      // Format based on Obscurity level chosen
-      const obs = AppState.sliders.obscurity;
-      if (obs <= 35) {
-        discoverParams.push(`vote_count.gte=1500`, `sort_by=popularity.desc`);
-      } else if (obs >= 70) {
-        discoverParams.push(`vote_count.gte=40`, `vote_count.lte=1200`, `sort_by=vote_average.desc`);
-      } else {
-        discoverParams.push(`vote_count.gte=300`, `vote_count.lte=3500`, `sort_by=popularity.desc`);
-      }
-
-      // Grab a random page offset to always keep results fresh
-      const randomOffsetPage = Math.floor(Math.random() * 3) + 1;
-      discoverParams.push(`page=${randomOffsetPage}`);
-
-      const discoverUrl = `https://api.themoviedb.org/3/discover/movie?${discoverParams.join('&')}`;
-
-      let candidates = [];
-      try {
-        const response = await fetch(discoverUrl);
-        if (!response.ok) throw new Error();
-        const data = await response.json();
-        candidates = data.results || [];
-      } catch (err) {
-        // Fallback to page 1 if the query offset page returns blank
-        try {
-          const fbUrl = `https://api.themoviedb.org/3/discover/movie?${discoverParams.filter(p => !p.startsWith('page=')).join('&')}&page=1`;
-          const response = await fetch(fbUrl);
-          const data = await response.json();
-          candidates = data.results || [];
-        } catch (e) {
-          clearInterval(progressInterval);
-          writeLog("Uplink disrupted. Connection timeout.", "text-red-500");
-          await sleep(1000);
-          showErrorState();
-          return;
-        }
-      }
-
-      if (candidates.length === 0) {
-        // Broaden matching restrictions to guarantee results
-        try {
-          writeLog("Optimizing search bandwidth...");
-          const broaderUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&vote_average.gte=7.0&vote_count.gte=200&page=1`;
-          const response = await fetch(broaderUrl);
-          const data = await response.json();
-          candidates = data.results || [];
-        } catch (e) {
-          clearInterval(progressInterval);
-          showErrorState();
-          return;
-        }
-      }
-
-      writeLog(`Scanning candidate matrices: [${candidates.length} nodes retrieved]`);
-      await sleep(300);
-
-      // Vector Distance Scoring Engine
-      let selectedMovieMeta = null;
-      let minDistance = Infinity;
-
-      candidates.forEach(movie => {
-        // Find center coordinates in Warmth/Tempo/Reality
-        let wSum = 0, tSum = 0, rSum = 0, count = 0;
-        movie.genre_ids.forEach(gid => {
-          if (GENRE_MAP[gid]) {
-            wSum += GENRE_MAP[gid].w;
-            tSum += GENRE_MAP[gid].t;
-            rSum += GENRE_MAP[gid].r;
-            count++;
-          }
-        });
-
-        const movieW = count > 0 ? wSum / count : 50;
-        const movieT = count > 0 ? tSum / count : 50;
-        const movieR = count > 0 ? rSum / count : 50;
-
-        // Extract obscurity from Vote counts using logarithmic mapping
-        const movieObscurity = Math.max(0, Math.min(100, 100 - (Math.log10(movie.vote_count || 1) * 22)));
-
-        // Compute 4-dimensional Euclidean distance
-        const dW = movieW - AppState.sliders.warmth;
-        const dT = movieT - AppState.sliders.tempo;
-        const dR = movieR - AppState.sliders.reality;
-        const dO = movieObscurity - AppState.sliders.obscurity;
-
-        // Apply critical Depth biases to score
-        let depthOffset = 0;
-        if (AppState.depth === 'cinephile') {
-          const artisticGenres = [18, 9648, 36, 99]; // Drama, Mystery, History, Documentary
-          const hasArtistic = movie.genre_ids.some(gid => artisticGenres.includes(gid));
-          if (hasArtistic) depthOffset = 15;
-        } else {
-          const casualGenres = [28, 12, 35, 53]; // Action, Adventure, Comedy, Thriller
-          const hasCasual = movie.genre_ids.some(gid => casualGenres.includes(gid));
-          if (hasCasual) depthOffset = 15;
-        }
-
-        const score = Math.sqrt(dW*dW + dT*dT + dR*dR + dO*dO) - depthOffset;
-
-        if (score < minDistance) {
-          minDistance = score;
-          selectedMovieMeta = movie;
-        }
-      });
-
-      if (!selectedMovieMeta) {
-        clearInterval(progressInterval);
-        showErrorState();
-        return;
-      }
-
-      // Fetch precise details for chosen candidate ID
-      writeLog("Securing final spatial match...", "text-green-500");
-      let fullDetails = null;
-      try {
-        const detailsUrl = `https://api.themoviedb.org/3/movie/${selectedMovieMeta.id}?api_key=${TMDB_API_KEY}&append_to_response=credits,watch/providers`;
-        const res = await fetch(detailsUrl);
-        fullDetails = await res.json();
-      } catch (e) {
-        fullDetails = selectedMovieMeta; // fallback to basic metadata
-      }
-
-      // Run Atmospheric Procedural Critique Composer
-      const customCritique = composeProceduralCritique(fullDetails);
-
-      populateFinalReveal(fullDetails, customCritique);
-
-      clearInterval(progressInterval);
-      document.getElementById('loading-pct').innerText = "100%";
-      playHighChime();
-      await sleep(600);
-      
-      showScreen('screen-result');
-      typeText('custom-analysis', customCritique.reasoning, 18);
     }
 
-    // ================= ATMOSPHERIC POETIC COMPOSITOR SYSTEM =================
-    function composeProceduralCritique(movie) {
-      const warmthVal = AppState.sliders.warmth;
-      const tempoVal = AppState.sliders.tempo;
-      const realityVal = AppState.sliders.reality;
-      const obscurityVal = AppState.sliders.obscurity;
+    // Extraction Utilities
+    function getOneSentencePlot(overview) {
+      if (!overview) return "A cinematic journey unfolds in the dark.";
+      const match = overview.match(/^.*?[.!?](?:\s|$)/);
+      return match ? match[0].trim() : overview.substring(0, 100) + '...';
+    }
 
-      const randomAssociation = AppState.associations[Math.floor(Math.random() * AppState.associations.length)] || "echo";
-      const randomStimulus = AppState.selectedWords[Math.floor(Math.random() * AppState.selectedWords.length)] || "shadow";
-      const randomDilemma = AppState.dilemmaAnswers[Math.floor(Math.random() * AppState.dilemmaAnswers.length)] || "the void";
-
-      const warmthDesc = warmthVal > 60 ? "a cold, haunting drift into psychological dread" : "a deeply comforting, nostalgic human embrace";
-      const tempoDesc = tempoVal > 60 ? "intense, razor-sharp narrative momentum" : "a slow-burn, beautifully hypnotic meditation on silence";
-      const realityDesc = realityVal > 60 ? "highly surreal, heightened visual dreamscapes" : "tactile, gritty realism and uncompromising human details";
+    function generateVibeWords(movie, w, t, r, h) {
+      const w1 = AppState.associations[0] || "SHADOW";
+      let w2 = "ATMOSPHERIC";
+      if (movie.genre_ids && movie.genre_ids.length > 0 && GENRE_MAP[movie.genre_ids[0]]) {
+        w2 = GENRE_MAP[movie.genre_ids[0]].name;
+      }
+      let w3 = "INTIMATE";
+      if (r > 60) w3 = "SURREAL";
+      else if (h > 60) w3 = "SATIRICAL";
+      else if (w > 60) w3 = "DREAD";
+      else if (t > 60) w3 = "KINETIC";
       
-      let rarityDesc = "universally respected cinema landmark";
-      if (obscurityVal > 70) rarityDesc = "highly elusive, deeply hidden underground masterpiece";
-      else if (obscurityVal > 40) rarityDesc = "respected, stylish cult classic favorite";
+      return [w1, w2, w3];
+    }
 
-      const director = movie.credits?.crew?.find(c => c.job === 'Director')?.name || "its director";
-      const title = movie.title || "Cinema Projector";
-      const year = movie.release_date ? movie.release_date.split('-')[0] : "Classic";
+    function composeProceduralCritique(movie, w, t, r, h) {
+      const tarot = AppState.selectedTarotCard || AppState.tarotDeck[0];
+      const word = AppState.associations[0] || "ECHO";
+      const word2 = AppState.associations[1] || "SHADOW";
 
-      const primaryGenre = movie.genres?.[0]?.name || "Film";
+      const dir = movie.credits?.crew?.find(c => c.job === 'Director')?.name || "the auteur";
+      const title = movie.title || "The Picture";
+      const yr = movie.release_date ? movie.release_date.split('-')[0] : "";
 
-      const lines = [
-        `Your neurological alignment with "${randomAssociation}" (triggered by the sensory marker "${randomStimulus}") and your draw toward "${randomDilemma}" reveals a psyche seeking ${warmthDesc}. With your tempo parameters locked at ${tempoVal}%, tonight's headspace gravitates toward ${tempoDesc}. This aligns flawlessly with ${director}'s landmark work, ${title} (${year}), which operates as a ${rarityDesc}. By mapping your vectors into our live cinema matrix, this projection yields a sublime integration of ${realityDesc} that perfectly honors your active parameters.`,
+      const warmthDesc = w > 60 ? "existential isolation and haunting darkness" : "deep emotional connection and cozy, lingering nostalgia";
+      const tempoDesc = t > 60 ? "relentless kinetic energy and frantic pacing" : "a patient, slow-burn, beautifully hypnotic framing of silence";
+      const realityDesc = r > 60 ? "strikingly surreal, heightened dreamscapes" : "tactile, gritty realism and uncompromising human truth";
+      const humorDesc = h > 60 ? "bizarrely witty, satirical humor" : "bleak, uncompromisingly tragic undertones";
+      const obscurityDesc = AppState.sliders.obscurity > 70 ? "highly rare, deeply hidden avant-garde discovery" : (AppState.sliders.obscurity > 40 ? "beautifully stylized, atmospheric cult classic" : "globally celebrated cinephile masterpiece");
+
+      const texts = [
+        `Your diagnostic baseline anchored with ${tarot.name} (${tarot.num}), signifying a subconscious drift toward ${tarot.essence}. This intuitive pull intersected directly with your typed associations of "${word}" and "${word2}". Tonight, your final projected path points to a cinema landscape seeking ${warmthDesc} layered with ${humorDesc}. This matches perfectly with ${dir}'s masterpiece, ${title} (${yr}), a ${obscurityDesc} aligning with your tempo vector of ${t}%. Its structural reliance on ${tempoDesc} combined with ${realityDesc} offers the perfect atmospheric calibration for your inner state.`,
         
-        `Tuning the lens markers to ${obscurityVal}% obscurity and a ${AppState.depth} watch index has isolated ${title} (${year}) directly from the archives. The delicate resonance between your typed association "${randomAssociation}" and your tactile pull toward "${randomDilemma}" indicates a clear desire for ${warmthDesc}. Structurally, the movie's ${tempoDesc} balances your active spectrum indicators, resulting in a mesmerizing experience defined by ${realityDesc}. This ${primaryGenre} classic represents the definitive, uncompromised calibration for tonight's mental framework.`,
+        `Drawing ${tarot.name} (meaning: ${tarot.meaning}) directly from the deck of the subconscious converged with your rapid echo response of "${word}". This reveals a mental framework desiring ${warmthDesc} cut with ${humorDesc}. To balance this state, ${title} (${yr}) has been projected from the live archives. Guided by ${dir}'s uncompromising vision, this ${obscurityDesc} is defined by ${tempoDesc}. As your intuitive tarot card predicted, tonight's watch will pull you deep into ${realityDesc}, resolving your parameters with stunning sensory precision.`,
 
-        `Tonight's diagnostic isolates a deep cognitive state positioned at ${realityVal}% reality and ${warmthVal}% psychological warmth. Your reaction to "${randomAssociation}" paired with the tactile choice of "${randomDilemma}" points directly to the atmosphere locked within ${title}. As ${director} paints this cinematic canvas, your subconscious will find immediate release in its ${tempoDesc}. This represents a precise, atmospheric reflection of your current mental parameters.`
-      ];
-
-      const taglines = [
-        `A breathtaking dance of desire and quiet atmospheric shadow.`,
-        `A pristine structural triumph of human dread and sensory elevation.`,
-        `An uncompromising exploration of silent spaces and vivid artistic light.`
+        `Your drawn tarot coordinates (${tarot.name}) paired with your raw spectrum baselines map a cognitive line seeking ${warmthDesc}, ${humorDesc}, and ${realityDesc}. Your gut pull toward this standard Major Arcana archetype mirrors the thematic core of ${title} (${yr}). Structured around a ${tempoDesc}, this ${obscurityDesc} by ${dir} serves as a perfect reflection of your active spectrum. It is an uncompromising cinematic mirror tailored to your subconscious needs.`
       ];
 
       return {
-        vibeTagline: movie.tagline || taglines[Math.floor(Math.random() * taglines.length)],
-        reasoning: lines[Math.floor(Math.random() * lines.length)]
+        vibeTagline: movie.tagline || "A masterclass in shadow and light.",
+        reasoning: texts[Math.floor(Math.random() * texts.length)]
       };
     }
 
-    // ================= PRESENTATION & RENDER ENGINE =================
-    function populateFinalReveal(movie, critique) {
+    function populateFinalReveal(movie, critique, vibes, plot) {
       document.getElementById('vibe-tagline').innerText = `"${critique.vibeTagline}"`;
-      document.getElementById('movie-title').innerText = movie.title;
-      
-      const year = movie.release_date ? movie.release_date.split('-')[0] : "Classic";
-      document.getElementById('movie-year').innerText = year;
-      
-      const directorName = movie.credits?.crew?.find(c => c.job === 'Director')?.name || "Auteur";
-      document.getElementById('movie-director').innerText = `DIR: ${directorName}`;
-      
-      const runtime = movie.runtime ? `${movie.runtime} min` : "Feature Film";
-      document.getElementById('movie-runtime').innerText = runtime;
+      document.getElementById('movie-title').innerText = movie.title || "UNKNOWN";
+      document.getElementById('movie-year').innerText = movie.release_date ? movie.release_date.split('-')[0] : "----";
+      document.getElementById('movie-director').innerText = movie.credits?.crew?.find(c => c.job === 'Director')?.name || "AUTEUR";
+      document.getElementById('movie-runtime').innerText = movie.runtime ? `${movie.runtime} MIN` : "--- MIN";
 
-      // Update configuration display badges
+      document.getElementById('movie-plot').innerText = `"${plot}"`;
+
+      const vibeC = document.getElementById('vibe-words-container');
+      vibeC.innerHTML = vibes.map(v => `<span class="px-2 py-0.5 border border-neonRed text-neonRed text-[9px] uppercase font-bold tracking-widest shadow-neon-sm">${v}</span>`).join('');
+
+      // Badges
       document.getElementById('active-lang-badge').innerText = AppState.language === 'any' ? 'GLOBAL' : AppState.language;
-      document.getElementById('active-era-badge').innerText = AppState.era === 'any' ? 'FULL SPECTRUM' : AppState.era;
+      document.getElementById('active-era-badge').innerText = AppState.era === 'any' ? 'FULL' : AppState.era;
       document.getElementById('active-depth-badge').innerText = AppState.depth;
       document.getElementById('active-obscurity-badge').innerText = `${AppState.sliders.obscurity}%`;
+      document.getElementById('active-humor-badge').innerText = `${AppState.sliders.humor}%`;
 
       const posterImg = document.getElementById('movie-poster');
       const ambientBg = document.getElementById('ambient-bg');
@@ -1209,117 +1161,44 @@
         ambientBg.style.backgroundImage = "none";
       }
 
-      // Handle streaming providers
       const providersContainer = document.getElementById('providers-container');
       providersContainer.innerHTML = "";
       
       const usFlatrate = movie["watch/providers"]?.results?.US?.flatrate;
       if (usFlatrate && usFlatrate.length > 0) {
-        usFlatrate.slice(0, 4).forEach(prov => {
-          const badge = document.createElement('div');
-          badge.className = "flex items-center space-x-1.5 bg-neutral-900 border border-neutral-800 px-2 py-1 text-[9px] font-mono text-neutral-300";
-          
-          const icon = document.createElement('img');
-          icon.src = `https://image.tmdb.org/t/p/original${prov.logo_path}`;
-          icon.className = "w-3 h-3 object-cover rounded-sm";
-          
-          const name = document.createElement('span');
-          name.innerText = prov.provider_name;
-          
-          badge.appendChild(icon);
-          badge.appendChild(name);
-          providersContainer.appendChild(badge);
+        usFlatrate.slice(0, 3).forEach(p => {
+          providersContainer.innerHTML += `<span class="border border-neutral-700 bg-neutral-900 text-neutral-300 px-1.5 py-0.5 text-[8px]">${p.provider_name}</span>`;
         });
       } else {
         const rentOptions = movie["watch/providers"]?.results?.US?.rent;
         if (rentOptions && rentOptions.length > 0) {
-          rentOptions.slice(0, 3).forEach(prov => {
-            const badge = document.createElement('div');
-            badge.className = "flex items-center space-x-1.5 bg-neutral-900 border border-neutral-800 px-2 py-1 text-[9px] font-mono text-neutral-300";
-            const name = document.createElement('span');
-            name.innerText = `${prov.provider_name} (Rent)`;
-            badge.appendChild(name);
-            providersContainer.appendChild(badge);
+          rentOptions.slice(0, 3).forEach(p => {
+            providersContainer.innerHTML += `<span class="border border-neutral-700 bg-neutral-900 text-neutral-300 px-1.5 py-0.5 text-[8px]">${p.provider_name} (Rent)</span>`;
           });
         } else {
-          providersContainer.innerHTML = `<span class="text-[9px] font-mono text-neutral-600 font-bold uppercase">CHECK LOCAL LISTINGS / CRITERION</span>`;
+          providersContainer.innerHTML = `<span class="text-[9px] font-mono text-neutral-600 font-bold uppercase border border-neutral-800 border-dashed px-2 py-1">LOCAL CINEMA / PHYSICAL MEDIA</span>`;
         }
       }
-    }
-
-    function handleImageError(image) {
-      image.style.opacity = "0";
-      document.getElementById('poster-fallback-text').style.display = "flex";
     }
 
     function shareProjection() {
       const title = document.getElementById('movie-title').innerText;
-      const year = document.getElementById('movie-year').innerText;
-      const shareText = `My Blind Cut Projection: ${title} (${year}). Calibrate your cinematic mood tonight.`;
-      
-      const tempInput = document.createElement('input');
-      tempInput.value = shareText;
-      document.body.appendChild(tempInput);
-      tempInput.select();
-      document.execCommand('copy');
-      document.body.removeChild(tempInput);
-
+      const shareText = `My Blind Cut Diagnostic: ${title}. Script locked.`;
+      const temp = document.createElement('input');
+      temp.value = shareText; document.body.appendChild(temp);
+      temp.select(); document.execCommand('copy'); document.body.removeChild(temp);
       const banner = document.getElementById('notification-banner');
-      banner.classList.remove('opacity-0');
-      banner.classList.add('opacity-100');
-      playSynthBeep(660, 0.15);
-      
-      setTimeout(() => {
-        banner.classList.remove('opacity-100');
-        banner.classList.add('opacity-0');
-      }, 2000);
+      banner.classList.remove('opacity-0'); banner.classList.add('opacity-100');
+      playTypewriterDing();
+      setTimeout(() => { banner.classList.remove('opacity-100'); banner.classList.add('opacity-0'); }, 2000);
     }
 
-    function showErrorState() {
-      playSynthBeep(150, 0.4, 'sawtooth');
-      showScreen('screen-error');
-    }
-
-    function retryProjection() {
-      playSynthBeep(440, 0.1);
-      initiateSubconsciousMatching();
-    }
-
-    function recalibrate() {
-      playSynthBeep(200, 0.1, 'sawtooth');
-      AppState.currentScreen = 'intro';
-      document.getElementById('slider-warmth').value = 50;
-      document.getElementById('slider-tempo').value = 50;
-      document.getElementById('slider-reality').value = 50;
-      document.getElementById('slider-obscurity').value = 50;
-      document.getElementById('val-warmth').innerText = '50%';
-      document.getElementById('val-tempo').innerText = '50%';
-      document.getElementById('val-reality').innerText = '50%';
-      document.getElementById('val-obscurity').innerText = '50%';
-      
-      showScreen('screen-intro');
-    }
-
-    // ================= HELPER FUNCTIONS =================
-    function sleep(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
-    function typeText(elementId, text, speed = 18) {
-      const element = document.getElementById(elementId);
-      element.innerHTML = "";
-      let i = 0;
-      function type() {
-        if (i < text.length) {
-          element.innerHTML += text.charAt(i);
-          i++;
-          setTimeout(type, speed);
-        }
-      }
-      type();
-    }
+    function retryProjection() { initiateSubconsciousMatching(); }
+    function recalibrate() { location.reload(); }
+    function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
   </script>
 </body>
 </html>
+
 
 ```
