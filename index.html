@@ -154,7 +154,7 @@
             THE BLIND
             <span class="block text-neonRed font-black shadow-neon-sm mt-1">CUT</span>
           </h1>
-          <p class="font-mono text-[10px] tracking-[0.3em] text-neutral-500 uppercase mt-2 font-bold">Quantum Cinematic Projection</p>
+          <p class="font-mono text-[10px] tracking-[0.3em] text-neutral-500 uppercase mt-2 font-bold font-mono">Subconscious Vector Matchmaker</p>
         </div>
 
         <div class="space-y-4 text-center px-3">
@@ -162,7 +162,7 @@
             An internet-powered diagnostic scours the entire historic landscape of cinema to map your immediate subconscious vibe.
           </p>
           <p class="text-neutral-500 text-xs leading-relaxed font-mono">
-            Requires active data feed. Results are unconstrained, dynamically generated in real-time.
+            Zero setup required. Fully client-contained, scanning live global archives in real-time.
           </p>
         </div>
 
@@ -235,22 +235,10 @@
               </button>
             </div>
           </div>
-
-          <!-- Secure API Uplink Key Override -->
-          <div class="space-y-1.5 border-t border-neutral-900 pt-3">
-            <div class="flex justify-between items-center">
-              <span class="font-mono text-[10px] tracking-widest text-neutral-400 block uppercase font-bold">4. Secure AI Uplink Override</span>
-              <a href="https://aistudio.google.com/" target="_blank" class="text-[8px] text-neonRed font-mono underline hover:text-white transition-colors">GET FREE KEY</a>
-            </div>
-            <div class="flex items-center space-x-2 bg-darkGrey border border-neutral-800 focus-within:border-neonRed px-3 py-2 transition-all">
-              <span class="font-mono text-xs text-neonRed font-bold">&gt;</span>
-              <input type="password" id="uplink-key-input" oninput="syncKeys(this.value)" placeholder="ENTER GEMINI API KEY..." class="bg-transparent text-white outline-none w-full tracking-widest font-mono text-[10px]">
-            </div>
-          </div>
         </div>
 
-        <div class="pt-2">
-          <button onclick="goToGame1()" class="w-full py-3.5 bg-black border border-neutral-700 hover:border-neonRed text-white hover:shadow-neon-sm transition-all duration-300 tracking-[0.2em] font-mono text-xs uppercase font-bold rounded-none flex items-center justify-center space-x-2">
+        <div class="pt-4">
+          <button onclick="goToGame1()" class="w-full py-4 bg-black border border-neutral-700 hover:border-neonRed text-white hover:shadow-neon-sm transition-all duration-300 tracking-[0.2em] font-mono text-xs uppercase font-bold rounded-none flex items-center justify-center space-x-2">
             <span>LOCK LENS PARAMETERS</span>
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
           </button>
@@ -268,9 +256,9 @@
         <!-- Slider 1 -->
         <div class="space-y-2 pt-2">
           <div class="flex justify-between font-mono text-[9px] tracking-wider">
-            <span class="text-neutral-400">HEARTWARMING & COZY</span>
-            <span id="val-warmth" class="text-neonRed font-bold">50%</span>
-            <span class="text-neutral-400">EXISTENTIAL DREAD</span>
+            <span class="text-neutral-400 font-bold">HEARTWARMING & COZY</span>
+            <span id="val-warmth" class="text-neonRed font-bold font-mono">50%</span>
+            <span class="text-neutral-400 font-bold">EXISTENTIAL DREAD</span>
           </div>
           <input type="range" id="slider-warmth" min="1" max="100" value="50" oninput="updateSliderVal('warmth')" class="w-full cursor-pointer">
         </div>
@@ -278,9 +266,9 @@
         <!-- Slider 2 -->
         <div class="space-y-2">
           <div class="flex justify-between font-mono text-[9px] tracking-wider">
-            <span class="text-neutral-400">MEDITATIVE & SLOW</span>
-            <span id="val-tempo" class="text-neonRed font-bold">50%</span>
-            <span class="text-neutral-400">KINETIC & INTENSE</span>
+            <span class="text-neutral-400 font-bold">MEDITATIVE & SLOW</span>
+            <span id="val-tempo" class="text-neonRed font-bold font-mono">50%</span>
+            <span class="text-neutral-400 font-bold">KINETIC & INTENSE</span>
           </div>
           <input type="range" id="slider-tempo" min="1" max="100" value="50" oninput="updateSliderVal('tempo')" class="w-full cursor-pointer">
         </div>
@@ -288,9 +276,9 @@
         <!-- Slider 3 -->
         <div class="space-y-2">
           <div class="flex justify-between font-mono text-[9px] tracking-wider">
-            <span class="text-neutral-400">GROUNDED & GRITTY</span>
-            <span id="val-reality" class="text-neonRed font-bold">50%</span>
-            <span class="text-neutral-400">SURREAL & DREAMLIKE</span>
+            <span class="text-neutral-400 font-bold">GROUNDED & GRITTY</span>
+            <span id="val-reality" class="text-neonRed font-bold font-mono">50%</span>
+            <span class="text-neutral-400 font-bold">SURREAL & DREAMLIKE</span>
           </div>
           <input type="range" id="slider-reality" min="1" max="100" value="50" oninput="updateSliderVal('reality')" class="w-full cursor-pointer">
         </div>
@@ -298,9 +286,9 @@
         <!-- Slider 4: Obscurity Slider -->
         <div class="space-y-2">
           <div class="flex justify-between font-mono text-[9px] tracking-wider">
-            <span class="text-neutral-400">HOUSEHOLD MAINSTREAM</span>
-            <span id="val-obscurity" class="text-neonRed font-bold">50%</span>
-            <span class="text-neutral-400">OBSCURE DEEP CUT</span>
+            <span class="text-neutral-400 font-bold">HOUSEHOLD MAINSTREAM</span>
+            <span id="val-obscurity" class="text-neonRed font-bold font-mono">50%</span>
+            <span class="text-neutral-400 font-bold">OBSCURE DEEP CUT</span>
           </div>
           <input type="range" id="slider-obscurity" min="1" max="100" value="50" oninput="updateSliderVal('obscurity')" class="w-full cursor-pointer">
         </div>
@@ -413,7 +401,7 @@
       </section>
 
       <!-- ================= SCREEN 5: DIAGNOSTIC / LOADING ================= -->
-      <section id="screen-loading" class="hidden flex flex-col space-y-8 py-12 animate-fade-in">
+      <section id="screen-loading" class="hidden flex flex-col space-y-8 py-12 animate-fade-in font-mono">
         <div class="flex flex-col items-center space-y-6">
           <!-- Hypnotic SVG Loader -->
           <div class="relative w-28 h-28">
@@ -492,7 +480,7 @@
 
           <!-- Synthesis Analysis -->
           <div class="bg-black border border-neutral-900 p-4 font-mono text-xs leading-relaxed text-neutral-300 relative">
-            <div class="absolute top-2 right-2 font-mono text-[8px] text-neutral-600">AI SYNTHESIS</div>
+            <div class="absolute top-2 right-2 font-mono text-[8px] text-neutral-600">SUB-COGNITIVE ALIGNMENT MATRIX</div>
             <p id="custom-analysis" class="pt-2 text-justify text-neutral-200">
               Analyzing. Calculating mental parameters...
             </p>
@@ -525,40 +513,28 @@
       </section>
 
       <!-- ================= SCREEN 7: DISRUPTED UPLINK (ERROR SCREEN) ================= -->
-      <section id="screen-error" class="hidden flex flex-col space-y-6 py-6 animate-fade-in font-mono">
-        <div class="text-center space-y-2">
-          <span class="inline-block px-3 py-1 bg-neonRed text-white text-[10px] tracking-widest font-bold">UPLINK SEVERED</span>
+      <section id="screen-error" class="hidden flex flex-col space-y-6 text-center py-8 animate-fade-in font-mono">
+        <div class="space-y-2">
+          <span class="inline-block px-3 py-1 bg-neonRed text-white text-[10px] tracking-widest font-bold font-mono">UPLINK SEVERED</span>
           <h2 class="font-cinzel text-3xl tracking-wider uppercase text-neonRed mt-4 glitch" data-text="SYSTEM OFFLINE">SYSTEM OFFLINE</h2>
           <p class="text-[10px] text-neutral-500 uppercase tracking-widest">Global Archive Unreachable</p>
         </div>
 
-        <div class="bg-darkGrey border border-neutral-800 p-5 text-left text-xs text-neutral-400 space-y-4 leading-relaxed">
+        <div class="bg-darkGrey border border-neutral-800 p-6 text-left text-xs text-neutral-400 space-y-4 leading-relaxed">
           <p>
-            The Blind Cut is a live, unconstrained diagnostic tool. It requires a secure API key to query the Gemini models.
+            The Blind Cut live pipeline was unable to perform a handshake with the TMDB visual catalog.
           </p>
-          <div class="border-t border-neutral-900 pt-3 text-[10px] text-neonRed space-y-1">
-            <div>&gt; ERR_SECURE_HANDSHAKE_FAILED</div>
-            <div>&gt; Suggestion: Paste your personal, free API key below and hit Retry.</div>
+          <div class="border-t border-neutral-900 pt-3 text-[10px] text-neonRed space-y-1 font-mono">
+            <div>&gt; ERR_NETWORK_DISRUPTED_OR_TIMEOUT</div>
+            <div>&gt; Reason: Active internet feed is required to resolve real-time recommendations. Please check your data connection.</div>
           </div>
         </div>
 
-        <!-- Inline Key entry box for quick error resolution -->
-        <div class="space-y-2 text-left">
-          <div class="flex justify-between items-center">
-            <label class="font-mono text-[9px] tracking-widest text-neutral-400 block uppercase font-bold">Secure AI Uplink Key:</label>
-            <a href="https://aistudio.google.com/" target="_blank" class="text-[8px] text-neonRed font-mono underline hover:text-white transition-colors">GET KEY INSTANTLY FROM GOOGLE</a>
-          </div>
-          <div class="flex items-center space-x-2 bg-darkGrey border border-neutral-800 focus-within:border-neonRed px-3 py-2.5 transition-all">
-            <span class="font-mono text-xs text-neonRed font-bold">&gt;</span>
-            <input type="password" id="error-key-input" oninput="syncKeys(this.value)" placeholder="PASTE GEMINI API KEY HERE..." class="bg-transparent text-white outline-none w-full tracking-widest font-mono text-xs placeholder-neutral-700">
-          </div>
-        </div>
-
-        <div class="pt-2 space-y-3">
-          <button onclick="retryProjection()" class="w-full py-4 bg-neonRed hover:bg-red-700 text-white font-bold tracking-[0.2em] text-xs uppercase shadow-neon-sm hover:shadow-neon transition-all duration-300">
+        <div class="pt-4 space-y-3">
+          <button onclick="retryProjection()" class="w-full py-4 bg-neonRed hover:bg-red-700 text-white font-bold tracking-[0.2em] text-xs uppercase shadow-neon-sm hover:shadow-neon transition-all duration-300 font-mono">
             RETRY SYSTEM UPLINK
           </button>
-          <button onclick="recalibrate()" class="w-full py-3 bg-black border border-neutral-800 text-neutral-500 hover:text-white hover:border-white tracking-[0.2em] text-[10px] uppercase transition-all duration-300">
+          <button onclick="recalibrate()" class="w-full py-3 bg-black border border-neutral-800 text-neutral-500 hover:text-white hover:border-white tracking-[0.2em] text-[10px] uppercase transition-all duration-300 font-mono">
             BACK TO CONSOLE
           </button>
         </div>
@@ -568,7 +544,7 @@
 
     <!-- Footer Information -->
     <footer class="w-full text-center py-4 border-t border-neutral-900 bg-black/85 backdrop-blur z-50">
-      <span class="font-mono text-[8px] tracking-widest text-neutral-600 uppercase">THE BLIND CUT — LIVE QUANTUM CALIBRATOR v1.08</span>
+      <span class="font-mono text-[8px] tracking-widest text-neutral-600 uppercase">THE BLIND CUT — DYNAMIC VECTOR MATCHMAKER v2.00</span>
     </footer>
 
   </div>
@@ -580,7 +556,7 @@
 
   <!-- JavaScript Core -->
   <script>
-    // TMDB Configuration
+    // TMDB Configuration - Using your working key directly to resolve serverless limitations on GitHub Pages!
     const TMDB_API_KEY = "c2015ecda624b83d2e3d19ead77c0a8c";
 
     // Application Global State
@@ -644,21 +620,26 @@
       diagnosticLogs: []
     };
 
-    // Restore cached key from tab session storage
-    window.onload = function() {
-      const cachedKey = sessionStorage.getItem('blind_cut_user_gemini_key');
-      if (cachedKey) {
-        document.getElementById('uplink-key-input').value = cachedKey;
-        document.getElementById('error-key-input').value = cachedKey;
-      }
+    // Subconscious Genre Vector coordinates mapping system
+    const GENRE_MAP = {
+      18: { w: 50, t: 25, r: 10 },   // Drama (Neutral warmth, slow-burn, gritty/grounded)
+      35: { w: 15, t: 65, r: 35 },   // Comedy (Warm, kinetic, slightly surreal)
+      53: { w: 85, t: 75, r: 30 },   // Thriller (High dread, highly kinetic, grounded)
+      27: { w: 95, t: 70, r: 80 },   // Horror (Extreme dread, fast-paced, dreamlike/unreal)
+      878: { w: 70, t: 60, r: 90 },  // Science Fiction (Dread, kinetic, surreal)
+      14: { w: 30, t: 50, r: 95 },   // Fantasy (Cozy, meditative, highly surreal)
+      10749: { w: 20, t: 30, r: 20 },// Romance (Highly cozy, meditative, grounded)
+      28: { w: 65, t: 95, r: 35 },   // Action (Dread, kinetic, slightly heightened)
+      80: { w: 80, t: 65, r: 15 },   // Crime (Dread, intense, gritty/grounded)
+      9648: { w: 75, t: 40, r: 55 },  // Mystery (Dread, slow-burn, slightly surreal)
+      36: { w: 45, t: 20, r: 5 },    // History (Comforting, slow-burn, ultra-grounded)
+      10752: { w: 90, t: 80, r: 10 }, // War (Extreme dread, fast-paced, gritty reality)
+      99: { w: 50, t: 15, r: 0 },    // Documentary (Neutral, slow-burn, absolute truth)
+      10751: { w: 10, t: 40, r: 30 }, // Family (Ultra-cozy, slow-burn, grounded)
+      12: { w: 40, t: 85, r: 50 },   // Adventure (Comforting, kinetic, heightened)
+      37: { w: 60, t: 50, r: 15 },   // Western (Tense dread, med-tempo, gritty)
+      10402: { w: 30, t: 40, r: 40 }  // Music (Cozy, meditative, heightened)
     };
-
-    // Synchronize setup key input and error key input
-    function syncKeys(val) {
-      document.getElementById('uplink-key-input').value = val;
-      document.getElementById('error-key-input').value = val;
-      sessionStorage.setItem('blind_cut_user_gemini_key', val);
-    }
 
     // ================= AUDIO SYNTHESIZER (WEB AUDIO API) =================
     let audioCtx = null;
@@ -782,30 +763,30 @@
         ['any', 'english', 'foreign'].forEach(item => {
           const btn = document.getElementById(`lang-${item}`);
           if (item === val) {
-            btn.className = "py-2.5 px-2 bg-black border border-neonRed text-neonRed text-[9px] font-mono tracking-wider uppercase transition-all duration-200 shadow-neon-sm";
+            btn.className = "py-2.5 px-2 bg-black border border-neonRed text-neonRed text-[10px] font-mono tracking-wider uppercase transition-all duration-200 shadow-neon-sm font-bold";
           } else {
-            btn.className = "py-2.5 px-2 bg-darkGrey border border-neutral-800 text-neutral-500 text-[9px] font-mono tracking-wider uppercase transition-all duration-200 hover:border-neutral-700";
+            btn.className = "py-2.5 px-2 bg-darkGrey border border-neutral-800 text-neutral-500 text-[10px] font-mono tracking-wider uppercase transition-all duration-200 hover:border-neutral-700 font-bold";
           }
         });
       } else if (key === 'era') {
         ['any', 'golden', 'neon', 'digital'].forEach(item => {
           const btn = document.getElementById(`era-${item}`);
           if (item === val) {
-            btn.className = "py-2.5 px-3 bg-black border border-neonRed text-neonRed text-[9px] font-mono tracking-wider uppercase transition-all duration-200 text-left flex justify-between items-center shadow-neon-sm";
-            btn.querySelector('span:last-child').className = "text-[8px] text-neonRed opacity-80";
+            btn.className = "py-2.5 px-3 bg-black border border-neonRed text-neonRed text-[10px] font-mono tracking-wider uppercase transition-all duration-200 text-left flex justify-between items-center shadow-neon-sm font-bold";
+            btn.querySelector('span:last-child').className = "text-[8px] text-neonRed opacity-80 font-bold";
           } else {
-            btn.className = "py-2.5 px-3 bg-darkGrey border border-neutral-800 text-neutral-500 text-[9px] font-mono tracking-wider uppercase transition-all duration-200 text-left flex justify-between items-center hover:border-neutral-700";
-            btn.querySelector('span:last-child').className = "text-[8px] text-neutral-600";
+            btn.className = "py-2.5 px-3 bg-darkGrey border border-neutral-800 text-neutral-500 text-[10px] font-mono tracking-wider uppercase transition-all duration-200 text-left flex justify-between items-center hover:border-neutral-700 font-bold";
+            btn.querySelector('span:last-child').className = "text-[8px] text-neutral-600 font-bold";
           }
         });
       } else if (key === 'depth') {
         ['casual', 'cinephile'].forEach(item => {
           const btn = document.getElementById(`depth-${item}`);
           if (item === val) {
-            btn.className = "p-2.5 bg-black border border-neonRed text-neonRed text-left flex flex-col justify-between transition-all duration-200 min-h-[56px] shadow-neon-sm";
+            btn.className = "p-2.5 bg-black border border-neonRed text-neonRed text-left flex flex-col justify-between transition-all duration-200 min-h-[56px] shadow-neon-sm font-bold";
             btn.querySelector('span:last-child').className = "text-[8px] text-neonRed/80 mt-0.5 leading-normal font-light";
           } else {
-            btn.className = "p-2.5 bg-darkGrey border border-neutral-800 text-neutral-500 text-left flex flex-col justify-between transition-all duration-200 min-h-[56px] hover:border-neutral-700";
+            btn.className = "p-2.5 bg-darkGrey border border-neutral-800 text-neutral-500 text-left flex flex-col justify-between transition-all duration-200 min-h-[56px] hover:border-neutral-700 font-bold";
             btn.querySelector('span:last-child').className = "text-[8px] text-neutral-600 mt-0.5 leading-normal font-light";
           }
         });
@@ -824,7 +805,6 @@
       playSynthBeep(150 + val * 3, 0.02, 'sine');
     }
 
-    // Go to Game 2 Word Association
     function goToGame2() {
       playLowDrone();
       const shuffled = [...AppState.wordPool].sort(() => 0.5 - Math.random());
@@ -939,17 +919,17 @@
         AppState.dilemmaIndex++;
         setupDilemma();
       } else {
-        initiateAiSynthesis();
+        initiateSubconsciousMatching();
       }
     }
 
-    // ================= MODEL SYNTHESIS & METADATA FLOW =================
-    async function initiateAiSynthesis() {
+    // ================= DYNAMIC VECTOR SEARCH MATCHER (KEYLESS) =================
+    async function initiateSubconsciousMatching() {
       showScreen('screen-loading');
       playLowDrone();
       
       const logContainer = document.getElementById('diagnostic-terminal');
-      logContainer.innerHTML = `<div class="text-neonRed font-bold">&gt;&gt; STARTING PSYCHOLOGICAL CALIBRATION...</div>`;
+      logContainer.innerHTML = `<div class="text-neonRed font-bold">&gt;&gt; STARTING PSYCHOLOGICAL ANALYSIS...</div>`;
       
       let progress = 0;
       const progressInterval = setInterval(() => {
@@ -958,7 +938,7 @@
           if (progress > 95) progress = 95;
           document.getElementById('loading-pct').innerText = `${progress.toString().padStart(2, '0')}%`;
         }
-      }, 200);
+      }, 150);
 
       function writeLog(text, color = 'text-neutral-400') {
         const line = document.createElement('div');
@@ -969,180 +949,238 @@
         playSynthBeep(450, 0.02, 'triangle');
       }
 
-      await sleep(500);
-      writeLog("Telemetry profile locked.");
+      await sleep(400);
+      writeLog("Telemetry profile coordinates computed.");
+      await sleep(200);
+      writeLog(`Vectors: Warmth-${AppState.sliders.warmth} Tempo-${AppState.sliders.tempo} Reality-${AppState.sliders.reality}`);
+      
       await sleep(300);
-      writeLog(`Spectrum coordinates: W-${AppState.sliders.warmth} T-${AppState.sliders.tempo} R-${AppState.sliders.reality}`);
-      writeLog(`Obscurity parameter adjusted: ${AppState.sliders.obscurity}%`);
+      writeLog(`LENS: Languages set to [${AppState.language.toUpperCase()}]`);
+      writeLog(`LENS: Chronological space tuned to [${AppState.era.toUpperCase()}]`);
+      writeLog(`LENS: Depth threshold calibrated to [${AppState.depth.toUpperCase()}]`);
       
+      await sleep(300);
+      writeLog("Compiling rapid neural words and tactile dilemmas...");
       await sleep(400);
-      writeLog(`LENS: Cultural origin aligned to [${AppState.language.toUpperCase()}]`);
-      writeLog(`LENS: Chronological epoch locked to [${AppState.era.toUpperCase()}]`);
-      writeLog(`LENS: Cognitive watch criteria set to [${AppState.depth.toUpperCase()}]`);
-      
-      await sleep(400);
-      writeLog("Echo responses cataloged.");
-      await sleep(350);
-      writeLog("Duality metrics parsed.");
-      await sleep(500);
-      writeLog("Contacting AI synthesis node (Gemini API)...", "text-neonRed");
+      writeLog("Polling global cinema archive (TMDB Database)...", "text-neonRed");
 
-      // Generate the unconstrained dynamic Prompt containing the Obscurity Slider value
-      const prompt = `Synthesize this subconscious emotional profile into one definitive cinema masterpiece:
-- Warmth (Cozy to Existential Dread): ${AppState.sliders.warmth}/100
-- Tempo (Meditative to Kinetic): ${AppState.sliders.tempo}/100
-- Reality (Grounded to Surreal): ${AppState.sliders.reality}/100
-- Obscurity Index (Household Mainstream to Rare Esoteric Deep-Cut): ${AppState.sliders.obscurity}/100
-- Rapid Word Associations:
-  * "${AppState.selectedWords[0]}" -> "${AppState.associations[0]}"
-  * "${AppState.selectedWords[1]}" -> "${AppState.associations[1]}"
-  * "${AppState.selectedWords[2]}" -> "${AppState.associations[2]}"
-  * "${AppState.selectedWords[3]}" -> "${AppState.associations[3]}"
-  * "${AppState.selectedWords[4]}" -> "${AppState.associations[4]}"
-- Tactile choices:
-  1. ${AppState.selectedDilemmas[0].q} Chosen: "${AppState.dilemmaAnswers[0]}"
-  2. ${AppState.selectedDilemmas[1].q} Chosen: "${AppState.dilemmaAnswers[1]}"
-  3. ${AppState.selectedDilemmas[2].q} Chosen: "${AppState.dilemmaAnswers[2]}"
+      // Build parameters list dynamically
+      let discoverParams = [
+        `api_key=${TMDB_API_KEY}`,
+        `vote_average.gte=7.0`,
+        `include_adult=false`,
+        `with_runtime.gte=60`
+      ];
 
-STRICT LENS FILTERS TO HONOR:
-1. Language constraint: ${AppState.language === 'english' ? 'Must be an English-language/Hollywood film' : AppState.language === 'foreign' ? 'Must be a foreign/non-English language film' : 'Any language origin is acceptable'}.
-2. Chronological Era: ${AppState.era === 'golden' ? 'Must be a classic film released before 1970' : AppState.era === 'neon' ? 'Must be a legendary film released between 1970 and 1999' : AppState.era === 'digital' ? 'Must be a modern film released from 2000 to present' : 'Any release era is acceptable'}.
-3. Accessibility Depth: ${AppState.depth === 'casual' ? 'Recommend an accessible, highly engaging watch with premium narrative drive' : 'Recommend a classic arthouse, auteur-driven, or challenging cinematic masterwork for cinephiles'}.
-4. Rarity Tuning: Based on Obscurity Index of ${AppState.sliders.obscurity}/100, provide a recommendation with corresponding rarity. (If <= 30: highly popular classic or recognizable cinephile favorite. If 31-70: a well-known cult classic or auteur favorite. If >= 71: an incredibly rare, obscure, deep-cut indie, underground, or experimental film that only true cinema scholars would easily recognize). Ensure this fits your chosen watch depth constraint too.`;
+      // Format constraints based on parameters chosen
+      if (AppState.language === 'english') {
+        discoverParams.push(`with_original_language=en`);
+      } else if (AppState.language === 'foreign') {
+        discoverParams.push(`with_original_language=fr|ja|ko|it|es|de|cn|pt|da|ru|pl|fa|hi|sv|no|nl`);
+      }
 
-      const systemPrompt = `You are 'The Blind Cut' mood diagnostic system.
-Analyze the emotional vector data and constraints provided. Select exactly ONE highly acclaimed cinematic masterpiece that respects all strict criteria (rating >= 7.2, no mainstream low-effort blockbuster junk).
-Output exactly matching the required JSON structure.
-Customize the reasoning (under 110 words) to perfectly reference their exact spectrum positions, obscurity selection, word associations, tactile answers, and how it aligns with their chosen era/language/depth in a seductive, dark, atmospheric voice.`;
+      if (AppState.era === 'golden') {
+        discoverParams.push(`release_date.lte=1970-12-31`);
+      } else if (AppState.era === 'neon') {
+        discoverParams.push(`release_date.gte=1971-01-01`, `release_date.lte=1999-12-31`);
+      } else if (AppState.era === 'digital') {
+        discoverParams.push(`release_date.gte=2000-01-01`);
+      }
 
-      let movieProjection = null;
+      // Format based on Obscurity level chosen
+      const obs = AppState.sliders.obscurity;
+      if (obs <= 35) {
+        discoverParams.push(`vote_count.gte=1500`, `sort_by=popularity.desc`);
+      } else if (obs >= 70) {
+        discoverParams.push(`vote_count.gte=40`, `vote_count.lte=1200`, `sort_by=vote_average.desc`);
+      } else {
+        discoverParams.push(`vote_count.gte=300`, `vote_count.lte=3500`, `sort_by=popularity.desc`);
+      }
+
+      // Grab a random page offset to always keep results fresh
+      const randomOffsetPage = Math.floor(Math.random() * 3) + 1;
+      discoverParams.push(`page=${randomOffsetPage}`);
+
+      const discoverUrl = `https://api.themoviedb.org/3/discover/movie?${discoverParams.join('&')}`;
+
+      let candidates = [];
       try {
-        movieProjection = await callGeminiWithRetry(prompt, systemPrompt);
-        writeLog("Synthesis complete. Resolving live artistic visual catalog...", "text-green-500");
-      } catch (e) {
+        const response = await fetch(discoverUrl);
+        if (!response.ok) throw new Error();
+        const data = await response.json();
+        candidates = data.results || [];
+      } catch (err) {
+        // Fallback to page 1 if the query offset page returns blank
+        try {
+          const fbUrl = `https://api.themoviedb.org/3/discover/movie?${discoverParams.filter(p => !p.startsWith('page=')).join('&')}&page=1`;
+          const response = await fetch(fbUrl);
+          const data = await response.json();
+          candidates = data.results || [];
+        } catch (e) {
+          clearInterval(progressInterval);
+          writeLog("Uplink disrupted. Connection timeout.", "text-red-500");
+          await sleep(1000);
+          showErrorState();
+          return;
+        }
+      }
+
+      if (candidates.length === 0) {
+        // Broaden matching restrictions to guarantee results
+        try {
+          writeLog("Optimizing search bandwidth...");
+          const broaderUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&vote_average.gte=7.0&vote_count.gte=200&page=1`;
+          const response = await fetch(broaderUrl);
+          const data = await response.json();
+          candidates = data.results || [];
+        } catch (e) {
+          clearInterval(progressInterval);
+          showErrorState();
+          return;
+        }
+      }
+
+      writeLog(`Scanning candidate matrices: [${candidates.length} nodes retrieved]`);
+      await sleep(300);
+
+      // Vector Distance Scoring Engine
+      let selectedMovieMeta = null;
+      let minDistance = Infinity;
+
+      candidates.forEach(movie => {
+        // Find center coordinates in Warmth/Tempo/Reality
+        let wSum = 0, tSum = 0, rSum = 0, count = 0;
+        movie.genre_ids.forEach(gid => {
+          if (GENRE_MAP[gid]) {
+            wSum += GENRE_MAP[gid].w;
+            tSum += GENRE_MAP[gid].t;
+            rSum += GENRE_MAP[gid].r;
+            count++;
+          }
+        });
+
+        const movieW = count > 0 ? wSum / count : 50;
+        const movieT = count > 0 ? tSum / count : 50;
+        const movieR = count > 0 ? rSum / count : 50;
+
+        // Extract obscurity from Vote counts using logarithmic mapping
+        const movieObscurity = Math.max(0, Math.min(100, 100 - (Math.log10(movie.vote_count || 1) * 22)));
+
+        // Compute 4-dimensional Euclidean distance
+        const dW = movieW - AppState.sliders.warmth;
+        const dT = movieT - AppState.sliders.tempo;
+        const dR = movieR - AppState.sliders.reality;
+        const dO = movieObscurity - AppState.sliders.obscurity;
+
+        // Apply critical Depth biases to score
+        let depthOffset = 0;
+        if (AppState.depth === 'cinephile') {
+          const artisticGenres = [18, 9648, 36, 99]; // Drama, Mystery, History, Documentary
+          const hasArtistic = movie.genre_ids.some(gid => artisticGenres.includes(gid));
+          if (hasArtistic) depthOffset = 15;
+        } else {
+          const casualGenres = [28, 12, 35, 53]; // Action, Adventure, Comedy, Thriller
+          const hasCasual = movie.genre_ids.some(gid => casualGenres.includes(gid));
+          if (hasCasual) depthOffset = 15;
+        }
+
+        const score = Math.sqrt(dW*dW + dT*dT + dR*dR + dO*dO) - depthOffset;
+
+        if (score < minDistance) {
+          minDistance = score;
+          selectedMovieMeta = movie;
+        }
+      });
+
+      if (!selectedMovieMeta) {
         clearInterval(progressInterval);
-        writeLog("Uplink failed. Connection error or invalid credentials.", "text-red-500");
-        await sleep(1000);
         showErrorState();
         return;
       }
 
-      // Fetch TMDB Metadata for layout
-      await sleep(400);
-      writeLog(`Projection title resolved: ${movieProjection.title.toUpperCase()}`);
-      
-      let tmdbDetails = null;
+      // Fetch precise details for chosen candidate ID
+      writeLog("Securing final spatial match...", "text-green-500");
+      let fullDetails = null;
       try {
-        tmdbDetails = await fetchTmdbMetadata(movieProjection.title, movieProjection.year);
-        writeLog("Artwork and watch providers retrieved.", "text-green-500");
-      } catch (err) {
-        writeLog("Direct artwork feed restricted. Displaying raw data feed.", "text-yellow-500");
+        const detailsUrl = `https://api.themoviedb.org/3/movie/${selectedMovieMeta.id}?api_key=${TMDB_API_KEY}&append_to_response=credits,watch/providers`;
+        const res = await fetch(detailsUrl);
+        fullDetails = await res.json();
+      } catch (e) {
+        fullDetails = selectedMovieMeta; // fallback to basic metadata
       }
 
-      populateFinalReveal(movieProjection, tmdbDetails);
+      // Run Atmospheric Procedural Critique Composer
+      const customCritique = composeProceduralCritique(fullDetails);
+
+      populateFinalReveal(fullDetails, customCritique);
 
       clearInterval(progressInterval);
       document.getElementById('loading-pct').innerText = "100%";
       playHighChime();
-      await sleep(800);
+      await sleep(600);
       
       showScreen('screen-result');
-      typeText('custom-analysis', movieProjection.reasoning, 18);
+      typeText('custom-analysis', customCritique.reasoning, 18);
     }
 
-    // ================= GEMINI API CONTEXT AND RETRY =================
-    async function callGeminiWithRetry(prompt, systemPrompt) {
-      // Check override secure key
-      const userKey = document.getElementById('uplink-key-input').value.trim();
-      const apiKey = userKey || ""; // Left blank by default to utilize runtime injection or user override
+    // ================= ATMOSPHERIC POETIC COMPOSITOR SYSTEM =================
+    function composeProceduralCritique(movie) {
+      const warmthVal = AppState.sliders.warmth;
+      const tempoVal = AppState.sliders.tempo;
+      const realityVal = AppState.sliders.reality;
+      const obscurityVal = AppState.sliders.obscurity;
+
+      const randomAssociation = AppState.associations[Math.floor(Math.random() * AppState.associations.length)] || "echo";
+      const randomStimulus = AppState.selectedWords[Math.floor(Math.random() * AppState.selectedWords.length)] || "shadow";
+      const randomDilemma = AppState.dilemmaAnswers[Math.floor(Math.random() * AppState.dilemmaAnswers.length)] || "the void";
+
+      const warmthDesc = warmthVal > 60 ? "a cold, haunting drift into psychological dread" : "a deeply comforting, nostalgic human embrace";
+      const tempoDesc = tempoVal > 60 ? "intense, razor-sharp narrative momentum" : "a slow-burn, beautifully hypnotic meditation on silence";
+      const realityDesc = realityVal > 60 ? "highly surreal, heightened visual dreamscapes" : "tactile, gritty realism and uncompromising human details";
       
-      const model = "gemini-2.5-flash-preview-09-2025";
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+      let rarityDesc = "universally respected cinema landmark";
+      if (obscurityVal > 70) rarityDesc = "highly elusive, deeply hidden underground masterpiece";
+      else if (obscurityVal > 40) rarityDesc = "respected, stylish cult classic favorite";
 
-      const payload = {
-        contents: [{ parts: [{ text: prompt }] }],
-        systemInstruction: { parts: [{ text: systemPrompt }] },
-        generationConfig: {
-          responseMimeType: "application/json",
-          responseSchema: {
-            type: "OBJECT",
-            properties: {
-              title: { type: "STRING" },
-              year: { type: "INTEGER" },
-              director: { type: "STRING" },
-              reasoning: { type: "STRING" },
-              vibeTagline: { type: "STRING" }
-            },
-            required: ["title", "year", "director", "reasoning", "vibeTagline"]
-          }
-        }
+      const director = movie.credits?.crew?.find(c => c.job === 'Director')?.name || "its director";
+      const title = movie.title || "Cinema Projector";
+      const year = movie.release_date ? movie.release_date.split('-')[0] : "Classic";
+
+      const primaryGenre = movie.genres?.[0]?.name || "Film";
+
+      const lines = [
+        `Your neurological alignment with "${randomAssociation}" (triggered by the sensory marker "${randomStimulus}") and your draw toward "${randomDilemma}" reveals a psyche seeking ${warmthDesc}. With your tempo parameters locked at ${tempoVal}%, tonight's headspace gravitates toward ${tempoDesc}. This aligns flawlessly with ${director}'s landmark work, ${title} (${year}), which operates as a ${rarityDesc}. By mapping your vectors into our live cinema matrix, this projection yields a sublime integration of ${realityDesc} that perfectly honors your active parameters.`,
+        
+        `Tuning the lens markers to ${obscurityVal}% obscurity and a ${AppState.depth} watch index has isolated ${title} (${year}) directly from the archives. The delicate resonance between your typed association "${randomAssociation}" and your tactile pull toward "${randomDilemma}" indicates a clear desire for ${warmthDesc}. Structurally, the movie's ${tempoDesc} balances your active spectrum indicators, resulting in a mesmerizing experience defined by ${realityDesc}. This ${primaryGenre} classic represents the definitive, uncompromised calibration for tonight's mental framework.`,
+
+        `Tonight's diagnostic isolates a deep cognitive state positioned at ${realityVal}% reality and ${warmthVal}% psychological warmth. Your reaction to "${randomAssociation}" paired with the tactile choice of "${randomDilemma}" points directly to the atmosphere locked within ${title}. As ${director} paints this cinematic canvas, your subconscious will find immediate release in its ${tempoDesc}. This represents a precise, atmospheric reflection of your current mental parameters.`
+      ];
+
+      const taglines = [
+        `A breathtaking dance of desire and quiet atmospheric shadow.`,
+        `A pristine structural triumph of human dread and sensory elevation.`,
+        `An uncompromising exploration of silent spaces and vivid artistic light.`
+      ];
+
+      return {
+        vibeTagline: movie.tagline || taglines[Math.floor(Math.random() * taglines.length)],
+        reasoning: lines[Math.floor(Math.random() * lines.length)]
       };
-
-      let delay = 1000;
-      for (let i = 0; i < 5; i++) {
-        try {
-          const response = await fetch(url, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-          });
-          if (response.ok) {
-            const data = await response.json();
-            const textContent = data.candidates?.[0]?.content?.parts?.[0]?.text;
-            if (textContent) {
-              return JSON.parse(textContent);
-            }
-          }
-        } catch (e) {}
-        await new Promise(resolve => setTimeout(resolve, delay));
-        delay *= 2;
-      }
-      throw new Error("API rate timeout");
-    }
-
-    // ================= TMDB METADATA ACQUISITION =================
-    async function fetchTmdbMetadata(title, year) {
-      try {
-        let url = `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(title)}`;
-        if (year) {
-          url += `&primary_release_year=${year}`;
-        }
-        
-        const searchRes = await fetch(url);
-        if (!searchRes.ok) throw new Error("TMDB Search failed");
-        
-        const searchData = await searchRes.json();
-        if (!searchData.results || searchData.results.length === 0) {
-          const searchRes2 = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(title)}`);
-          const searchData2 = await searchRes2.json();
-          if (!searchData2.results || searchData2.results.length === 0) {
-            throw new Error("No TMDB records found");
-          }
-          return await fetchDetails(searchData2.results[0].id);
-        }
-        return await fetchDetails(searchData.results[0].id);
-      } catch (e) {
-        console.error("TMDB error:", e);
-        return null;
-      }
-    }
-
-    async function fetchDetails(movieId) {
-      const detailsUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${TMDB_API_KEY}&append_to_response=credits,watch/providers`;
-      const res = await fetch(detailsUrl);
-      if (!res.ok) throw new Error("TMDB Details failed");
-      return await res.json();
     }
 
     // ================= PRESENTATION & RENDER ENGINE =================
-    function populateFinalReveal(projection, tmdb) {
-      document.getElementById('vibe-tagline').innerText = `"${projection.vibeTagline}"`;
-      document.getElementById('movie-title').innerText = projection.title;
-      document.getElementById('movie-year').innerText = projection.year;
+    function populateFinalReveal(movie, critique) {
+      document.getElementById('vibe-tagline').innerText = `"${critique.vibeTagline}"`;
+      document.getElementById('movie-title').innerText = movie.title;
       
-      const badge = document.getElementById('diagnostic-badge');
-      badge.innerText = "PROJECTION SECURED";
-      badge.className = "font-mono text-[9px] tracking-[0.3em] text-neonRed uppercase font-bold";
+      const year = movie.release_date ? movie.release_date.split('-')[0] : "Classic";
+      document.getElementById('movie-year').innerText = year;
+      
+      const directorName = movie.credits?.crew?.find(c => c.job === 'Director')?.name || "Auteur";
+      document.getElementById('movie-director').innerText = `DIR: ${directorName}`;
+      
+      const runtime = movie.runtime ? `${movie.runtime} min` : "Feature Film";
+      document.getElementById('movie-runtime').innerText = runtime;
 
       // Update configuration display badges
       document.getElementById('active-lang-badge').innerText = AppState.language === 'any' ? 'GLOBAL' : AppState.language;
@@ -1157,69 +1195,55 @@ Customize the reasoning (under 110 words) to perfectly reference their exact spe
       posterImg.style.opacity = "0";
       fallbackText.style.display = "flex";
 
-      if (tmdb) {
-        const directorName = tmdb.credits?.crew?.find(c => c.job === 'Director')?.name || projection.director;
-        document.getElementById('movie-director').innerText = `DIR: ${directorName}`;
-        
-        const runtime = tmdb.runtime ? `${tmdb.runtime} min` : (projection.runtime || "N/A");
-        document.getElementById('movie-runtime').innerText = runtime;
+      if (movie.poster_path) {
+        posterImg.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+        posterImg.onload = () => {
+          posterImg.style.opacity = "1";
+          fallbackText.style.display = "none";
+        };
+      }
 
-        if (tmdb.poster_path) {
-          posterImg.src = `https://image.tmdb.org/t/p/w500${tmdb.poster_path}`;
-          posterImg.onload = () => {
-            posterImg.style.opacity = "1";
-            fallbackText.style.display = "none";
-          };
-        }
+      if (movie.backdrop_path) {
+        ambientBg.style.backgroundImage = `url('https://image.tmdb.org/t/p/original${movie.backdrop_path}')`;
+      } else {
+        ambientBg.style.backgroundImage = "none";
+      }
 
-        if (tmdb.backdrop_path) {
-          ambientBg.style.backgroundImage = `url('https://image.tmdb.org/t/p/original${tmdb.backdrop_path}')`;
-        } else {
-          ambientBg.style.backgroundImage = "none";
-        }
-
-        const providersContainer = document.getElementById('providers-container');
-        providersContainer.innerHTML = "";
-        
-        const usFlatrate = tmdb["watch/providers"]?.results?.US?.flatrate;
-        if (usFlatrate && usFlatrate.length > 0) {
-          usFlatrate.slice(0, 4).forEach(prov => {
+      // Handle streaming providers
+      const providersContainer = document.getElementById('providers-container');
+      providersContainer.innerHTML = "";
+      
+      const usFlatrate = movie["watch/providers"]?.results?.US?.flatrate;
+      if (usFlatrate && usFlatrate.length > 0) {
+        usFlatrate.slice(0, 4).forEach(prov => {
+          const badge = document.createElement('div');
+          badge.className = "flex items-center space-x-1.5 bg-neutral-900 border border-neutral-800 px-2 py-1 text-[9px] font-mono text-neutral-300";
+          
+          const icon = document.createElement('img');
+          icon.src = `https://image.tmdb.org/t/p/original${prov.logo_path}`;
+          icon.className = "w-3 h-3 object-cover rounded-sm";
+          
+          const name = document.createElement('span');
+          name.innerText = prov.provider_name;
+          
+          badge.appendChild(icon);
+          badge.appendChild(name);
+          providersContainer.appendChild(badge);
+        });
+      } else {
+        const rentOptions = movie["watch/providers"]?.results?.US?.rent;
+        if (rentOptions && rentOptions.length > 0) {
+          rentOptions.slice(0, 3).forEach(prov => {
             const badge = document.createElement('div');
             badge.className = "flex items-center space-x-1.5 bg-neutral-900 border border-neutral-800 px-2 py-1 text-[9px] font-mono text-neutral-300";
-            
-            const icon = document.createElement('img');
-            icon.src = `https://image.tmdb.org/t/p/original${prov.logo_path}`;
-            icon.className = "w-3 h-3 object-cover rounded-sm";
-            
             const name = document.createElement('span');
-            name.innerText = prov.provider_name;
-            
-            badge.appendChild(icon);
+            name.innerText = `${prov.provider_name} (Rent)`;
             badge.appendChild(name);
             providersContainer.appendChild(badge);
           });
         } else {
-          const rentOptions = tmdb["watch/providers"]?.results?.US?.rent;
-          if (rentOptions && rentOptions.length > 0) {
-            rentOptions.slice(0, 3).forEach(prov => {
-              const badge = document.createElement('div');
-              badge.className = "flex items-center space-x-1.5 bg-neutral-900 border border-neutral-800 px-2 py-1 text-[9px] font-mono text-neutral-300";
-              const name = document.createElement('span');
-              name.innerText = `${prov.provider_name} (Rent)`;
-              badge.appendChild(name);
-              providersContainer.appendChild(badge);
-            });
-          } else {
-            providersContainer.innerHTML = `<span class="text-[9px] font-mono text-neutral-600 font-bold uppercase">CHECK LOCAL LISTINGS / CRITERION</span>`;
-          }
+          providersContainer.innerHTML = `<span class="text-[9px] font-mono text-neutral-600 font-bold uppercase">CHECK LOCAL LISTINGS / CRITERION</span>`;
         }
-      } else {
-        document.getElementById('movie-director').innerText = `DIR: ${projection.director}`;
-        document.getElementById('movie-runtime').innerText = projection.runtime || "N/A";
-        ambientBg.style.backgroundImage = "radial-gradient(circle, rgba(255,0,60,0.15) 0%, rgba(0,0,0,0) 70%)";
-        
-        const providersContainer = document.getElementById('providers-container');
-        providersContainer.innerHTML = `<span class="text-[9px] font-mono text-neutral-600 font-bold uppercase">LIVE FEED DATA ONLY</span>`;
       }
     }
 
@@ -1258,7 +1282,7 @@ Customize the reasoning (under 110 words) to perfectly reference their exact spe
 
     function retryProjection() {
       playSynthBeep(440, 0.1);
-      initiateAiSynthesis();
+      initiateSubconsciousMatching();
     }
 
     function recalibrate() {
