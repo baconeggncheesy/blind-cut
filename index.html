@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en" class="h-full bg-black select-none">
 <head>
@@ -9,7 +8,7 @@
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- Google Fonts: Courier Prime and Cinzel -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
@@ -43,21 +42,14 @@
 
     body { font-size: 14px; line-height: 1.4; }
 
-    /* CRT Scanlines Overlay */
+    /* CRT Scanlines */
     .crt::after {
-      content: " ";
-      display: block;
-      position: fixed;
-      top: 0; left: 0; bottom: 0; right: 0;
+      content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0;
       background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-      aspect-ratio: auto;
-      background-size: 100% 3px, 6px 100%;
-      z-index: 999;
-      pointer-events: none;
-      opacity: 0.35;
+      background-size: 100% 3px, 6px 100%; z-index: 999; pointer-events: none; opacity: 0.35;
     }
 
-    /* Screenplay Formatting Classes */
+    /* Screenplay Formats */
     .scene-heading { font-weight: bold; text-transform: uppercase; margin-bottom: 1rem; color: #fff; border-bottom: 1px dashed #333; padding-bottom: 0.25rem; }
     .action { margin-bottom: 1.5rem; text-align: left; color: #a3a3a3; }
     .character { text-align: center; text-transform: uppercase; width: 100%; margin-top: 1rem; margin-bottom: 0.2rem; color: #FF003C; font-weight: bold; }
@@ -65,28 +57,16 @@
     .dialogue { width: 90%; margin: 0 auto 1.5rem auto; text-align: left; padding-left: 5%; color: #e5e5e5; }
     .transition { text-align: right; text-transform: uppercase; font-weight: bold; margin-top: 1.5rem; margin-bottom: 1rem; color: #FF003C; }
 
-    /* Typewriter Cursor */
-    .cursor-blink::after {
-      content: "█";
-      animation: blink 0.8s infinite;
-      color: #FF003C;
-      margin-left: 4px;
-    }
+    .cursor-blink::after { content: "█"; animation: blink 0.8s infinite; color: #FF003C; margin-left: 4px; }
     @keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
 
-    /* Mechanical Typewriter Sliders */
-    input[type="range"] {
-      -webkit-appearance: none; appearance: none; background: transparent; height: 24px; outline: none; position: relative; width: 100%;
-    }
-    input[type="range"]::before {
-      content: ""; position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: #444; transform: translateY(-50%); z-index: -1;
-    }
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none; appearance: none; width: 12px; height: 24px; background: #FF003C; cursor: pointer; border: 1px solid #FF003C; border-radius: 0px; box-shadow: 0 0 10px rgba(255, 0, 60, 0.5); transition: background 0.15s ease, transform 0.1s ease;
-    }
+    /* Sliders */
+    input[type="range"] { -webkit-appearance: none; appearance: none; background: transparent; height: 24px; outline: none; position: relative; width: 100%; }
+    input[type="range"]::before { content: ""; position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: #444; transform: translateY(-50%); z-index: -1; }
+    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 12px; height: 24px; background: #FF003C; cursor: pointer; border: 1px solid #FF003C; border-radius: 0px; box-shadow: 0 0 10px rgba(255, 0, 60, 0.5); transition: background 0.15s ease, transform 0.1s ease; }
     input[type="range"]::-webkit-slider-thumb:active { background: #fff; border-color: #fff; transform: scaleX(1.3); box-shadow: 0 0 15px #fff; }
 
-    /* Script UI Buttons */
+    /* Script Buttons */
     .script-btn { display: inline-block; border: 1px solid #333; background: #0A0A0A; color: #a3a3a3; padding: 0.5rem; cursor: pointer; transition: all 0.2s; }
     .script-btn:hover { border-color: #FF003C; color: #fff; }
     .script-btn.active { border-color: #FF003C; font-weight: bold; background: rgba(255,0,60,0.1); color: #FF003C; }
@@ -94,20 +74,13 @@
     .script-btn-primary:hover { box-shadow: inset 0 0 10px 0 rgba(255,0,60,0.4); }
     .script-btn-primary:active { background: #FF003C; color: #000; }
 
-    /* 3D Cinematic Tarot Deck */
+    /* Tarot Layout */
     .tarot-card-container { perspective: 1000px; }
     .tarot-card { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.7s cubic-bezier(0.4, 0.0, 0.2, 1); cursor: pointer; }
     .tarot-card.flipped { transform: rotateY(180deg); }
-    .tarot-card-front, .tarot-card-back { position: absolute; backface-visibility: hidden; top: 0; left: 0; width: 100%; height: 100%; background: #0A0A0A; border: 1px solid #333; padding: 4px; }
-    .tarot-card-front { transform: rotateY(180deg); border-color: #FF003C; }
-    .tarot-inner-border { width: 100%; height: 100%; border: 1px solid #333; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 8px 4px; position: relative; overflow: hidden; }
-    .tarot-card-front .tarot-inner-border { border-color: rgba(255,0,60,0.3); }
+    .tarot-card-front, .tarot-card-back { position: absolute; backface-visibility: hidden; top: 0; left: 0; width: 100%; height: 100%; background: #0A0A0A; }
+    .tarot-card-front { transform: rotateY(180deg); }
     
-    .tarot-back-art {
-      width: 100%; height: 100%;
-      background-image: radial-gradient(circle at center, transparent 40%, #0A0A0A 60%), repeating-linear-gradient(45deg, rgba(255,0,60,0.05) 0, rgba(255,0,60,0.05) 2px, transparent 2px, transparent 8px), repeating-linear-gradient(-45deg, rgba(255,0,60,0.05) 0, rgba(255,0,60,0.05) 2px, transparent 2px, transparent 8px);
-    }
-
     /* Glitch Animation */
     .glitch { position: relative; color: #FF003C; }
     .glitch::before, .glitch::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: black; }
@@ -119,10 +92,8 @@
 </head>
 <body class="h-full bg-black text-neutral-200 font-mono antialiased overflow-hidden crt">
 
-  <!-- Main Wrapper -->
   <div class="relative h-full w-full max-w-lg mx-auto bg-black flex flex-col justify-between pt-4 pb-6 px-6 border-x border-neutral-900 overflow-y-auto">
     
-    <!-- Header -->
     <header class="w-full flex items-center justify-between pb-4 mb-4 border-b border-neutral-900">
       <div class="flex items-center space-x-2">
         <span class="w-2 h-2 rounded-full bg-neonRed animate-pulse shadow-neon-sm"></span>
@@ -135,10 +106,9 @@
       </div>
     </header>
 
-    <!-- CONTENT CONTAINERS -->
     <main class="flex-1 relative pb-6">
 
-      <!-- ================= SCREEN 1: INTRO ================= -->
+      <!-- SCREEN 1: INTRO -->
       <section id="screen-intro" class="animate-fade-in flex flex-col justify-center min-h-[60vh]">
         <div class="text-center space-y-4 mb-12">
           <h1 class="font-cinzel text-4xl sm:text-5xl font-bold uppercase tracking-widest text-white border-y border-neutral-800 py-6 my-8">
@@ -163,14 +133,10 @@
         </div>
       </section>
 
-      <!-- ================= SCREEN 1.5: PARAMETERS ================= -->
+      <!-- SCREEN 1.5: PARAMETERS -->
       <section id="screen-parameters" class="hidden animate-fade-in flex flex-col justify-center min-h-[60vh]">
         <div class="scene-heading text-xs">INT. PRE-FLIGHT CALIBRATION - CONTINUOUS</div>
-        
-        <div class="action text-xs">
-          The machine demands structural boundaries before querying the live global database.
-        </div>
-
+        <div class="action text-xs">The machine demands structural boundaries before querying the live global database.</div>
         <div class="character text-xs">THE SYSTEM</div>
         <div class="dialogue cursor-blink text-xs" id="param-dialogue"></div>
 
@@ -183,165 +149,77 @@
               <button onclick="setParameter('language', 'foreign')" id="lang-foreign" class="script-btn">FOREIGN</button>
             </div>
           </div>
-
           <div>
             <div class="font-bold mb-1 uppercase text-[10px] text-neutral-500">2. Chronological Epoch</div>
             <div class="grid grid-cols-2 gap-1.5 text-[9px] font-bold tracking-wider">
-              <button onclick="setParameter('era', 'any')" id="era-any" class="script-btn active flex justify-between">
-                <span>ANY ERA</span><span class="text-neutral-600">ALL</span>
-              </button>
-              <button onclick="setParameter('era', 'golden')" id="era-golden" class="script-btn flex justify-between">
-                <span>GOLDEN</span><span class="text-neutral-600">&lt;1970</span>
-              </button>
-              <button onclick="setParameter('era', 'neon')" id="era-neon" class="script-btn flex justify-between">
-                <span>NEON</span><span class="text-neutral-600">70-99</span>
-              </button>
-              <button onclick="setParameter('era', 'digital')" id="era-digital" class="script-btn flex justify-between">
-                <span>DIGITAL</span><span class="text-neutral-600">2000+</span>
-              </button>
+              <button onclick="setParameter('era', 'any')" id="era-any" class="script-btn active flex justify-between"><span>ANY ERA</span><span class="text-neutral-600">ALL</span></button>
+              <button onclick="setParameter('era', 'golden')" id="era-golden" class="script-btn flex justify-between"><span>GOLDEN</span><span class="text-neutral-600">&lt;1970</span></button>
+              <button onclick="setParameter('era', 'neon')" id="era-neon" class="script-btn flex justify-between"><span>NEON</span><span class="text-neutral-600">70-99</span></button>
+              <button onclick="setParameter('era', 'digital')" id="era-digital" class="script-btn flex justify-between"><span>DIGITAL</span><span class="text-neutral-600">2000+</span></button>
             </div>
           </div>
-
           <div>
             <div class="font-bold mb-1 uppercase text-[10px] text-neutral-500">3. Cognitive Depth</div>
             <div class="flex flex-col gap-1.5 text-[9px] font-bold tracking-wider">
-              <button onclick="setParameter('depth', 'casual')" id="depth-casual" class="script-btn text-left p-3">
-                [ CASUAL ] - Accessible pacing, universal narratives.
-              </button>
-              <button onclick="setParameter('depth', 'cinephile')" id="depth-cinephile" class="script-btn active text-left p-3">
-                [ CINEPHILE ] - Art-house focus, deep film grammar.
-              </button>
+              <button onclick="setParameter('depth', 'casual')" id="depth-casual" class="script-btn text-left p-3">[ CASUAL ] - Accessible pacing, universal narratives.</button>
+              <button onclick="setParameter('depth', 'cinephile')" id="depth-cinephile" class="script-btn active text-left p-3">[ CINEPHILE ] - Art-house focus, deep film grammar.</button>
             </div>
           </div>
         </div>
 
         <div class="transition text-[10px]">CUT TO:</div>
-
         <div class="mt-2">
-          <button onclick="goToGame1()" class="script-btn-primary uppercase text-xs tracking-widest">
-            [ LOCK LENS & CONTINUE ]
-          </button>
+          <button onclick="goToGame1()" class="script-btn-primary uppercase text-xs tracking-widest">[ LOCK LENS & CONTINUE ]</button>
         </div>
       </section>
 
-      <!-- ================= SCREEN 2: GAME 1 (THE SLIDERS) ================= -->
+      <!-- SCREEN 2: GAME 1 (THE SLIDERS) -->
       <section id="screen-game1" class="hidden animate-fade-in flex flex-col justify-center min-h-[60vh]">
         <div class="scene-heading text-xs">INT. THE CORE SPECTRUM - GAME 01</div>
-        
-        <div class="action text-xs">
-          Five mechanical levers sit on the terminal. They establish the user's subconscious baselines.
-        </div>
-
+        <div class="action text-xs">Five mechanical levers sit on the terminal. They establish the user's subconscious baselines.</div>
         <div class="character text-xs">THE SYSTEM</div>
         <div class="parenthetical text-xs">(patiently)</div>
         <div class="dialogue cursor-blink text-xs" id="slider-dialogue"></div>
 
         <div class="space-y-4 mt-6 pl-3 border-l border-neutral-800">
-          
           <div class="space-y-1">
-            <div class="flex justify-between text-[9px] font-bold text-neutral-400">
-              <span>COZY</span>
-              <span id="val-warmth" class="text-neonRed">50</span>
-              <span>DREAD</span>
-            </div>
+            <div class="flex justify-between text-[9px] font-bold text-neutral-400"><span>COZY</span><span id="val-warmth" class="text-neonRed">50</span><span>DREAD</span></div>
             <input type="range" id="slider-warmth" min="1" max="100" value="50" oninput="updateSliderVal('warmth')">
           </div>
-
           <div class="space-y-1">
-            <div class="flex justify-between text-[9px] font-bold text-neutral-400">
-              <span>MEDITATIVE</span>
-              <span id="val-tempo" class="text-neonRed">50</span>
-              <span>KINETIC</span>
-            </div>
+            <div class="flex justify-between text-[9px] font-bold text-neutral-400"><span>MEDITATIVE</span><span id="val-tempo" class="text-neonRed">50</span><span>KINETIC</span></div>
             <input type="range" id="slider-tempo" min="1" max="100" value="50" oninput="updateSliderVal('tempo')">
           </div>
-
           <div class="space-y-1">
-            <div class="flex justify-between text-[9px] font-bold text-neutral-400">
-              <span>GROUNDED</span>
-              <span id="val-reality" class="text-neonRed">50</span>
-              <span>SURREAL</span>
-            </div>
+            <div class="flex justify-between text-[9px] font-bold text-neutral-400"><span>GROUNDED</span><span id="val-reality" class="text-neonRed">50</span><span>SURREAL</span></div>
             <input type="range" id="slider-reality" min="1" max="100" value="50" oninput="updateSliderVal('reality')">
           </div>
-
           <div class="space-y-1">
-            <div class="flex justify-between text-[9px] font-bold text-neutral-400">
-              <span>MAINSTREAM</span>
-              <span id="val-obscurity" class="text-neonRed">50</span>
-              <span>OBSCURE</span>
-            </div>
+            <div class="flex justify-between text-[9px] font-bold text-neutral-400"><span>MAINSTREAM</span><span id="val-obscurity" class="text-neonRed">50</span><span>OBSCURE</span></div>
             <input type="range" id="slider-obscurity" min="1" max="100" value="50" oninput="updateSliderVal('obscurity')">
           </div>
-
           <div class="space-y-1">
-            <div class="flex justify-between text-[9px] font-bold text-neutral-400">
-              <span>BLEAK / NIHILISTIC</span>
-              <span id="val-humor" class="text-neonRed">50</span>
-              <span>WITTY / FUNNY</span>
-            </div>
+            <div class="flex justify-between text-[9px] font-bold text-neutral-400"><span>BLEAK / NIHILISTIC</span><span id="val-humor" class="text-neonRed">50</span><span>WITTY / FUNNY</span></div>
             <input type="range" id="slider-humor" min="1" max="100" value="50" oninput="updateSliderVal('humor')">
           </div>
-
         </div>
 
         <div class="transition text-[10px]">CUT TO:</div>
-
         <div class="mt-2">
-          <button onclick="goToGame2()" class="script-btn-primary uppercase text-xs tracking-widest">
-            [ SET MARGINS & CONTINUE ]
-          </button>
+          <button onclick="goToTarotGame()" class="script-btn-primary uppercase text-xs tracking-widest">[ SET MARGINS & DRAW DECK ]</button>
         </div>
       </section>
 
-      <!-- ================= SCREEN 3: GAME 2 (WORD ASSOCIATION) ================= -->
-      <section id="screen-game2" class="hidden animate-fade-in flex flex-col justify-center min-h-[60vh]">
-        <div class="scene-heading text-xs">INT. THE ECHO CHAMBER - GAME 02</div>
-        
-        <div class="action text-xs">
-          A blank prompt appears on the screen. Rapid neural coupling begins.
-        </div>
-
-        <div class="character text-xs">THE SYSTEM</div>
-        <div class="dialogue cursor-blink text-xs" id="word-dialogue"></div>
-
-        <div class="my-10 text-center">
-          <div class="text-[10px] text-neutral-500 mb-2">STIMULUS <span id="word-progress" class="text-neonRed">1/5</span>:</div>
-          <div id="terminal-stimulus" class="text-3xl font-bold uppercase tracking-widest text-white border-y border-neutral-800 py-4 inline-block px-8 shadow-neon-sm">
-            WAITING
-          </div>
-        </div>
-
-        <div class="action text-[10px] text-center text-neutral-500">
-          (Type immediate gut reaction)
-        </div>
-
-        <div class="flex items-center space-x-2 border-b border-neutral-500 pb-1 mb-8 w-full max-w-xs mx-auto">
-          <span class="font-bold text-neonRed">&gt;</span>
-          <input type="text" id="association-input" autocomplete="off" placeholder="SINGLE WORD..." class="bg-transparent text-white outline-none w-full uppercase font-bold text-sm tracking-widest placeholder-neutral-700">
-        </div>
-
-        <div>
-          <button onclick="submitWord()" class="script-btn-primary uppercase text-xs tracking-widest">
-            [ SUBMIT ]
-          </button>
-        </div>
-      </section>
-
-      <!-- ================= SCREEN 4: GAME 3 (CINEMATIC TAROT) ================= -->
+      <!-- SCREEN 4: GAME 3 (CINEMATIC TAROT) -->
       <section id="screen-game3" class="hidden animate-fade-in flex flex-col justify-center min-h-[60vh]">
-        <div class="scene-heading text-xs">INT. THE DIRECTOR'S DESK - GAME 03</div>
-        
-        <div class="action text-xs mb-2">
-          Twelve cards are spread across the digital surface. They are the Cinematic Arcana.
-        </div>
-
+        <div class="scene-heading text-xs">INT. THE DIRECTOR'S DESK - GAME 02</div>
+        <div class="action text-xs mb-2">Twelve beautifully weathered tarot cards are spread across the digital surface. They are the Cinematic Arcana.</div>
         <div class="character text-xs mt-0">THE SYSTEM</div>
         <div class="parenthetical text-xs">(whispering)</div>
         <div class="dialogue cursor-blink text-xs min-h-[40px]" id="tarot-dialogue"></div>
 
-        <!-- 3x4 Grid of Tarot Cards -->
-        <div class="grid grid-cols-3 sm:grid-cols-4 gap-2 py-4 mx-auto w-full" id="tarot-grid">
+        <!-- Image-based Tarot Grid -->
+        <div class="grid grid-cols-3 sm:grid-cols-4 gap-2.5 py-4 mx-auto w-full" id="tarot-grid">
           <!-- Injected dynamically via script -->
         </div>
 
@@ -352,16 +230,14 @@
         </div>
       </section>
 
-      <!-- ================= SCREEN 5: LOADING ================= -->
+      <!-- SCREEN 5: LOADING -->
       <section id="screen-loading" class="hidden animate-fade-in flex flex-col justify-center min-h-[60vh]">
         <div class="scene-heading text-xs">MONTAGE: SYNTHESIZING PSYCHE</div>
-        
         <div class="action text-xs leading-loose">
           -- The telemetrics lock into place.<br>
           -- The script pages shuffle furiously.<br>
           -- The global archives are queried.
         </div>
-
         <div class="character text-xs">THE SYSTEM</div>
         <div class="parenthetical text-xs">(processing)</div>
         <div class="dialogue text-xs">
@@ -370,84 +246,56 @@
         </div>
       </section>
 
-      <!-- ================= SCREEN 6: THE PROJECTION (RESULT) ================= -->
+      <!-- SCREEN 6: THE PROJECTION (RESULT) -->
       <section id="screen-result" class="hidden flex flex-col space-y-6 relative animate-fade-in font-sans">
-        
-        <!-- Background Ambient Cover Art -->
         <div id="ambient-bg" class="absolute -inset-x-6 -inset-y-8 bg-cover bg-center opacity-25 filter blur-3xl mix-blend-color-dodge transition-all duration-1000 z-0"></div>
 
         <div class="relative z-10 space-y-4">
-          
-          <!-- Cinematic Oracle Headline -->
           <div class="text-center space-y-1">
-            <span class="font-mono text-[9px] tracking-[0.3em] text-neonRed uppercase font-bold" id="diagnostic-badge">PROJECTION SECURED</span>
-            <p id="vibe-tagline" class="font-serif text-sm italic text-neutral-300 px-4">
-              "An aching dance of unspoken desire, saturated in velvet red and lingering shadows."
-            </p>
+            <span class="font-mono text-[9px] tracking-[0.3em] text-neonRed uppercase font-bold">PROJECTION SECURED</span>
+            <p id="vibe-tagline" class="font-serif text-sm italic text-neutral-300 px-4 mt-1">"Loading..."</p>
           </div>
 
-          <!-- VIBE WORDS STRIP -->
-          <div class="flex flex-wrap justify-center gap-2 mb-4" id="vibe-words-container">
-            <!-- Injected dynamically -->
-          </div>
+          <div class="flex flex-wrap justify-center gap-2 mb-4" id="vibe-words-container"></div>
 
-          <!-- Movie Showcase Card -->
-          <div class="bg-darkGrey/95 border border-neutral-800 p-4 shadow-neon-sm relative flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-5">
-            <!-- Poster -->
-            <div class="w-full sm:w-[130px] aspect-[2/3] bg-neutral-900 border border-neutral-800 relative overflow-hidden flex-shrink-0">
+          <div class="bg-darkGrey/95 border border-neutral-800 p-3 shadow-neon-sm relative flex flex-row space-x-4 items-center">
+            <div class="w-[80px] sm:w-[100px] aspect-[2/3] bg-neutral-900 border border-neutral-800 relative overflow-hidden flex-shrink-0 shadow-lg">
               <img id="movie-poster" src="" alt="Cinema Poster" class="w-full h-full object-cover opacity-0 transition-opacity duration-1000" onerror="this.style.opacity='0'; document.getElementById('poster-fallback-text').style.display='flex';">
-              <div id="poster-fallback-text" class="absolute inset-0 hidden items-center justify-center text-center p-3 font-cinzel text-xs text-neutral-400 select-none">
-                CINEMA REVEAL
-              </div>
+              <div id="poster-fallback-text" class="absolute inset-0 hidden items-center justify-center text-center p-2 font-cinzel text-[8px] text-neutral-400 select-none">IMAGE REEL MISSING</div>
             </div>
 
-            <!-- Details -->
-            <div class="flex-1 flex flex-col justify-between py-1 font-sans">
+            <div class="flex-1 flex flex-col justify-center font-sans space-y-2">
               <div>
-                <h2 id="movie-title" class="font-cinzel text-xl sm:text-2xl font-bold uppercase leading-none mb-2 text-white">TITLE</h2>
-                <div class="flex flex-wrap gap-2 text-[10px] font-mono font-bold border-b border-neutral-800 pb-2 mb-3 text-neonRed tracking-widest">
-                  <span id="movie-year">YEAR</span> | <span id="movie-director">DIR</span> | <span id="movie-runtime">MIN</span>
-                </div>
-                
-                <!-- 1 SENTENCE PLOT -->
-                <div class="border-l-2 border-neutral-800 pl-3 mb-4">
-                  <p class="text-xs text-neutral-400 italic font-sans" id="movie-plot">"One sentence plot goes here..."</p>
+                <h2 id="movie-title" class="font-cinzel text-lg sm:text-xl font-bold uppercase leading-tight mb-1 text-white">TITLE</h2>
+                <div class="text-[9px] font-bold text-neonRed tracking-widest font-mono">
+                  <span id="movie-year">YEAR</span> • <span id="movie-director">DIR</span> • <span id="movie-runtime">MIN</span>
                 </div>
               </div>
-
-              <!-- US Watch Providers / Streaming availability -->
-              <div class="pt-2">
-                <span class="font-mono text-[9px] tracking-wider text-neutral-500 uppercase block font-bold mb-1.5">Where to watch (US):</span>
-                <div id="providers-container" class="flex flex-wrap gap-1.5 font-mono">
-                  <!-- Badges added dynamically -->
-                </div>
+              <div class="border-l border-neutral-700 pl-2">
+                <p class="text-[11px] text-neutral-400 italic font-sans leading-snug" id="movie-plot">"One sentence plot goes here..."</p>
+              </div>
+              <div class="pt-1">
+                <div id="providers-container" class="flex flex-wrap gap-1 font-mono"></div>
               </div>
             </div>
           </div>
 
-          <!-- Synthesis Analysis -->
           <div class="bg-black border border-neutral-900 p-4 font-mono text-xs leading-relaxed text-neutral-300 relative">
             <div class="absolute top-2 right-2 font-mono text-[8px] text-neutral-600 font-bold">SUB-COGNITIVE ALIGNMENT MATRIX</div>
-            <p id="custom-analysis" class="pt-2 text-justify text-neutral-200">
-              Analyzing. Calculating mental parameters...
-            </p>
+            <p id="custom-analysis" class="pt-2 text-justify text-neutral-200 mt-1">Analyzing...</p>
           </div>
 
-          <!-- Lens parameters active for this Projection -->
           <div class="flex flex-wrap gap-1 justify-between items-center border border-neutral-900 px-3 py-2 bg-darkGrey/50 rounded-none font-mono text-[8px] text-neutral-500 uppercase tracking-widest font-bold">
-            <span>LANG: <strong id="active-lang-badge" class="text-neonRed font-mono">ANY</strong></span>
-            <span>EPOCH: <strong id="active-era-badge" class="text-neonRed font-mono">ANY</strong></span>
-            <span>DEPTH: <strong id="active-depth-badge" class="text-neonRed font-mono">CINEPHILE</strong></span>
-            <span>OBSC: <strong id="active-obscurity-badge" class="text-neonRed font-mono">50%</strong></span>
-            <span>HUMOR: <strong id="active-humor-badge" class="text-neonRed font-mono">50%</strong></span>
+            <span><strong id="active-lang-badge" class="text-neonRed">ANY</strong></span>
+            <span><strong id="active-era-badge" class="text-neonRed">ANY</strong></span>
+            <span><strong id="active-depth-badge" class="text-neonRed">CINEPHILE</strong></span>
+            <span>O: <strong id="active-obscurity-badge" class="text-neonRed">50%</strong></span>
+            <span>H: <strong id="active-humor-badge" class="text-neonRed">50%</strong></span>
           </div>
 
-          <!-- REALIGNMENT & FINE-TUNING PANEL -->
           <div class="bg-darkGrey/90 border border-dashed border-neutral-700 p-4 space-y-3 relative font-mono">
             <span class="font-mono text-[9px] tracking-wider text-neutral-400 block uppercase font-bold">Script Notes (Adjustments):</span>
-            
             <div class="grid grid-cols-2 gap-4">
-              <!-- Adjust Warmth -->
               <div class="flex flex-col space-y-1">
                 <span class="font-mono text-[8px] text-neutral-500 font-bold tracking-wider">WARMTH DENSITY</span>
                 <div class="flex space-x-1">
@@ -455,8 +303,6 @@
                   <button onclick="adjustSubconsciousVibe('warmth', 20)" class="script-btn flex-1 text-center text-[9px] tracking-widest">[ DARKER ]</button>
                 </div>
               </div>
-
-              <!-- Adjust Obscurity -->
               <div class="flex flex-col space-y-1">
                 <span class="font-mono text-[8px] text-neutral-500 font-bold tracking-wider">RARITY RADIUS</span>
                 <div class="flex space-x-1">
@@ -465,8 +311,6 @@
                 </div>
               </div>
             </div>
-
-            <!-- Extra options: Marked seen & instant reroll -->
             <div class="flex space-x-2 border-t border-neutral-800 pt-3 mt-3">
               <button onclick="markMovieAsSeen()" class="script-btn flex-1 text-center text-[10px] tracking-widest text-green-500 hover:border-green-500 hover:text-green-400">I'VE SEEN THIS</button>
               <button onclick="rerollCurrentSpectrum()" class="script-btn flex-1 text-center font-bold text-[10px] tracking-widest !text-neonRed hover:!border-neonRed hover:!text-neonRed">REROLL SCENE</button>
@@ -480,15 +324,12 @@
         </div>
       </section>
 
-      <!-- ================= SCREEN 7: ERROR ================= -->
+      <!-- SCREEN 7: ERROR -->
       <section id="screen-error" class="hidden animate-fade-in text-center py-12 flex flex-col justify-center min-h-[60vh]">
         <div class="scene-heading glitch text-2xl border-none mb-6" data-text="SYSTEM OFFLINE">SYSTEM OFFLINE</div>
-        
         <div class="action text-center mt-2 text-xs leading-relaxed max-w-xs mx-auto" id="error-message">
-          The live pipeline failed to establish a handshake with the global visual catalog.<br><br>
-          [ERR_NETWORK_DISRUPTED_OR_EMPTY]
+          The live pipeline failed to establish a handshake with the global visual catalog.<br><br>[ERR_NETWORK_DISRUPTED_OR_EMPTY]
         </div>
-
         <div class="mt-8 space-y-3 max-w-xs mx-auto w-full">
           <button onclick="retryProjection()" class="script-btn-primary uppercase text-xs tracking-widest">Action: Retry</button>
           <button onclick="recalibrate()" class="script-btn uppercase text-xs w-full text-center block tracking-widest border border-neutral-600">Action: Restart</button>
@@ -497,130 +338,52 @@
 
     </main>
 
-    <!-- Footer: Scene Counter -->
+    <!-- Footer -->
     <footer class="w-full text-center pt-4 pb-2 border-t border-neutral-900 flex justify-between items-center text-[9px] font-bold uppercase text-neutral-600 tracking-widest">
-      <div>V 5.0.0</div>
+      <div>V 7.0.1</div>
       <div class="flex items-center space-x-2">
         <span>SCENES RENDERED:</span>
         <div id="retro-counter" class="flex space-x-0.5">
-          <!-- Populated dynamically -->
           <span>0</span><span>0</span><span>0</span><span>0</span><span>0</span>
         </div>
       </div>
     </footer>
-
   </div>
 
-  <!-- Notification Banner -->
   <div id="notification-banner" class="fixed top-6 left-1/2 -translate-x-1/2 bg-neonRed text-white font-bold text-xs px-6 py-2 uppercase tracking-widest shadow-neon opacity-0 transition-opacity duration-300 pointer-events-none z-50">
     LINK COPIED TO CLIPBOARD
   </div>
 
-  <!-- JavaScript Core -->
   <script>
-    // TMDB Configuration - Serverless client-side vector math pipeline
     const TMDB_API_KEY = "c2015ecda624b83d2e3d19ead77c0a8c";
 
     const AppState = {
       audioEnabled: true,
       currentScreen: 'intro',
-      language: 'any', 
-      era: 'any',      
-      depth: 'cinephile', 
+      language: 'any', era: 'any', depth: 'cinephile', 
       sliders: { warmth: 50, tempo: 50, reality: 50, obscurity: 50, humor: 50 },
-      seenMovies: [],
-      rejectedMovies: [],
-      currentMovie: null,
-      wordPool: [
-        'SHADOW', 'SILENCE', 'VELVET', 'NEON', 'FOG', 'RUST', 'ECHO', 'CHROME', 'RAIN', 
-        'GLASS', 'DECAY', 'MIRROR', 'FEATHER', 'ASH', 'COCOON', 'SPIKE', 'AMBER', 'STATIC',
-        'VEIL', 'RAZOR', 'BLOOD', 'CHAMBER', 'VOID', 'COBALT', 'GHOST', 'CRYSTAL', 'GLITCH',
-        'THORN', 'PULSE', 'OBSIDIAN', 'SIREN', 'LABYRINTH', 'SKELETON', 'COPPER', 'SPIRAL',
-        'WHISPER', 'TEMPLE', 'ECLIPSE', 'GRID', 'CLAY', 'CAGE', 'THREAD', 'GRAVE', 'CROWN',
-        'ROOT', 'WAVE', 'DESERT', 'SUTURE', 'MASK', 'BEAST', 'OXYGEN', 'STEEL', 'CARBON'
-      ],
-      selectedWords: [],
-      wordIndex: 0,
-      associations: [],
-      // Cinematic Tarot Deck (Minimalist SVGs representing legendary archetypes)
+      seenMovies: [], rejectedMovies: [], currentMovie: null,
+      
+      // Cinematic Tarot Deck (Image Based)
+      // NOTE: Images should be saved in an "assets" folder next to this HTML file.
+      // This app now tries .jpg first, then automatically tries .jpeg if .jpg is missing.
       tarotDeck: [
-        {
-          id: 'tramp', name: 'The Tramp (The Fool)', num: '0',
-          meaning: 'Beginnings, spontaneity, comedy masking tragedy.', essence: 'pure spontaneity, lighthearted survival, and physical humor',
-          shift: { w: -20, t: 25, r: 10, h: 40 }, 
-          svg: `<svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M40 30 Q50 10 60 30 L70 30 Q50 20 30 30 Z"/><line x1="50" y1="30" x2="50" y2="70"/><path d="M45 70 L35 120 M55 70 L65 120 M50 50 L30 80 M50 50 L80 40 L85 100"/><circle cx="50" cy="15" r="8"/></svg>`
-        },
-        {
-          id: 'auteur', name: 'The Auteur (Magician)', num: 'I',
-          meaning: 'Willpower, absolute control, and creation.', essence: 'focused manifestation, meta-narratives, and cinematic construction',
-          shift: { w: 10, t: 10, r: 25, h: 0 },
-          svg: `<svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polygon points="30 40 70 40 60 80 40 80"/><line x1="30" y1="80" x2="20" y2="120"/><line x1="70" y1="80" x2="80" y2="120"/><path d="M35 25 C45 10 55 10 65 25 C75 40 55 40 50 30 C45 40 25 40 35 25 Z" stroke="#FF003C"/></svg>`
-        },
-        {
-          id: 'oracle', name: 'The Oracle (Priestess)', num: 'II',
-          meaning: 'The subconscious, hidden truth behind reality.', essence: 'unveiling the matrix of reality, deep intuition, and philosophy',
-          shift: { w: 20, t: -15, r: 40, h: -10 }, 
-          svg: `<svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="3"><rect x="20" y="30" width="10" height="90"/><rect x="70" y="30" width="10" height="90"/><path d="M40 70 Q50 50 60 70 Q50 90 40 70 Z"/><circle cx="50" cy="70" r="5" fill="#FF003C"/></svg>`
-        },
-        {
-          id: 'don', name: 'The Don (Emperor)', num: 'IV',
-          meaning: 'Power, family, corruption, and structure.', essence: 'rigid family structures, power dynamics, and heavy consequences',
-          shift: { w: 30, t: -10, r: -20, h: -20 }, 
-          svg: `<svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="3"><line x1="20" y1="40" x2="80" y2="40"/><line x1="50" y1="20" x2="50" y2="60"/><line x1="20" y1="40" x2="20" y2="100" stroke-dasharray="4 4"/><line x1="80" y1="40" x2="80" y2="120" stroke-dasharray="4 4"/><line x1="50" y1="60" x2="50" y2="110" stroke-dasharray="4 4"/><circle cx="50" cy="70" r="8" stroke="#FF003C"/></svg>`
-        },
-        {
-          id: 'reel', name: 'The Reel (Wheel)', num: 'X',
-          meaning: 'Destiny, time loops, and changing fortunes.', essence: 'cyclical time, fateful turning points, and narrative loops',
-          shift: { w: 0, t: 20, r: 15, h: 10 },
-          svg: `<svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="3"><circle cx="50" cy="75" r="35"/><circle cx="50" cy="75" r="10" fill="#FF003C"/><line x1="15" y1="75" x2="85" y2="75"/><line x1="50" y1="40" x2="50" y2="110"/><line x1="25" y1="50" x2="75" y2="100"/><line x1="25" y1="100" x2="75" y2="50"/></svg>`
-        },
-        {
-          id: 'falling', name: 'Falling Man (Hanged Man)', num: 'XII',
-          meaning: 'Surrender, shifting perspectives, and gravity.', essence: 'surrender to the fall, psychological vertigo, and altered perspectives',
-          shift: { w: 15, t: -30, r: 25, h: -15 }, 
-          svg: `<svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="3"><path d="M50 20 L50 60 M50 60 L30 30 M50 60 L70 30 M50 20 L40 10 L60 10" opacity="0.3"/><circle cx="50" cy="110" r="10"/><line x1="50" y1="100" x2="50" y2="50"/><line x1="50" y1="80" x2="30" y2="50"/><line x1="50" y1="80" x2="70" y2="50"/><line x1="50" y1="50" x2="35" y2="20"/><line x1="50" y1="50" x2="65" y2="20"/></svg>`
-        },
-        {
-          id: 'chess', name: 'Chess Match (Death)', num: 'XIII',
-          meaning: 'Inevitability, transition, and playing with fate.', essence: 'the inevitability of endings, stark existentialism, and stark reality',
-          shift: { w: 40, t: -10, r: -15, h: -30 }, 
-          svg: `<svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 120 L80 120 L60 70 L40 70 Z"/><path d="M45 70 L45 40 L55 40 L55 70 M40 40 L60 40 M50 40 L50 20 M40 30 L60 30"/><path d="M75 20 Q90 20 90 40 Q90 80 50 100" stroke="#FF003C"/></svg>`
-        },
-        {
-          id: 'hotel', name: 'The Hotel (The Devil)', num: 'XV',
-          meaning: 'Isolation, madness, traps, and shadow selves.', essence: 'claustrophobic madness, isolation, and dark psychological traps',
-          shift: { w: 45, t: 15, r: 10, h: -25 }, 
-          svg: `<svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="3"><polygon points="50 30 80 50 80 100 50 120 20 100 20 50"/><polygon points="50 60 65 70 65 90 50 100 35 90 35 70"/><line x1="50" y1="30" x2="50" y2="60"/><line x1="20" y1="50" x2="35" y2="70"/><line x1="80" y1="50" x2="65" y2="70"/><line x1="20" y1="100" x2="35" y2="90"/><line x1="80" y1="100" x2="65" y2="90"/><line x1="50" y1="120" x2="50" y2="100" stroke="#FF003C"/></svg>`
-        },
-        {
-          id: 'tower', name: 'The Nakatomi (The Tower)', num: 'XVI',
-          meaning: 'Explosive chaos, ruin, and action.', essence: 'explosive chaos, confined action, and the destruction of physical structures',
-          shift: { w: 20, t: 40, r: -20, h: 5 }, 
-          svg: `<svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="3"><rect x="35" y="50" width="30" height="90"/><path d="M25 50 L50 20 L75 50 Z"/><path d="M10 40 L40 60 L20 80 L50 90" stroke="#FF003C"/><circle cx="30" cy="90" r="2"/><circle cx="70" cy="110" r="2"/></svg>`
-        },
-        {
-          id: 'moon', name: 'Méliès Moon', num: 'XVIII',
-          meaning: 'Dreams, early illusions, and surreal visions.', essence: 'wild early-cinema surrealism, dream logic, and visual trickery',
-          shift: { w: 0, t: -15, r: 45, h: 10 }, 
-          svg: `<svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="3"><path d="M70 30 A 40 40 0 1 0 70 120 A 30 30 0 1 1 70 30"/><path d="M 50 65 L 90 50 L 85 75 Z" stroke="#FF003C"/><circle cx="45" cy="55" r="4"/><path d="M 40 85 Q 50 95 60 85"/></svg>`
-        },
-        {
-          id: 'rosebud', name: 'The Rosebud (The World)', num: 'XXI',
-          meaning: 'Wholeness, memory, legacy, and complete truth.', essence: 'lost memories, complete narrative arcs, and the search for absolute truth',
-          shift: { w: -15, t: -10, r: -10, h: 0 }, 
-          svg: `<svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="3"><circle cx="50" cy="65" r="35"/><path d="M30 115 L70 115 L60 100 L40 100 Z"/><path d="M35 70 C45 60 55 60 65 70" stroke="#FF003C"/><line x1="30" y1="80" x2="70" y2="80"/></svg>`
-        },
-        {
-          id: 'delorean', name: 'Time Machine (Chariot)', num: 'VII',
-          meaning: 'Momentum, journeys, overcoming obstacles.', essence: 'kinetic journeys, overcoming time and physical obstacles, and hope',
-          shift: { w: -20, t: 35, r: 20, h: 20 }, 
-          svg: `<svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 90 L80 90 L70 70 L30 70 Z"/><path d="M30 70 L10 40 M70 70 L90 40"/><circle cx="30" cy="90" r="10"/><circle cx="70" cy="90" r="10"/><line x1="10" y1="110" x2="90" y2="110" stroke="#FF003C" stroke-dasharray="10 5"/></svg>`
-        }
+        { id: 'tramp', name: 'The Tramp (The Fool)', num: '0', meaning: 'Beginnings, spontaneity, comedy masking tragedy.', essence: 'pure spontaneity, lighthearted survival, and physical humor', shift: { w: -20, t: 25, r: 10, h: 40 }, image: 'assets/0-tramp.jpg' },
+        { id: 'auteur', name: 'The Auteur (Magician)', num: 'I', meaning: 'Willpower, absolute control, and creation.', essence: 'focused manifestation, meta-narratives, and cinematic construction', shift: { w: 10, t: 10, r: 25, h: 0 }, image: 'assets/1-auteur.jpg' },
+        { id: 'oracle', name: 'The Oracle (Priestess)', num: 'II', meaning: 'The subconscious, hidden truth behind reality.', essence: 'unveiling the matrix of reality, deep intuition, and philosophy', shift: { w: 20, t: -15, r: 40, h: -10 }, image: 'assets/2-oracle.jpg' },
+        { id: 'don', name: 'The Don (Emperor)', num: 'IV', meaning: 'Power, family, corruption, and structure.', essence: 'rigid family structures, power dynamics, and heavy consequences', shift: { w: 30, t: -10, r: -20, h: -20 }, image: 'assets/4-don.jpg' },
+        { id: 'reel', name: 'The Reel (Wheel)', num: 'X', meaning: 'Destiny, time loops, and changing fortunes.', essence: 'cyclical time, fateful turning points, and narrative loops', shift: { w: 0, t: 20, r: 15, h: 10 }, image: 'assets/10-reel.jpg' },
+        { id: 'falling', name: 'Falling Man (Hanged Man)', num: 'XII', meaning: 'Surrender, shifting perspectives, and gravity.', essence: 'surrender to the fall, psychological vertigo, and altered perspectives', shift: { w: 15, t: -30, r: 25, h: -15 }, image: 'assets/12-falling.jpg' },
+        { id: 'chess', name: 'Chess Match (Death)', num: 'XIII', meaning: 'Inevitability, transition, and playing with fate.', essence: 'the inevitability of endings, stark existentialism, and stark reality', shift: { w: 40, t: -10, r: -15, h: -30 }, image: 'assets/13-chess.jpg' },
+        { id: 'hotel', name: 'The Hotel (The Devil)', num: 'XV', meaning: 'Isolation, madness, traps, and shadow selves.', essence: 'claustrophobic madness, isolation, and dark psychological traps', shift: { w: 45, t: 15, r: 10, h: -25 }, image: 'assets/15-hotel.jpg' },
+        { id: 'tower', name: 'The Nakatomi (The Tower)', num: 'XVI', meaning: 'Explosive chaos, ruin, and action.', essence: 'explosive chaos, confined action, and the destruction of physical structures', shift: { w: 20, t: 40, r: -20, h: 5 }, image: 'assets/16-tower.jpg' },
+        { id: 'moon', name: 'Méliès Moon (The Moon)', num: 'XVIII', meaning: 'Dreams, early illusions, and surreal visions.', essence: 'wild early-cinema surrealism, dream logic, and visual trickery', shift: { w: 0, t: -15, r: 45, h: 10 }, image: 'assets/18-moon.jpg' },
+        { id: 'rosebud', name: 'The Rosebud (The World)', num: 'XXI', meaning: 'Wholeness, memory, legacy, and complete truth.', essence: 'lost memories, complete narrative arcs, and the search for absolute truth', shift: { w: -15, t: -10, r: -10, h: 0 }, image: 'assets/21-rosebud.jpg' },
+        { id: 'delorean', name: 'Time Machine (Chariot)', num: 'VII', meaning: 'Momentum, journeys, overcoming obstacles.', essence: 'kinetic journeys, overcoming time and physical obstacles, and hope', shift: { w: -20, t: 35, r: 20, h: 20 }, image: 'assets/7-delorean.jpg' }
       ],
       selectedTarotCard: null
     };
 
-    // Subconscious Genre Vector mapping coords (incorporating h for Humor)
     const GENRE_MAP = {
       18: { w: 50, t: 25, r: 10, h: 25, name: 'DRAMA' },
       35: { w: 15, t: 65, r: 35, h: 95, name: 'COMEDY' },
@@ -641,14 +404,12 @@
       10402: { w: 30, t: 40, r: 40, h: 50, name: 'MUSIC' }
     };
 
-    // Initialize application
     window.onload = function() {
       fetchHitsTelemetry();
       document.getElementById('current-date').innerText = new Date().toLocaleDateString();
       typewriter('intro-dialogue', "Are you ready to project your subconscious?", 40);
     };
 
-    // Live Typewriter Effect Generator
     let typeToken = 0;
     async function typewriter(elementId, text, speed = 30) {
       const el = document.getElementById(elementId);
@@ -659,23 +420,17 @@
       for (let i = 0; i < text.length; i++) {
         if (typeToken !== currentToken) return;
         el.innerHTML += text.charAt(i);
-        if(AppState.audioEnabled && i % 3 === 0) {
-          playSynthBeep(800 + Math.random()*200, 0.01, 'square');
-        }
+        if(AppState.audioEnabled && i % 3 === 0) playSynthBeep(800 + Math.random()*200, 0.01, 'square');
         await sleep(speed + Math.random()*20);
       }
     }
 
-    // Retro Telemetry Handler
     async function fetchHitsTelemetry() {
       try {
         const res = await fetch('https://api.counterapi.dev/v1/theblindcut_baconeggncheesy/hits/increment');
         if (res.ok) {
           const data = await res.json();
-          if (data && data.count) {
-            renderHitCounter(data.count);
-            return;
-          }
+          if (data && data.count) { renderHitCounter(data.count); return; }
         }
       } catch (e) {}
       let localHits = parseInt(localStorage.getItem('blind_cut_telemetry') || '142');
@@ -694,11 +449,8 @@
       }
     }
 
-    // Audio Context (Mechanical clicks)
     let audioCtx = null;
-    function initAudio() {
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
+    function initAudio() { if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
     function toggleAudio() {
       AppState.audioEnabled = !AppState.audioEnabled;
       document.getElementById('audio-toggle-btn').innerText = AppState.audioEnabled ? "[AUDIO: ON]" : "[AUDIO: OFF]";
@@ -710,12 +462,10 @@
         initAudio();
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
-        osc.type = type;
-        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        osc.type = type; osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
         gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
+        osc.connect(gain); gain.connect(audioCtx.destination);
         osc.start(); osc.stop(audioCtx.currentTime + duration);
       } catch (e) {}
     }
@@ -724,12 +474,13 @@
       setTimeout(() => playSynthBeep(1500, 0.1, 'sine'), 50);
     }
 
-    // Navigation Flow
     function showScreen(screenId) {
-      ['screen-intro', 'screen-parameters', 'screen-game1', 'screen-game2', 'screen-game3', 'screen-loading', 'screen-result', 'screen-error'].forEach(id => {
-        document.getElementById(id).classList.add('hidden');
+      ['screen-intro', 'screen-parameters', 'screen-game1', 'screen-game3', 'screen-loading', 'screen-result', 'screen-error'].forEach(id => {
+        const el = document.getElementById(id);
+        if(el) el.classList.add('hidden');
       });
-      document.getElementById(screenId).classList.remove('hidden');
+      const target = document.getElementById(screenId);
+      if(target) target.classList.remove('hidden');
     }
 
     async function startCalibrator() {
@@ -749,17 +500,10 @@
     }
 
     function updateParameterUI(key, val) {
-      const ids = {
-        'language': ['any', 'english', 'foreign'],
-        'era': ['any', 'golden', 'neon', 'digital'],
-        'depth': ['casual', 'cinephile']
-      };
+      const ids = { 'language': ['any', 'english', 'foreign'], 'era': ['any', 'golden', 'neon', 'digital'], 'depth': ['casual', 'cinephile'] };
       ids[key].forEach(item => {
         const btn = document.getElementById(`${key}-${item}`);
-        if(btn) {
-          if (item === val) btn.classList.add('active');
-          else btn.classList.remove('active');
-        }
+        if(btn) { if (item === val) btn.classList.add('active'); else btn.classList.remove('active'); }
       });
     }
 
@@ -777,51 +521,23 @@
       playSynthBeep(200 + parseInt(val)*5, 0.02, 'square');
     }
 
-    async function goToGame2() {
-      playTypewriterDing();
-      const shuffled = [...AppState.wordPool].sort(() => 0.5 - Math.random());
-      AppState.selectedWords = shuffled.slice(0, 5);
-      AppState.wordIndex = 0;
-      AppState.associations = [];
-      
-      setupWordAssociation();
-      showScreen('screen-game2');
-      
-      await sleep(300);
-      typewriter('word-dialogue', "Read the stimulus. Type your immediate reaction. Do not think.");
-      document.getElementById('association-input').focus();
-    }
+    // ================= IMAGE FALLBACK HELPER =================
+    function tryJpegFallback(img, fallbackText = 'TAROT') {
+      const currentSrc = img.getAttribute('src') || '';
 
-    function setupWordAssociation() {
-      const currWord = AppState.selectedWords[AppState.wordIndex];
-      document.getElementById('terminal-stimulus').innerText = currWord.split('').join(' ');
-      document.getElementById('word-progress').innerText = `${AppState.wordIndex + 1}/5`;
-      document.getElementById('association-input').value = "";
-    }
-
-    document.getElementById('association-input').addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') submitWord();
-      else playSynthBeep(600 + Math.random()*200, 0.01, 'square');
-    });
-
-    function submitWord() {
-      const input = document.getElementById('association-input');
-      const val = input.value.trim().toUpperCase();
-      if (!val) return;
-
-      AppState.associations.push(val);
-      playTypewriterDing();
-
-      if (AppState.wordIndex < 4) {
-        AppState.wordIndex++;
-        setupWordAssociation();
-        input.focus();
-      } else {
-        goToTarotGame();
+      // First failure: try .jpeg instead of .jpg.
+      if (!img.dataset.triedJpeg && currentSrc.toLowerCase().endsWith('.jpg')) {
+        img.dataset.triedJpeg = 'true';
+        img.src = currentSrc.replace(/\.jpg$/i, '.jpeg');
+        return;
       }
+
+      // Second failure: show a placeholder.
+      img.onerror = null;
+      img.src = `https://via.placeholder.com/150x210/0A0A0A/FF003C?text=${encodeURIComponent(fallbackText)}`;
     }
 
-    // ================= SUBCONSCIOUS TAROT INTERFACE =================
+    // ================= SUBCONSCIOUS TAROT INTERFACE (IMAGE RENDERER) =================
     async function goToTarotGame() {
       playTypewriterDing();
       AppState.selectedTarotCard = null;
@@ -837,24 +553,22 @@
         
         wrapper.innerHTML = `
           <div onclick="selectTarotCard('${card.id}', this)" class="tarot-card cursor-pointer">
-            <!-- Card Back -->
-            <div class="tarot-card-back hover:-translate-y-1 transition-transform">
-              <div class="tarot-inner-border bg-neutral-950 border-neutral-800">
-                <div class="tarot-back-art opacity-30 text-neonRed w-full h-full"></div>
-                <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" class="w-8 h-8 text-neutral-600">
-                    <circle cx="50" cy="50" r="30"/><circle cx="50" cy="50" r="10"/><path d="M50 20 L50 80 M20 50 L80 50" stroke-dasharray="4"/>
-                  </svg>
-                </div>
-              </div>
+            <div class="tarot-card-back hover:-translate-y-1 transition-transform p-0 border-0 shadow-lg">
+              <img 
+                src="assets/card-back.jpg" 
+                class="w-full h-full object-cover rounded-sm border border-neutral-700" 
+                alt="Card Back" 
+                onerror="tryJpegFallback(this, 'TAROT')"
+              >
             </div>
-            <!-- Card Front (Standard Symbol) -->
-            <div class="tarot-card-front shadow-xl bg-black">
-              <div class="tarot-inner-border">
-                <span class="font-bold text-[9px] tracking-widest text-neonRed">${card.num}</span>
-                <div class="w-10 h-10 sm:w-14 sm:h-14 flex items-center justify-center text-white">${card.svg}</div>
-                <span class="font-bold text-[7px] uppercase tracking-wider text-center leading-tight px-1 text-white">${card.name}</span>
-              </div>
+
+            <div class="tarot-card-front shadow-xl p-0 border-0">
+              <img 
+                src="${card.image}" 
+                class="w-full h-full object-cover rounded-sm border border-neonRed" 
+                alt="${card.name}" 
+                onerror="tryJpegFallback(this, '${card.num}')"
+              >
             </div>
           </div>
         `;
@@ -878,7 +592,6 @@
 
       await typewriter('tarot-dialogue', `You drew ${selectedCard.name}. Your inner landscape aligns with ${selectedCard.essence}.`, 30);
 
-      // Halt execution here and present tactile button to continue
       document.getElementById('tarot-proceed-btn').classList.remove('hidden');
     }
 
@@ -888,13 +601,7 @@
     async function initiateSubconsciousMatching() {
       showScreen('screen-loading');
       
-      const logs = [
-        "Formatting margins...",
-        "Evaluating dialogue associations...",
-        "Calculating spatial tarot vectors...",
-        "Querying global live archives...",
-        "Printing definitive match..."
-      ];
+      const logs = ["Formatting margins...", "Evaluating structural boundaries...", "Calculating spatial tarot vectors...", "Querying global live archives...", "Printing definitive match..."];
       
       let step = 0;
       const term = document.getElementById('loading-terminal');
@@ -902,9 +609,7 @@
       
       progressInterval = setInterval(() => {
         let currentPct = parseInt(pct.innerText);
-        if(currentPct < 95) {
-          pct.innerText = `${currentPct + Math.floor(Math.random()*5)}%`;
-        }
+        if(currentPct < 95) pct.innerText = `${currentPct + Math.floor(Math.random()*5)}%`;
         if(Math.random() > 0.7 && step < logs.length) {
           term.innerText = logs[step];
           playSynthBeep(700, 0.02, 'square');
@@ -912,7 +617,6 @@
         }
       }, 200);
 
-      // Hardened Try/Catch to prevent hanging!
       try {
         const tarot = AppState.selectedTarotCard || AppState.tarotDeck[0];
         const finalWarmth = Math.max(1, Math.min(100, AppState.sliders.warmth + (tarot.shift?.w || 0)));
@@ -920,13 +624,7 @@
         const finalReality = Math.max(1, Math.min(100, AppState.sliders.reality + (tarot.shift?.r || 0)));
         const finalHumor = Math.max(1, Math.min(100, AppState.sliders.humor + (tarot.shift?.h || 0)));
 
-        // Build discovery parameters dynamically
-        let discoverParams = [
-          `api_key=${TMDB_API_KEY}`,
-          `vote_average.gte=6.8`,
-          `include_adult=false`,
-          `with_runtime.gte=60`
-        ];
+        let discoverParams = [`api_key=${TMDB_API_KEY}`, `vote_average.gte=6.8`, `include_adult=false`, `with_runtime.gte=60`];
 
         if (AppState.language === 'english') discoverParams.push(`with_original_language=en`);
         else if (AppState.language === 'foreign') discoverParams.push(`with_original_language=fr,ja,ko,it,es,de,ru,zh,pt,pl,da`);
@@ -936,11 +634,10 @@
         else if (AppState.era === 'digital') discoverParams.push(`primary_release_date.gte=2000-01-01`);
 
         const obs = AppState.sliders.obscurity;
-        if (obs <= 35) discoverParams.push(`vote_count.gte=1000`, `sort_by=popularity.desc`);
-        else if (obs >= 70) discoverParams.push(`vote_count.gte=30`, `vote_count.lte=1500`, `sort_by=vote_average.desc`);
-        else discoverParams.push(`vote_count.gte=250`, `vote_count.lte=4000`, `sort_by=popularity.desc`);
+        if (obs <= 35) discoverParams.push(`vote_count.gte=1500`, `sort_by=popularity.desc`);
+        else if (obs >= 70) discoverParams.push(`vote_count.gte=30`, `vote_count.lte=1200`, `sort_by=vote_average.desc`);
+        else discoverParams.push(`vote_count.gte=200`, `vote_count.lte=4000`, `sort_by=popularity.desc`);
 
-        // Safe fetch with AbortController timeout to prevent infinite hanging
         const fetchWithTimeout = async (url, ms = 10000) => {
           const controller = new AbortController();
           const id = setTimeout(() => controller.abort(), ms);
@@ -1037,13 +734,13 @@
         await sleep(600);
         
         showScreen('screen-result');
-        // Live type the long review
         typewriter('custom-analysis', customCritique.reasoning, 12);
 
       } catch (err) {
         clearInterval(progressInterval);
         console.error("Matchmaker Crash: ", err.message);
-        document.getElementById('error-message').innerText = `[CRITICAL FAULT] Matrix empty or uplink disrupted.\n\n${err.message}`;
+        const errContainer = document.getElementById('error-message');
+        if(errContainer) errContainer.innerHTML = `The live pipeline failed to establish a handshake with the global visual catalog.<br><br>[ERR: ${err.message}]`;
         showScreen('screen-error');
       }
     }
@@ -1070,7 +767,6 @@
       }
     }
 
-    // Extraction Utilities
     function getOneSentencePlot(overview) {
       if (!overview) return "A cinematic journey unfolds in the dark.";
       const match = overview.match(/^.*?[.!?](?:\s|$)/);
@@ -1078,25 +774,30 @@
     }
 
     function generateVibeWords(movie, w, t, r, h) {
-      const w1 = AppState.associations[0] || "SHADOW";
+      const tarot = AppState.selectedTarotCard || AppState.tarotDeck[0];
+      let w1 = "SHADOW";
+
+      if(tarot && tarot.name) {
+         const parts = tarot.name.split(' ');
+         if(parts.length > 1) w1 = parts[1].replace(/[^A-Za-z]/g, '');
+      }
+      
       let w2 = "ATMOSPHERIC";
       if (movie.genre_ids && movie.genre_ids.length > 0 && GENRE_MAP[movie.genre_ids[0]]) {
         w2 = GENRE_MAP[movie.genre_ids[0]].name;
       }
+
       let w3 = "INTIMATE";
       if (r > 60) w3 = "SURREAL";
       else if (h > 60) w3 = "SATIRICAL";
       else if (w > 60) w3 = "DREAD";
       else if (t > 60) w3 = "KINETIC";
       
-      return [w1, w2, w3];
+      return [w1.toUpperCase(), w2.toUpperCase(), w3.toUpperCase()];
     }
 
     function composeProceduralCritique(movie, w, t, r, h) {
       const tarot = AppState.selectedTarotCard || AppState.tarotDeck[0];
-      const word = AppState.associations[0] || "ECHO";
-      const word2 = AppState.associations[1] || "SHADOW";
-
       const dir = movie.credits?.crew?.find(c => c.job === 'Director')?.name || "the auteur";
       const title = movie.title || "The Picture";
       const yr = movie.release_date ? movie.release_date.split('-')[0] : "";
@@ -1108,10 +809,8 @@
       const obscurityDesc = AppState.sliders.obscurity > 70 ? "highly rare, deeply hidden avant-garde discovery" : (AppState.sliders.obscurity > 40 ? "beautifully stylized, atmospheric cult classic" : "globally celebrated cinephile masterpiece");
 
       const texts = [
-        `Your diagnostic baseline anchored with ${tarot.name} (${tarot.num}), signifying a subconscious drift toward ${tarot.essence}. This intuitive pull intersected directly with your typed associations of "${word}" and "${word2}". Tonight, your final projected path points to a cinema landscape seeking ${warmthDesc} layered with ${humorDesc}. This matches perfectly with ${dir}'s masterpiece, ${title} (${yr}), a ${obscurityDesc} aligning with your tempo vector of ${t}%. Its structural reliance on ${tempoDesc} combined with ${realityDesc} offers the perfect atmospheric calibration for your inner state.`,
-        
-        `Drawing ${tarot.name} (meaning: ${tarot.meaning}) directly from the deck of the subconscious converged with your rapid echo response of "${word}". This reveals a mental framework desiring ${warmthDesc} cut with ${humorDesc}. To balance this state, ${title} (${yr}) has been projected from the live archives. Guided by ${dir}'s uncompromising vision, this ${obscurityDesc} is defined by ${tempoDesc}. As your intuitive tarot card predicted, tonight's watch will pull you deep into ${realityDesc}, resolving your parameters with stunning sensory precision.`,
-
+        `Your mechanical spectrum inputs intersected perfectly with the thematic weight of this archetype. Tonight, your final projected path points to a cinema landscape seeking ${warmthDesc} layered with ${humorDesc}. This matches perfectly with ${dir}'s masterpiece, ${title} (${yr}), a ${obscurityDesc} aligning with your tempo vector of ${t}%. Its structural reliance on ${tempoDesc} combined with ${realityDesc} offers the perfect atmospheric calibration for your inner state.`,
+        `Drawing ${tarot.name} (meaning: ${tarot.meaning}) directly from the deck of the subconscious reveals a mental framework desiring ${warmthDesc} cut with ${humorDesc}. To balance this state, ${title} (${yr}) has been projected from the live archives. Guided by ${dir}'s uncompromising vision, this ${obscurityDesc} is defined by ${tempoDesc}. As your intuitive tarot card predicted, tonight's watch will pull you deep into ${realityDesc}, resolving your parameters with stunning sensory precision.`,
         `Your drawn tarot coordinates (${tarot.name}) paired with your raw spectrum baselines map a cognitive line seeking ${warmthDesc}, ${humorDesc}, and ${realityDesc}. Your gut pull toward this standard Major Arcana archetype mirrors the thematic core of ${title} (${yr}). Structured around a ${tempoDesc}, this ${obscurityDesc} by ${dir} serves as a perfect reflection of your active spectrum. It is an uncompromising cinematic mirror tailored to your subconscious needs.`
       ];
 
@@ -1122,75 +821,88 @@
     }
 
     function populateFinalReveal(movie, critique, vibes, plot) {
-      document.getElementById('vibe-tagline').innerText = `"${critique.vibeTagline}"`;
-      document.getElementById('movie-title').innerText = movie.title || "UNKNOWN";
-      document.getElementById('movie-year').innerText = movie.release_date ? movie.release_date.split('-')[0] : "----";
-      document.getElementById('movie-director').innerText = movie.credits?.crew?.find(c => c.job === 'Director')?.name || "AUTEUR";
-      document.getElementById('movie-runtime').innerText = movie.runtime ? `${movie.runtime} MIN` : "--- MIN";
+      const vtagEl = document.getElementById('vibe-tagline');
+      if(vtagEl) vtagEl.innerText = `"${critique.vibeTagline}"`;
+      
+      const mtitleEl = document.getElementById('movie-title');
+      if(mtitleEl) mtitleEl.innerText = movie.title || "UNKNOWN";
+      
+      const myearEl = document.getElementById('movie-year');
+      if(myearEl) myearEl.innerText = movie.release_date ? movie.release_date.split('-')[0] : "----";
+      
+      const mdirEl = document.getElementById('movie-director');
+      if(mdirEl) mdirEl.innerText = movie.credits?.crew?.find(c => c.job === 'Director')?.name || "AUTEUR";
+      
+      const mrunEl = document.getElementById('movie-runtime');
+      if(mrunEl) mrunEl.innerText = movie.runtime ? `${movie.runtime} MIN` : "--- MIN";
 
-      document.getElementById('movie-plot').innerText = `"${plot}"`;
+      const mplotEl = document.getElementById('movie-plot');
+      if(mplotEl) mplotEl.innerText = `"${plot}"`;
 
       const vibeC = document.getElementById('vibe-words-container');
-      vibeC.innerHTML = vibes.map(v => `<span class="px-2 py-0.5 border border-neonRed text-neonRed text-[9px] uppercase font-bold tracking-widest shadow-neon-sm">${v}</span>`).join('');
+      if(vibeC) vibeC.innerHTML = vibes.map(v => `<span class="px-2 py-0.5 border border-neonRed text-neonRed text-[9px] uppercase font-bold tracking-widest shadow-neon-sm">${v}</span>`).join('');
 
-      // Badges
-      document.getElementById('active-lang-badge').innerText = AppState.language === 'any' ? 'GLOBAL' : AppState.language;
-      document.getElementById('active-era-badge').innerText = AppState.era === 'any' ? 'FULL' : AppState.era;
-      document.getElementById('active-depth-badge').innerText = AppState.depth;
-      document.getElementById('active-obscurity-badge').innerText = `${AppState.sliders.obscurity}%`;
-      document.getElementById('active-humor-badge').innerText = `${AppState.sliders.humor}%`;
+      const bLang = document.getElementById('active-lang-badge'); if(bLang) bLang.innerText = AppState.language === 'any' ? 'GLOBAL' : AppState.language;
+      const bEra = document.getElementById('active-era-badge'); if(bEra) bEra.innerText = AppState.era === 'any' ? 'FULL' : AppState.era;
+      const bDepth = document.getElementById('active-depth-badge'); if(bDepth) bDepth.innerText = AppState.depth;
+      const bObsc = document.getElementById('active-obscurity-badge'); if(bObsc) bObsc.innerText = `${AppState.sliders.obscurity}%`;
+      const bHumor = document.getElementById('active-humor-badge'); if(bHumor) bHumor.innerText = `${AppState.sliders.humor}%`;
 
       const posterImg = document.getElementById('movie-poster');
       const ambientBg = document.getElementById('ambient-bg');
       const fallbackText = document.getElementById('poster-fallback-text');
       
-      posterImg.style.opacity = "0";
-      fallbackText.style.display = "flex";
+      if(posterImg) posterImg.style.opacity = "0";
+      if(fallbackText) fallbackText.style.display = "flex";
 
-      if (movie.poster_path) {
+      if (movie.poster_path && posterImg) {
         posterImg.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
         posterImg.onload = () => {
           posterImg.style.opacity = "1";
-          fallbackText.style.display = "none";
+          if(fallbackText) fallbackText.style.display = "none";
         };
       }
 
-      if (movie.backdrop_path) {
+      if (movie.backdrop_path && ambientBg) {
         ambientBg.style.backgroundImage = `url('https://image.tmdb.org/t/p/original${movie.backdrop_path}')`;
-      } else {
+      } else if (ambientBg) {
         ambientBg.style.backgroundImage = "none";
       }
 
       const providersContainer = document.getElementById('providers-container');
-      providersContainer.innerHTML = "";
-      
-      const usFlatrate = movie["watch/providers"]?.results?.US?.flatrate;
-      if (usFlatrate && usFlatrate.length > 0) {
-        usFlatrate.slice(0, 3).forEach(p => {
-          providersContainer.innerHTML += `<span class="border border-neutral-700 bg-neutral-900 text-neutral-300 px-1.5 py-0.5 text-[8px]">${p.provider_name}</span>`;
-        });
-      } else {
-        const rentOptions = movie["watch/providers"]?.results?.US?.rent;
-        if (rentOptions && rentOptions.length > 0) {
-          rentOptions.slice(0, 3).forEach(p => {
-            providersContainer.innerHTML += `<span class="border border-neutral-700 bg-neutral-900 text-neutral-300 px-1.5 py-0.5 text-[8px]">${p.provider_name} (Rent)</span>`;
+      if(providersContainer) {
+        providersContainer.innerHTML = "";
+        const usFlatrate = movie["watch/providers"]?.results?.US?.flatrate;
+        if (usFlatrate && usFlatrate.length > 0) {
+          usFlatrate.slice(0, 3).forEach(p => {
+            providersContainer.innerHTML += `<span class="border border-neutral-700 bg-neutral-900 text-neutral-300 px-1.5 py-0.5 text-[8px]">${p.provider_name}</span>`;
           });
         } else {
-          providersContainer.innerHTML = `<span class="text-[9px] font-mono text-neutral-600 font-bold uppercase border border-neutral-800 border-dashed px-2 py-1">LOCAL CINEMA / PHYSICAL MEDIA</span>`;
+          const rentOptions = movie["watch/providers"]?.results?.US?.rent;
+          if (rentOptions && rentOptions.length > 0) {
+            rentOptions.slice(0, 3).forEach(p => {
+              providersContainer.innerHTML += `<span class="border border-neutral-700 bg-neutral-900 text-neutral-300 px-1.5 py-0.5 text-[8px]">${p.provider_name} (Rent)</span>`;
+            });
+          } else {
+            providersContainer.innerHTML = `<span class="text-[9px] font-mono text-neutral-600 font-bold uppercase border border-neutral-800 border-dashed px-2 py-1">LOCAL CINEMA / PHYSICAL MEDIA</span>`;
+          }
         }
       }
     }
 
     function shareProjection() {
-      const title = document.getElementById('movie-title').innerText;
+      const mtitleEl = document.getElementById('movie-title');
+      const title = mtitleEl ? mtitleEl.innerText : "A Masterpiece";
       const shareText = `My Blind Cut Diagnostic: ${title}. Script locked.`;
       const temp = document.createElement('input');
       temp.value = shareText; document.body.appendChild(temp);
       temp.select(); document.execCommand('copy'); document.body.removeChild(temp);
       const banner = document.getElementById('notification-banner');
-      banner.classList.remove('opacity-0'); banner.classList.add('opacity-100');
-      playTypewriterDing();
-      setTimeout(() => { banner.classList.remove('opacity-100'); banner.classList.add('opacity-0'); }, 2000);
+      if(banner) {
+        banner.classList.remove('opacity-0'); banner.classList.add('opacity-100');
+        playTypewriterDing();
+        setTimeout(() => { banner.classList.remove('opacity-100'); banner.classList.add('opacity-0'); }, 2000);
+      }
     }
 
     function retryProjection() { initiateSubconsciousMatching(); }
@@ -1199,6 +911,3 @@
   </script>
 </body>
 </html>
-
-
-```
